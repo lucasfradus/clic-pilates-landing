@@ -47,8 +47,8 @@
 
 :root {
   /* CLIC Pilates Theme Colors */
-  --cream: oklch(0.940 0.006 50.000);  /* #EDECE7 */
-  --nude: oklch(0.747 0.029 28.000);   /* #BCAC9E */
+  --cream: oklch(94.25% 0.0068 97.35);  /* #EDECE7 */
+  --nude: oklch(75.41% 0.027 63.62);   /* #BCAC9E */
   --dark-text: oklch(0.145 0 0);       /* Near black for text */
   --light-text: oklch(0.985 0 0);      /* Near white for text on dark backgrounds */
   
@@ -149,4 +149,32 @@
   color: var(--nude);
 }
 
-/* Add these custom animations to your existing globals.css file */
+/* Replace the previous marquee animation with this improved version */
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 15s linear infinite;
+  white-space: nowrap;
+}
+
+.marquee-container {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.marquee-content {
+  display: flex;
+  width: max-content;
+}
+
+.overflow-x-hidden {
+  overflow-x: hidden;
+}
