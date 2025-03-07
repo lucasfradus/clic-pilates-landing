@@ -1,0 +1,17 @@
+{
+  "tailwindCSS.experimental.classRegex": [
+  "clsx\\([^)]*['\"](.*?)['\"]"
+],
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit",
+    // Add a timeout to prevent long-running actions
+    "source.fixAll.eslint.silent": "always",
+    "source.timeout": "explicit"
+  },
+  // Disable automatic formatting for specific file types if needed
+  "editor.formatOnSave": true,
+  "[typescript][typescriptreact]": {
+    // Choose one formatter, not multiple
+    "editor.defaultFormatter": "standard.vscode-standard"
+  }
+}
