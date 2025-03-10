@@ -17,15 +17,17 @@ export default function Brand (): React.JSX.Element {
 
       {/* Right column with brand content and second image */}
       <div className='flex flex-col w-full md:w-2/3'>
-        {/* Brand content */}
-        <div className='flex-1 flex flex-col gap-5 justify-center p-8 md:p-12 basis-2/5'>
+        {/* Brand content - now with fixed height to prevent content jump during typing animation */}
+        <div className='flex-1 flex flex-col gap-5 justify-start p-8 md:p-12 basis-2/5 h-[250px] md:h-[300px]'>
           <h2 className='text-2xl md:text-3xl text-accent font-semibold'>CLIC</h2>
           <p className='text-2xl md:text-3xl text-accent font-semibold'>/klik/</p>
 
-          <TypingAnimation startOnView duration={50} className='text-md md:text-lg text-accent font-normal max-w-3xl'>
-            Hacer el clic. Momento de transformación en el que decidís priorizarte,
-            conectar con tu cuerpo y reencontrarte a través del movimiento.
-          </TypingAnimation>
+          <div className='min-h-[100px]'>
+            <TypingAnimation startOnView delay={500} duration={50} className='text-md md:text-lg text-accent font-normal max-w-3xl'>
+              Hacer el clic. Momento de transformación en el que decidís priorizarte,
+              conectar con tu cuerpo y reencontrarte a través del movimiento.
+            </TypingAnimation>
+          </div>
         </div>
 
         {/* Bottom image - now shown on all devices with responsive layout */}
@@ -39,11 +41,11 @@ export default function Brand (): React.JSX.Element {
           />
           <Image
             src='/texto_brand2.png'
-            width={350}
-            height={30}
+            width={300}
+            height={50}
             priority
             alt='Clic Pilates Studio'
-            className='absolute bottom-4 right-4 md:bottom-0 md:right-5 transform'
+            className='absolute bottom-6 right-6 transform'
           />
         </div>
       </div>
