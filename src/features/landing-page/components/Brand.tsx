@@ -5,7 +5,7 @@ export default function Brand (): React.JSX.Element {
   return (
     <section className='min-h-[90vh] w-full flex flex-col md:flex-row border-t border-accent'>
       {/* Left column with pilates equipment image */}
-      <div className='relative w-full md:w-1/3'>
+      <div className='relative w-full md:w-1/3 h-[30vh] md:h-auto'>
         <Image
           src='/2CLIC.jpeg'
           fill
@@ -28,22 +28,22 @@ export default function Brand (): React.JSX.Element {
           </TypingAnimation>
         </div>
 
-        {/* Bottom image - hidden on mobile */}
-        <div className='hidden md:block relative basis-3/5 w-full'>
+        {/* Bottom image - now shown on all devices with responsive layout */}
+        <div className='relative w-full h-[40vh] md:h-auto md:basis-3/5'>
           <Image
             src='/3CLIC.jpeg'
             fill
             priority
             alt='Clic Pilates Studio'
-            className='object-cover object-top'
+            className='object-cover object-center md:object-top'
           />
           <Image
             src='/texto_brand2.png'
             width={350}
-            height={50}
+            height={30}
             priority
             alt='Clic Pilates Studio'
-            className='absolute bottom-0 right-5 transform '
+            className='absolute bottom-4 right-4 md:bottom-0 md:right-5 transform'
           />
         </div>
       </div>

@@ -7,7 +7,7 @@ export default function DesktopNav ({ scrolled }: { scrolled: boolean }): React.
     <nav className={cn(
       'fixed left-0 right-0 top-0 z-50 hidden  justify-between items-center border-b-2 border-background px-20 py-8 font-thin text-background transition-all duration-300 ease-in-out xl:flex text-xl',
       scrolled
-        ? 'backdrop-blur-md bg-background/10 shadow-lg'
+        ? 'backdrop-blur-md bg-accent/80 shadow-lg'
         : 'bg-transparent'
     )}
     >
