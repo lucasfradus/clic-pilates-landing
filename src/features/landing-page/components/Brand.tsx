@@ -1,18 +1,29 @@
+'use client'
 import { TypingAnimation } from '@/components/magicui/typing-animation'
 import Image from 'next/image'
+import { useRef } from 'react'
+import { motion, useScroll, useTransform } from 'framer-motion'
 
 export default function Brand (): React.JSX.Element {
+  const sectionRef = useRef(null)
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start end', 'end start']
+  })
+  const y = useTransform(scrollYProgress, [0, 1], ['-10%', '10%'])
   return (
-    <section className='min-h-[90vh] w-full flex flex-col md:flex-row border-t border-accent'>
+    <section ref={sectionRef} className='min-h-[90vh] w-full flex flex-col md:flex-row border-t border-accent overflow-hidden'>
       {/* Left column with pilates equipment image */}
-      <div className='relative w-full md:w-1/3 h-[30vh] md:h-auto'>
-        <Image
-          src='/2CLIC.jpeg'
-          fill
-          priority
-          alt='Clic Pilates Equipment'
-          className='object-cover'
-        />
+      <div className='relative w-full md:w-1/3 h-[30vh] md:h-auto overflow-hidden'>
+        <motion.div className='absolute inset-0' style={{ y }}>
+          <Image
+            src='/2CLIC.jpeg'
+            fill
+            priority
+            alt='Clic Pilates Equipment'
+            className='object-cover'
+          />
+        </motion.div>
       </div>
 
       {/* Right column with brand content and second image */}
@@ -31,14 +42,16 @@ export default function Brand (): React.JSX.Element {
         </div>
 
         {/* Bottom image - now shown on all devices with responsive layout */}
-        <div className='relative w-full h-[40vh] md:h-auto md:basis-3/5'>
-          <Image
-            src='/3CLIC.jpeg'
-            fill
-            priority
-            alt='Clic Pilates Studio'
-            className='object-cover object-center md:object-top'
-          />
+        <div className='relative w-full h-[40vh] md:h-auto md:basis-3/5 overflow-hidden'>
+          <motion.div className='absolute inset-0' style={{ y }}>
+            <Image
+              src='/3CLIC.jpeg'
+              fill
+              priority
+              alt='Clic Pilates Studio'
+              className='object-cover object-center md:object-top'
+            />
+          </motion.div>
           <Image
             src='/texto_brand2.png'
             width={300}

@@ -1,6 +1,7 @@
 'use client'
 import Image from 'next/image'
 import { useRef, useState, useEffect } from 'react'
+import { motion, useScroll, useTransform } from 'framer-motion'
 
 export default function Hero (): React.JSX.Element {
   const sectionRef = useRef(null)
@@ -11,14 +12,20 @@ export default function Hero (): React.JSX.Element {
     setIsLoaded(true)
   }, [])
 
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start end', 'end start']
+  })
+  const y = useTransform(scrollYProgress, [0, 1], ['-10%', '10%'])
+
   return (
     <section
       ref={sectionRef}
       id='home'
-      className='relative h-screen w-full'
+      className='relative h-screen w-full overflow-hidden'
     >
       {/* Static background container (no motion) to prevent shifts */}
-      <div className='absolute inset-0 h-full w-full'>
+      <motion.div className='absolute h-[110%] w-full' style={{ top: y }}>
         {/* Image wrapper */}
         <div className='relative h-full w-full'>
           <Image
@@ -36,7 +43,7 @@ export default function Hero (): React.JSX.Element {
           {/* Black overlay for better text visibility */}
           <div className='absolute inset-0 bg-black/50' />
         </div>
-      </div>
+      </motion.div>
 
       {/* Content container - centered for all screen sizes */}
       <div className='absolute inset-0 flex h-full w-full flex-col items-center justify-center px-6 sm:px-10'>

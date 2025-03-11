@@ -27,6 +27,7 @@ export default function LandingPage (): React.JSX.Element {
         <Hero />
         <HaceElClic />
         <Brand />
+        <div className='h-96' />
       </main>
     </>
   )
