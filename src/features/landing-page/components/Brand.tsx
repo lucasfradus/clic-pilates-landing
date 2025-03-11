@@ -35,8 +35,11 @@ export default function Brand (): React.JSX.Element {
 
           <div className='min-h-[100px]'>
             <TypingAnimation startOnView delay={500} duration={50} className='text-md md:text-lg text-accent font-normal max-w-3xl'>
-              Hacer el clic. Momento de transformación en el que decidís priorizarte,
-              conectar con tu cuerpo y reencontrarte a través del movimiento.
+              {[
+                { text: 'Hacer el clic. Momento de transformación en el que decidís ' },
+                { text: 'priorizarte, conectar con tu cuerpo y reencontrarte', className: 'font-semibold' },
+                { text: ' a través del movimiento.' }
+              ]}
             </TypingAnimation>
           </div>
         </div>

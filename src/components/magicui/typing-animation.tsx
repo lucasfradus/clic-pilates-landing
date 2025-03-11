@@ -3,15 +3,25 @@
 import { cn } from "@/lib/utils";
 import { motion, MotionProps } from "motion/react";
 import { useEffect, useRef, useState } from "react";
+import { ReactNode } from "react";
 
-interface TypingAnimationProps extends MotionProps {
-  children: string;
+interface TextSegment {
+  text: string;
+  className?: string;
+}
+
+// Separate the base props from motion props to avoid type conflicts
+interface BaseTypingAnimationProps {
+  children: string | TextSegment[];
   className?: string;
   duration?: number;
   delay?: number;
   as?: React.ElementType;
   startOnView?: boolean;
 }
+
+// Combine with motion props but omit children to avoid conflicts
+type TypingAnimationProps = BaseTypingAnimationProps & Omit<MotionProps, 'children'>;
 
 export function TypingAnimation({
   children,
@@ -29,6 +39,11 @@ export function TypingAnimation({
   const [displayedText, setDisplayedText] = useState<string>("");
   const [started, setStarted] = useState(false);
   const elementRef = useRef<HTMLElement | null>(null);
+  
+  // Convert children to string for typing animation
+  const fullText = typeof children === "string" 
+    ? children 
+    : children.map(segment => segment.text).join("");
 
   useEffect(() => {
     if (!startOnView) {
@@ -62,8 +77,8 @@ export function TypingAnimation({
 
     let i = 0;
     const typingEffect = setInterval(() => {
-      if (i < children.length) {
-        setDisplayedText(children.substring(0, i + 1));
+      if (i < fullText.length) {
+        setDisplayedText(fullText.substring(0, i + 1));
         i++;
       } else {
         clearInterval(typingEffect);
@@ -73,7 +88,30 @@ export function TypingAnimation({
     return () => {
       clearInterval(typingEffect);
     };
-  }, [children, duration, started]);
+  }, [fullText, duration, started]);
+
+  // Render the text with segments if provided
+  const renderText = () => {
+    if (typeof children === "string") {
+      return displayedText;
+    }
+    
+    let currentPos = 0;
+    return children.map((segment, index) => {
+      const start = currentPos;
+      const end = start + segment.text.length;
+      currentPos = end;
+      
+      const visibleText = displayedText.substring(start, Math.min(end, displayedText.length));
+      if (!visibleText) return null;
+      
+      return (
+        <span key={index} className={segment.className}>
+          {visibleText}
+        </span>
+      );
+    });
+  };
 
   return (
     <MotionComponent
@@ -84,7 +122,7 @@ export function TypingAnimation({
       )}
       {...props}
     >
-      {displayedText}
+      {renderText()}
     </MotionComponent>
   );
 }

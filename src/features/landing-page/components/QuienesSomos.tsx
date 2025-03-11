@@ -18,24 +18,24 @@ export default function QuienesSomos (): React.JSX.Element {
     >
       {/* Left content column */}
       <div className='w-full md:w-1/2 p-8 md:p-12 lg:p-20 flex flex-col gap-6 justify-center'>
-        <h2 className='text-lg md:text-xl text-accent font-bold'>Quienes Somos</h2>
+        <h2 className='text-md md:text-lg text-accent font-semibold'>Quienes Somos</h2>
 
-        <div className='flex flex-col gap-5 text-accent font-medium text-justify'>
-          <p className='text-lg md:text-xl'>
-            En <span className='font-bold'>CLIC Studio Pilates</span>, nos especializamos en
+        <div className='flex flex-col gap-5 text-accent font-normal text-justify'>
+          <p className='text-md md:text-lg'>
+            En <span className='font-semibold'>CLIC Studio Pilates</span>, nos especializamos en
             Pilates Clásico, honrando la técnica original de
             <span className='italic'> Contrología</span> de Joseph Pilates.
           </p>
 
-          <p className='text-lg md:text-xl'>
-            Con <span className='font-bold'>movimientos precisos y controlados</span>,
+          <p className='text-md md:text-lg'>
+            Con <span className='font-semibold'>movimientos precisos y controlados</span>,
             buscamos una experiencia auténtica y
-            transformadora, promoviendo <span className='font-bold'>equilibrio, alineación, fuerza y flexibilidad</span>.
+            transformadora, promoviendo <span className='font-semibold'>equilibrio, alineación, fuerza y flexibilidad</span>.
           </p>
 
-          <p className='text-lg md:text-xl'>
+          <p className='text-md md:text-lg'>
             Nuestros estudios ofrecen un espacio seguro y
-            armonioso. <span className='font-bold'>Te invitamos a hacer el "CLIC"</span>:
+            armonioso. <span className='font-semibold'>Te invitamos a hacer el "CLIC"</span>:
             priorizarte, moverte con conciencia y adoptar
             hábitos que mejoren tu vida.
           </p>
