@@ -31,7 +31,7 @@ export default function MobileNav ({ scrolled }: { scrolled: boolean }): React.R
       )}
       >
         <Link href='/#home' className='z-50' onClick={() => setOpen(false)}>
-          <Image src='/logo_nav.png' width={100} height={100} alt='Clic Pilates Logo' className='animate-fade ease-in-out animate-normal animate-duration-[3000ms] animate-fill-both animate-once' />
+          <Image src='/logo_clic.svg' width={100} height={100} alt='Clic Pilates Logo' className='animate-fade ease-in-out animate-normal animate-duration-[3000ms] animate-fill-both animate-once' />
         </Link>
 
         {/* Botón para abrir o cerrar menú */}
