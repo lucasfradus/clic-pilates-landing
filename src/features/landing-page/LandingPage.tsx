@@ -1,11 +1,12 @@
 'use client'
 import { useEffect } from 'react'
+import Lenis from 'lenis'
+import 'lenis/dist/lenis.css'
 import NavBar from '@/features/landing-page/components/NavBar/NavBar'
 import Hero from '@/features/landing-page/components/Hero'
 import HaceElClic from '@/features/landing-page/components/HaceElClic'
 import Brand from '@/features/landing-page/components/Brand'
-import Lenis from 'lenis'
-import 'lenis/dist/lenis.css'
+import QuienesSomos from '@/features/landing-page/components/QuienesSomos'
 
 export default function LandingPage (): React.JSX.Element {
   // Lenis smooth scroll
@@ -27,7 +28,7 @@ export default function LandingPage (): React.JSX.Element {
         <Hero />
         <HaceElClic />
         <Brand />
-        <div className='h-96' />
+        <QuienesSomos />
       </main>
     </>
   )
