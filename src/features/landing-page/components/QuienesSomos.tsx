@@ -3,6 +3,20 @@ import { motion, useScroll, useTransform } from 'framer-motion'
 import React, { useRef } from 'react'
 import Image from 'next/image'
 
+// Animation variants for text elements
+const textVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      delay: 0.2 * i,
+      duration: 0.6,
+      ease: 'easeOut'
+    }
+  })
+}
+
 export default function QuienesSomos (): React.JSX.Element {
   const sectionRef = useRef(null)
   const { scrollYProgress } = useScroll({
@@ -10,20 +24,6 @@ export default function QuienesSomos (): React.JSX.Element {
     offset: ['start end', 'end start']
   })
   const y = useTransform(scrollYProgress, [0, 1], ['-10%', '10%'])
-
-  // Animation variants for text elements
-  const textVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: (i: number) => ({
-      opacity: 1,
-      y: 0,
-      transition: {
-        delay: 0.1 * i,
-        duration: 0.6,
-        ease: 'easeOut'
-      }
-    })
-  }
 
   return (
     <section
