@@ -3,6 +3,41 @@ import React, { useRef } from 'react'
 import Image from 'next/image'
 import { motion, useScroll, useTransform } from 'framer-motion'
 
+// Animation variants for cards
+const cardVariants = {
+  hover: {
+    scale: 1.02,
+    boxShadow: '0 10px 30px rgba(0, 0, 0, 0.1)',
+    transition: {
+      type: 'spring',
+      stiffness: 300,
+      damping: 20
+    }
+  },
+  initial: {
+    scale: 1,
+    boxShadow: '0 0 0 rgba(0, 0, 0, 0)',
+    transition: {
+      type: 'spring',
+      stiffness: 500,
+      damping: 30
+    }
+  },
+  hidden: {
+    opacity: 0,
+    y: 30
+  },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      delay: 0.1 * i,
+      duration: 0.6,
+      ease: 'easeOut'
+    }
+  })
+}
+
 export default function Niveles (): React.JSX.Element {
   const sectionRef = useRef(null)
   const { scrollYProgress } = useScroll({
@@ -10,41 +45,6 @@ export default function Niveles (): React.JSX.Element {
     offset: ['start end', 'end start']
   })
   const y = useTransform(scrollYProgress, [0, 1], ['-10%', '10%'])
-
-  // Animation variants for cards
-  const cardVariants = {
-    hover: {
-      scale: 1.02,
-      boxShadow: '0 10px 30px rgba(0, 0, 0, 0.1)',
-      transition: {
-        type: 'spring',
-        stiffness: 300,
-        damping: 20
-      }
-    },
-    initial: {
-      scale: 1,
-      boxShadow: '0 0 0 rgba(0, 0, 0, 0)',
-      transition: {
-        type: 'spring',
-        stiffness: 500,
-        damping: 30
-      }
-    },
-    hidden: {
-      opacity: 0,
-      y: 30
-    },
-    visible: (i: number) => ({
-      opacity: 1,
-      y: 0,
-      transition: {
-        delay: 0.1 * i,
-        duration: 0.6,
-        ease: 'easeOut'
-      }
-    })
-  }
 
   // Animation variants for text elements
   const textVariants = {
@@ -64,7 +64,7 @@ export default function Niveles (): React.JSX.Element {
     <section
       ref={sectionRef}
       id='niveles'
-      className='relative min-h-screen w-full overflow-hidden border-t border-accent'
+      className='relative min-h-screen md:min-h-[120vh] w-full overflow-hidden border-t border-accent'
     >
       {/* Background image with parallax effect */}
       <motion.div className='absolute h-[110%] w-full' style={{ y }}>
@@ -84,7 +84,7 @@ export default function Niveles (): React.JSX.Element {
       </motion.div>
 
       {/* Content container */}
-      <div className='relative flex min-h-screen w-full flex-col items-center justify-center px-4 py-16 sm:px-8 md:px-12'>
+      <div className='relative flex min-h-screen md:min-h-[120vh] w-full flex-col items-center justify-center px-4 py-16 sm:px-8 md:px-12'>
         <div className='flex w-full max-w-5xl flex-col items-center text-center'>
           {/* Main heading - larger and more prominent */}
           <motion.h2
@@ -114,7 +114,7 @@ export default function Niveles (): React.JSX.Element {
           <div className='flex w-full flex-col items-stretch justify-center gap-6 md:flex-row md:gap-10 lg:gap-16'>
             {/* Inicial Pilates Card - lighter background with motion animation */}
             <motion.div
-              className='w-full  bg-background p-8 py-16 md:w-1/2'
+              className='w-full bg-background p-10 md:p-8 md:py-16 md:w-1/2'
               initial='hidden'
               whileInView='visible'
               viewport={{ once: true, margin: '-50px' }}
@@ -144,7 +144,7 @@ export default function Niveles (): React.JSX.Element {
 
             {/* Level Up Pilates Card - lighter background with motion animation */}
             <motion.div
-              className='w-full  bg-background p-8 py-16 md:w-1/2'
+              className='w-full bg-background p-10 md:p-8 md:py-16 md:w-1/2'
               initial='hidden'
               whileInView='visible'
               viewport={{ once: true, margin: '-50px' }}
