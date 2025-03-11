@@ -1,9 +1,24 @@
+'use client'
+import { useEffect } from 'react'
 import NavBar from '@/features/landing-page/components/NavBar/NavBar'
 import Hero from '@/features/landing-page/components/Hero'
 import HaceElClic from '@/features/landing-page/components/HaceElClic'
-import Brand from './components/Brand'
+import Brand from '@/features/landing-page/components/Brand'
+import Lenis from 'lenis'
+import 'lenis/dist/lenis.css'
 
 export default function LandingPage (): React.JSX.Element {
+  // Lenis smooth scroll
+  useEffect(() => {
+    const lenis = new Lenis()
+    function raf (time: any): void {
+      lenis.raf(time)
+      requestAnimationFrame(raf)
+    }
+
+    requestAnimationFrame(raf)
+  }, [])
+
   return (
     <>
       <NavBar />
