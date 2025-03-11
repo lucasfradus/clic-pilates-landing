@@ -12,7 +12,7 @@ export default function Brand (): React.JSX.Element {
   })
   const y = useTransform(scrollYProgress, [0, 1], ['-10%', '10%'])
   return (
-    <section ref={sectionRef} className='min-h-[90vh] w-full flex flex-col md:flex-row border-t border-accent overflow-hidden'>
+    <section ref={sectionRef} className='min-h-[90vh] w-full flex flex-col md:flex-row md:border-t-2 border-accent overflow-hidden'>
       {/* Left column with pilates equipment image */}
       <div className='relative w-full md:w-1/3 h-[30vh] md:h-auto overflow-hidden'>
         <motion.div className='absolute inset-0' style={{ y }}>

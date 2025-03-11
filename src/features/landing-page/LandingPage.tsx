@@ -7,6 +7,7 @@ import Hero from '@/features/landing-page/components/Hero'
 import HaceElClic from '@/features/landing-page/components/HaceElClic'
 import Brand from '@/features/landing-page/components/Brand'
 import QuienesSomos from '@/features/landing-page/components/QuienesSomos'
+import Niveles from '@/features/landing-page/components/Niveles'
 
 export default function LandingPage (): React.JSX.Element {
   // Lenis smooth scroll
@@ -29,6 +30,7 @@ export default function LandingPage (): React.JSX.Element {
         <HaceElClic />
         <Brand />
         <QuienesSomos />
+        <Niveles />
       </main>
     </>
   )
