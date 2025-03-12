@@ -14,11 +14,11 @@ export default function Carousel (): JSX.Element {
       enableAutoplay: true,
       autoplayInterval: 2000,
       autoplayDirection: 'to left',
-      stopAutoplayOnInteraction: false,
+      stopAutoplayOnInteraction: true,
       transitionDuration: 800,
       transitionTimingFunction: 'ease',
       draggable: true,
-      enablePagination: true
+      enablePagination: false
     },
     '(min-width: 640px)': {
       slidesToShow: 3
