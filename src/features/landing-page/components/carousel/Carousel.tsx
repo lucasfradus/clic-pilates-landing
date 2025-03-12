@@ -21,12 +21,14 @@ export default function Carousel (): JSX.Element {
       enablePagination: false
     },
     '(min-width: 640px)': {
+      slidesToShow: 2
+    },
+    '(min-width: 768px)': {
       slidesToShow: 3
       // slidesToScroll: 1
     },
     '(min-width: 1024px)': {
       slidesToShow: 4
-      // slidesToScroll: 1
     }
   })
 

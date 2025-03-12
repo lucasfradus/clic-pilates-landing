@@ -182,20 +182,25 @@
 
 /* fix layout shifts */
 
-.blaze-slider.my-slider {
-  --slides-to-show: 3;
-  --slide-gap: 20px;
+.blaze-slider {
+  --slides-to-show: 1;
 }
 
-@media (max-width: 900px) {
-  .blaze-slider.my-slider {
+@media (max-width: 640px) {
+  .blaze-slider {
     --slides-to-show: 2;
   }
 }
 
-@media (max-width: 500px) {
-  .blaze-slider.my-slider {
-    --slides-to-show: 1;
+@media (max-width: 768px) {
+  .blaze-slider {
+    --slides-to-show: 3;
+  }
+}
+
+@media (max-width: 1024px) {
+  .blaze-slider {
+    --slides-to-show: 4
   }
 }
 /* other styles */
