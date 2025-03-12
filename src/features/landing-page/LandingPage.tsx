@@ -9,6 +9,7 @@ import Brand from '@/features/landing-page/components/Brand'
 import QuienesSomos from '@/features/landing-page/components/QuienesSomos'
 import Niveles from '@/features/landing-page/components/Niveles'
 import Carousel from '@/features/landing-page/components/carousel/Carousel'
+import DownloadApp from './components/DownloadApp'
 
 export default function LandingPage (): React.JSX.Element {
   // Lenis smooth scroll
@@ -33,6 +34,8 @@ export default function LandingPage (): React.JSX.Element {
         <QuienesSomos />
         <Niveles />
         <Carousel />
+        <DownloadApp />
+        <div className='h-96' />
       </main>
     </>
   )
