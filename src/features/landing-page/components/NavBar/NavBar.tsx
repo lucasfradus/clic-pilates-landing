@@ -1,6 +1,6 @@
 'use client'
-import DesktopNav from '@/features/landing-page/components/NavBar/components/DesktopNav'
-import MobileNav from '@/features/landing-page/components/NavBar/components/MobileNav'
+import DesktopNav from '@/features/landing-page/components/navbar/components/DesktopNav'
+import MobileNav from '@/features/landing-page/components/navbar/components/MobileNav'
 import { useEffect, useState } from 'react'
 
 export default function NavBar (): React.ReactElement {
