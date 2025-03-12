@@ -12,21 +12,21 @@ export default function Carousel (): JSX.Element {
       slideGap: '0px',
       loop: true,
       enableAutoplay: true,
-      autoplayInterval: 2000,
+      autoplayInterval: 1200,
       autoplayDirection: 'to left',
       stopAutoplayOnInteraction: true,
-      transitionDuration: 800,
+      transitionDuration: 1000,
       transitionTimingFunction: 'ease',
       draggable: true,
       enablePagination: false
     },
     '(min-width: 640px)': {
-      slidesToShow: 3,
-      slidesToScroll: 3
+      slidesToShow: 3
+      // slidesToScroll: 1
     },
     '(min-width: 1024px)': {
-      slidesToShow: 4,
-      slidesToScroll: 4
+      slidesToShow: 4
+      // slidesToScroll: 1
     }
   })
 
@@ -38,7 +38,7 @@ export default function Carousel (): JSX.Element {
       <div className='blaze-slider' ref={ref}>
         <div className='blaze-container'>
           <div className='blaze-track-container'>
-            <div className='blaze-track h-[60vh]'>
+            <div className='blaze-track h-[70vh]'>
               {galleryImages.map((imageSrc, index) => (
                 <div key={index} className='relative w-full h-full'>
                   <Image
