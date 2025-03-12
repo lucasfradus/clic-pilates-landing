@@ -21,10 +21,12 @@ export default function Carousel (): JSX.Element {
       enablePagination: false
     },
     '(min-width: 640px)': {
-      slidesToShow: 3
+      slidesToShow: 3,
+      slidesToScroll: 3
     },
     '(min-width: 1024px)': {
-      slidesToShow: 4
+      slidesToShow: 4,
+      slidesToScroll: 4
     }
   })
 
@@ -45,7 +47,7 @@ export default function Carousel (): JSX.Element {
                     fill
                     sizes='(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw'
                     className='object-cover'
-                    priority={index < 2}
+                    priority
                   />
                 </div>
               ))}
