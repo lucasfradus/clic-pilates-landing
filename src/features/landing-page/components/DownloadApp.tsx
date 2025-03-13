@@ -14,6 +14,7 @@ export default function DownloadApp (): React.JSX.Element {
           delay={0.5} // Using 0.5 seconds delay
           duration={0.8} // Slightly longer duration for smoother animation
           startOnView
+          once
         >
           <h6 className='font-semibold text-3xl sm:text-4xl md:text-5xl'>Push your <span className='italic'>Habits,</span></h6>
           <h6 className='font-semibold text-3xl sm:text-4xl md:text-5xl'>Push your <span className='italic'>Body,</span></h6>

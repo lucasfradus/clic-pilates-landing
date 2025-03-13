@@ -10,7 +10,7 @@ import QuienesSomos from '@/features/landing-page/components/QuienesSomos'
 import Niveles from '@/features/landing-page/components/Niveles'
 import Carousel from '@/features/landing-page/components/carousel/Carousel'
 import DownloadApp from './components/DownloadApp'
-import PorqueElegirnos from './PorqueElegirnos'
+import PorqueElegirnos from './components/PorqueElegirnos'
 
 export default function LandingPage (): React.JSX.Element {
   // Lenis smooth scroll
