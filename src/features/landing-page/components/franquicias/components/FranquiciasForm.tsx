@@ -11,7 +11,7 @@ import {
 } from '@hookform/resolvers/zod'
 import * as z from 'zod'
 import { useState } from 'react'
-import { CheckIcon, X } from 'lucide-react'
+import { CheckCircleIcon, CheckIcon, SendIcon, X } from 'lucide-react'
 import {
   Button
 } from '@/components/ui/button'
@@ -121,10 +121,10 @@ export default function FranquiciasForm (): React.JSX.Element {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8 md:space-y-5 w-full px-12 lg:px-14 mx-auto'>
-        <h3 className='text-2xl md:text-3xl font-semibold text-primary uppercase mb-6 md:mb-10'>Franquicias</h3>
+      <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-6 w-full px-12 lg:px-14 mx-auto'>
+        <h3 className='text-2xl md:text-3xl font-semibold text-primary uppercase mb-6'>Franquicias</h3>
 
-        <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
+        <div className='grid grid-cols-1 sm:grid-cols-2 gap-6'>
           <div className='col-span-1'>
             <FormField
               control={form.control}
@@ -166,7 +166,7 @@ export default function FranquiciasForm (): React.JSX.Element {
           </div>
         </div>
 
-        <div className='grid grid-cols-1 sm:grid-cols-3 gap-4'>
+        <div className='grid grid-cols-1 sm:grid-cols-3 gap-6'>
           <div className='col-span-1'>
             <FormField
               control={form.control}
@@ -230,7 +230,7 @@ export default function FranquiciasForm (): React.JSX.Element {
           </div>
         </div>
 
-        <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
+        <div className='grid grid-cols-1 sm:grid-cols-2 gap-6'>
           <div className='col-span-1'>
             <FormField
               control={form.control}
@@ -258,26 +258,11 @@ export default function FranquiciasForm (): React.JSX.Element {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>¿Cómo nos conociste?</FormLabel>
-                  <Select
-                    onValueChange={(value) => {
-                      const handleComoNosConociste = (): void => {
-                        field.onChange(value)
-                      }
-                      handleComoNosConociste()
-                    }}
-                    value={field.value}
-                  >
-                    <FormControl>
-                      <SelectTrigger className='w-full'>
-                        <SelectValue placeholder='Instagram' />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      <SelectItem value='instagram'>Instagram</SelectItem>
-                      <SelectItem value='amigo'>Un amigo</SelectItem>
-                      <SelectItem value='google'>Google</SelectItem>
-                    </SelectContent>
-                  </Select>
+                  <Input
+                    placeholder='Contanos como nos conociste'
+                    className='resize-none'
+                    {...field}
+                  />
                   <FormMessage />
                 </FormItem>
               )}
@@ -341,7 +326,10 @@ export default function FranquiciasForm (): React.JSX.Element {
         >
           {formStatus === 'initial'
             ? (
-                'Enviar'
+              <span className='flex items-center gap-2'>
+                <SendIcon size={18} />
+                Enviar
+              </span>
               )
             : formStatus === 'loading'
               ? (
@@ -357,7 +345,10 @@ export default function FranquiciasForm (): React.JSX.Element {
                 </TextShimmerWave>
                 )
               : (
-                  'Recibimos tu consulta'
+                <span className='flex items-center gap-2'>
+                  <CheckCircleIcon size={18} />
+                  Recibimos tu consulta
+                </span>
                 )}
         </Button>
       </form>
