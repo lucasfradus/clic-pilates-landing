@@ -1,147 +1,139 @@
 'use client'
 
 import * as React from 'react'
-import { Button } from '@/components/ui/button'
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger
-} from '@/components/ui/tooltip'
 import Link from 'next/link'
 import Image from 'next/image'
 
 export default function ClicFooter (): React.ReactElement {
   return (
-    <footer className='relative border-t bg-accent text-background transition-colors duration-300'>
-      <div className='container mx-auto px-4 py-8 sm:py-10 md:px-6 md:py-12 lg:px-8'>
-        <div className='grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4'>
-          {/* Stay Connected Section */}
-          <div className='relative flex flex-col'>
-            <div className='mb-4 sm:mb-6'>
-              <Image
-                src='/logo_footer.svg'
-                alt='CLIC studio pilates'
-                width={190}
-                height={50}
-                className='mb-2'
-                priority
-              />
-            </div>
-          </div>
+    <footer className='relative border-t bg-accent text-background transition-colors duration-300 py-10 px-10 md:px-20'>
+      <div className='flex flex-col md:flex-row justify-between items-center flex-wrap gap-16 md:gap-8'>
 
-          {/* Explore Section */}
-          <div>
-            <h3 className='mb-4 text-lg font-bold'>EXPLORE</h3>
-            <nav className='grid gap-2 text-sm'>
-              <Link href='#' className='inline-block transition-opacity hover:opacity-80 hover:underline'>
-                Brand
-              </Link>
-              <Link href='#' className='inline-block transition-opacity hover:opacity-80 hover:underline'>
-                Quienes Somos
-              </Link>
-              <Link href='#' className='inline-block transition-opacity hover:opacity-80 hover:underline'>
-                Niveles
-              </Link>
-              <Link href='#' className='inline-block transition-opacity hover:opacity-80 hover:underline'>
-                Pilates
-              </Link>
-              <Link href='#' className='inline-block transition-opacity hover:opacity-80 hover:underline'>
-                Franquicias
-              </Link>
-              <Link href='#' className='inline-block transition-opacity hover:opacity-80 hover:underline'>
-                Contacto
-              </Link>
-            </nav>
-          </div>
-
-          {/* Contact Us Section */}
-          <div>
-            <h3 className='mb-4 text-lg font-bold'>CONTACT</h3>
-            <address className='grid gap-1 text-sm not-italic'>
-              <Link href='#' className='inline-block transition-opacity hover:opacity-80 hover:underline'>
-                Office Park
-              </Link>
-              <Link href='#' className='inline-block transition-opacity hover:opacity-80 hover:underline'>
-                Escobar
-              </Link>
-              <Link href='#' className='inline-block transition-opacity hover:opacity-80 hover:underline'>
-                Pilará
-              </Link>
-            </address>
-          </div>
-
-          {/* Follow Us Section */}
-          <div className='relative'>
-            <h3 className='mb-4 text-lg font-bold'>FOLLOW US</h3>
-            <div className='flex flex-wrap gap-4'>
-              <TooltipProvider>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Button
-                      variant='outline'
-                      size='icon'
-                      className='h-10 w-10 rounded-full bg-transparent border-background/30 hover:border-background hover:bg-background/10 hover:opacity-100 transition-all'
-                    >
-                      <Image src='/facebook.svg' alt='Facebook' width={18} height={18} />
-                      <span className='sr-only'>Facebook</span>
-                    </Button>
-                  </TooltipTrigger>
-                  <TooltipContent className='bg-background text-accent'>
-                    <p>Follow us on Facebook</p>
-                  </TooltipContent>
-                </Tooltip>
-              </TooltipProvider>
-
-              <TooltipProvider>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Button
-                      variant='outline'
-                      size='icon'
-                      className='h-10 w-10 rounded-full bg-transparent border-background/30 hover:border-background hover:bg-background/10 hover:opacity-100 transition-all'
-                    >
-                      <Image src='/tiktok.svg' alt='TikTok' width={18} height={18} />
-                      <span className='sr-only'>TikTok</span>
-                    </Button>
-                  </TooltipTrigger>
-                  <TooltipContent className='bg-background text-accent'>
-                    <p>Follow us on TikTok</p>
-                  </TooltipContent>
-                </Tooltip>
-              </TooltipProvider>
-
-              <TooltipProvider>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Button
-                      variant='outline'
-                      size='icon'
-                      className='h-10 w-10 rounded-full bg-transparent border-background/30 hover:border-background hover:bg-background/10 hover:opacity-100 transition-all'
-                    >
-                      <Image src='/instagram.svg' alt='Instagram' width={18} height={18} />
-                      <span className='sr-only'>Instagram</span>
-                    </Button>
-                  </TooltipTrigger>
-                  <TooltipContent className='bg-background text-accent'>
-                    <p>Follow us on Instagram</p>
-                  </TooltipContent>
-                </Tooltip>
-              </TooltipProvider>
-            </div>
+        {/* Explore Section */}
+        <div className='flex flex-col justify-center items-start'>
+          <h3 className='mb-4 text-lg font-bold'>EXPLORE</h3>
+          <div className='grid grid-cols-2 gap-x-3 gap-y-2 text-sm'>
+            <Link href='#' className='inline-block transition-opacity hover:opacity-80 hover:underline'>
+              Brand
+            </Link>
+            <Link href='#' className='inline-block transition-opacity hover:opacity-80 hover:underline'>
+              Quienes Somos
+            </Link>
+            <Link href='#' className='inline-block transition-opacity hover:opacity-80 hover:underline'>
+              Niveles
+            </Link>
+            <Link href='#' className='inline-block transition-opacity hover:opacity-80 hover:underline'>
+              Pilates
+            </Link>
+            <Link href='#' className='inline-block transition-opacity hover:opacity-80 hover:underline'>
+              Franquicias
+            </Link>
+            <Link href='#' className='inline-block transition-opacity hover:opacity-80 hover:underline'>
+              Contacto
+            </Link>
           </div>
         </div>
 
-        {/* Bottom Footer */}
-        <div className='mt-8 sm:mt-10 md:mt-12 flex flex-col items-center justify-between gap-4 border-t border-background/20 pt-6 md:flex-row md:pt-8'>
-          <p className='text-xs sm:text-sm'>
-            ® CLIC STUDIO PILATES.
-          </p>
-          <div className='flex items-center'>
-            <a href='#' className='text-xs sm:text-sm transition-opacity hover:opacity-80 hover:underline'>
-              DESIGNED BY CS CREATIVE STUDIO
-            </a>
+        {/* logo */}
+        <div className='relative flex flex-col gap-0 justify-center items-center'>
+          <Image
+            src='/logo_footer.svg'
+            alt='CLIC studio pilates'
+            width={200}
+            height={50}
+            className='mb-2'
+            priority
+          />
+
+        </div>
+
+        {/* Contact Us Section */}
+        <div className='flex flex-col justify-center items-start'>
+          <h3 className='mb-4 text-lg font-bold'>CONTACT</h3>
+          <div className='grid grid-cols-2 gap-x-3 gap-y-2 text-sm'>
+            <Link href='#' className='inline-block transition-opacity hover:opacity-80 hover:underline'>
+              Office Park
+            </Link>
+            <Link href='#' className='inline-block transition-opacity hover:opacity-80 hover:underline'>
+              +54 9 11 2689-4398
+            </Link>
+            <Link href='#' className='inline-block transition-opacity hover:opacity-80 hover:underline'>
+              Escobar
+            </Link>
+            <Link href='#' className='inline-block transition-opacity hover:opacity-80 hover:underline'>
+              +54 9 11 3336-6571
+            </Link>
+            <Link href='#' className='inline-block transition-opacity hover:opacity-80 hover:underline'>
+              Pilará
+            </Link>
+            <Link href='#' className='inline-block transition-opacity hover:opacity-80 hover:underline'>
+              +54 9 11 2650-9533
+            </Link>
           </div>
+        </div>
+
+        {/* social */}
+        <div className='flex w-full justify-center md:justify-start flex-wrap gap-4 py-6 md:py-8'>
+          <a
+            href='https://www.facebook.com'
+            target='_blank'
+            rel='noopener noreferrer'
+            className=''
+          >
+            <Image
+              src='/facebook.svg'
+              alt='Facebook'
+              width={18}
+              height={18}
+              className='invert brightness-0'
+            />
+            <span className='sr-only'>Facebook</span>
+          </a>
+
+          <a
+            href='https://www.tiktok.com'
+            target='_blank'
+            rel='noopener noreferrer'
+            className=''
+          >
+            <Image
+              src='/tiktok.svg'
+              alt='TikTok'
+              width={18}
+              height={18}
+              className='invert brightness-0'
+            />
+            <span className='sr-only'>TikTok</span>
+          </a>
+
+          <a
+            href='https://www.instagram.com'
+            target='_blank'
+            rel='noopener noreferrer'
+            className=''
+          >
+            <Image
+              src='/instagram.svg'
+              alt='Instagram'
+              width={18}
+              height={18}
+              className='invert brightness-0'
+            />
+            <span className='sr-only'>Instagram</span>
+          </a>
+        </div>
+      </div>
+
+      {/* Bottom Footer */}
+      <div className='flex flex-col items-center justify-between gap-4 border-t border-background/20 pt-6 md:flex-row md:pt-8'>
+        <p className='text-xs sm:text-sm'>
+          ® CLIC STUDIO PILATES.
+        </p>
+
+        <div className='flex items-center'>
+          <a href='#' className='text-xs sm:text-sm transition-opacity hover:opacity-80 hover:underline'>
+            DESIGNED BY CS CREATIVE STUDIO
+          </a>
         </div>
       </div>
     </footer>
