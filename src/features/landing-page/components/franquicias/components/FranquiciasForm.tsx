@@ -10,6 +10,8 @@ import {
   zodResolver
 } from '@hookform/resolvers/zod'
 import * as z from 'zod'
+import { useState } from 'react'
+import { CheckIcon, X } from 'lucide-react'
 import {
   Button
 } from '@/components/ui/button'
@@ -35,6 +37,7 @@ import {
   SelectTrigger,
   SelectValue
 } from '@/components/ui/select'
+import { TextShimmerWave } from '@/components/motion-primitives/text-shimmer-wave'
 
 const formSchema = z.object({
   name: z.string().min(1, 'Por favor ingresa tu nombre').max(35),
@@ -58,6 +61,8 @@ const formSchema = z.object({
 })
 
 export default function FranquiciasForm (): React.JSX.Element {
+  const [formStatus, setFormStatus] = useState<'initial' | 'loading' | 'submitted'>('initial')
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -75,15 +80,42 @@ export default function FranquiciasForm (): React.JSX.Element {
 
   function onSubmit (values: z.infer<typeof formSchema>): void {
     try {
+      setFormStatus('loading')
       console.log(values)
-      toast(
-        <pre className='mt-2 w-[340px] rounded-md bg-slate-950 p-4'>
-          <code className='text-white'>{JSON.stringify(values, null, 2)}</code>
-        </pre>
-      )
+
+      // Simulate API call with delay
+      setTimeout(() => {
+        // Show custom toast with CheckIcon
+        toast(
+          <div className='flex items-start'>
+            <div className='mr-3 rounded-full bg-accent p-2'>
+              <CheckIcon className='h-4 w-4 text-background' />
+            </div>
+            <div>
+              <p className='font-medium'>Recibimos tu consulta</p>
+              <p className='text-sm text-muted-foreground'>Te contactaremos a la brevedad</p>
+            </div>
+          </div>
+        )
+
+        // Reset form and update status
+        form.reset()
+        setFormStatus('submitted')
+      }, 1500)
     } catch (error) {
       console.error('Form submission error', error)
-      toast.error('Failed to submit the form. Please try again.')
+      toast(
+        <div className='flex items-start'>
+          <div className='mr-3 rounded-full bg-accent p-2'>
+            <X className='h-4 w-4 text-background' />
+          </div>
+          <div>
+            <p className='font-medium'>Ocurrió un error</p>
+            <p className='text-sm text-muted-foreground'>No recibimos tu consulta </p>
+          </div>
+        </div>
+      )
+      setFormStatus('initial')
     }
   }
 
@@ -302,7 +334,32 @@ export default function FranquiciasForm (): React.JSX.Element {
             </FormItem>
           )}
         />
-        <Button type='submit' className='w-full cursor-pointer py-4 md:py-6'>Enviar</Button>
+        <Button
+          type='submit'
+          disabled={formStatus !== 'initial'}
+          className='w-full cursor-pointer py-4 md:py-6'
+        >
+          {formStatus === 'initial'
+            ? (
+                'Enviar'
+              )
+            : formStatus === 'loading'
+              ? (
+                <TextShimmerWave
+                  className='[--base-color:#FDFBFA] [--base-gradient-color:#FAFAFA]'
+                  duration={1}
+                  spread={1}
+                  zDistance={1}
+                  scaleDistance={1.1}
+                  rotateYDistance={20}
+                >
+                  Enviando consulta...
+                </TextShimmerWave>
+                )
+              : (
+                  'Recibimos tu consulta'
+                )}
+        </Button>
       </form>
     </Form>
   )

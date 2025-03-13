@@ -28,7 +28,7 @@ export default function RootLayout ({
         className={`${poppins.variable} antialiased font-poppins bg-background`}
       >
         {children}
-        <Toaster />
+        <Toaster position='top-center' />
       </body>
     </html>
   )
