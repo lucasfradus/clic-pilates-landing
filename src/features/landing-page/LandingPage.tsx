@@ -9,8 +9,9 @@ import Brand from '@/features/landing-page/components/Brand'
 import QuienesSomos from '@/features/landing-page/components/QuienesSomos'
 import Niveles from '@/features/landing-page/components/Niveles'
 import Carousel from '@/features/landing-page/components/carousel/Carousel'
-import DownloadApp from './components/DownloadApp'
-import PorqueElegirnos from './components/PorqueElegirnos'
+import DownloadApp from '@/features/landing-page/components/DownloadApp'
+import PorqueElegirnos from '@/features/landing-page/components/PorqueElegirnos'
+import Franquicias from '@/features/landing-page/components/franquicias/Franquicias'
 
 export default function LandingPage (): React.JSX.Element {
   // Lenis smooth scroll
@@ -37,6 +38,7 @@ export default function LandingPage (): React.JSX.Element {
         <Carousel />
         <DownloadApp />
         <PorqueElegirnos />
+        <Franquicias />
       </main>
     </>
   )
