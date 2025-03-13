@@ -14,43 +14,42 @@ import Image from 'next/image'
 export default function ClicFooter (): React.ReactElement {
   return (
     <footer className='relative border-t bg-accent text-background transition-colors duration-300'>
-      <div className='container mx-auto px-4 py-12 md:px-6 lg:px-8'>
-        <div className='grid gap-12 md:grid-cols-2 lg:grid-cols-4'>
+      <div className='container mx-auto px-4 py-8 sm:py-10 md:px-6 md:py-12 lg:px-8'>
+        <div className='grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4'>
           {/* Stay Connected Section */}
-          <div className='relative'>
-            <div className='mb-4'>
+          <div className='relative flex flex-col'>
+            <div className='mb-4 sm:mb-6'>
               <Image
                 src='/logo_footer.svg'
                 alt='CLIC studio pilates'
-                width={160}
+                width={190}
                 height={50}
                 className='mb-2'
+                priority
               />
             </div>
-
-            <div className='absolute -right-4 top-0 h-24 w-24 rounded-full bg-background/10 blur-2xl' />
           </div>
 
           {/* Explore Section */}
           <div>
             <h3 className='mb-4 text-lg font-bold'>EXPLORE</h3>
-            <nav className='space-y-2 text-sm'>
-              <Link href='#' className='block transition-opacity hover:opacity-80'>
+            <nav className='grid gap-2 text-sm'>
+              <Link href='#' className='inline-block transition-opacity hover:opacity-80 hover:underline'>
                 Brand
               </Link>
-              <Link href='#' className='block transition-opacity hover:opacity-80'>
+              <Link href='#' className='inline-block transition-opacity hover:opacity-80 hover:underline'>
                 Quienes Somos
               </Link>
-              <Link href='#' className='block transition-opacity hover:opacity-80'>
+              <Link href='#' className='inline-block transition-opacity hover:opacity-80 hover:underline'>
                 Niveles
               </Link>
-              <Link href='#' className='block transition-opacity hover:opacity-80'>
+              <Link href='#' className='inline-block transition-opacity hover:opacity-80 hover:underline'>
                 Pilates
               </Link>
-              <Link href='#' className='block transition-opacity hover:opacity-80'>
+              <Link href='#' className='inline-block transition-opacity hover:opacity-80 hover:underline'>
                 Franquicias
               </Link>
-              <Link href='#' className='block transition-opacity hover:opacity-80'>
+              <Link href='#' className='inline-block transition-opacity hover:opacity-80 hover:underline'>
                 Contacto
               </Link>
             </nav>
@@ -59,24 +58,32 @@ export default function ClicFooter (): React.ReactElement {
           {/* Contact Us Section */}
           <div>
             <h3 className='mb-4 text-lg font-bold'>CONTACT</h3>
-            <address className='space-y-2 text-sm not-italic'>
-              <p className='font-medium'>Office Park Pilar</p>
-              <p className='font-medium'>Escobar</p>
-              <p>Av. 12 de Octubre 2961, Pilar,</p>
-              <p>Buenos Aires</p>
-              <p className='pt-2'>Phone: +54 9 11 2889-4398</p>
+            <address className='grid gap-1 text-sm not-italic'>
+              <Link href='#' className='inline-block transition-opacity hover:opacity-80 hover:underline'>
+                Office Park
+              </Link>
+              <Link href='#' className='inline-block transition-opacity hover:opacity-80 hover:underline'>
+                Escobar
+              </Link>
+              <Link href='#' className='inline-block transition-opacity hover:opacity-80 hover:underline'>
+                Pilará
+              </Link>
             </address>
           </div>
 
           {/* Follow Us Section */}
           <div className='relative'>
             <h3 className='mb-4 text-lg font-bold'>FOLLOW US</h3>
-            <div className='mb-6 flex space-x-5'>
+            <div className='flex flex-wrap gap-4'>
               <TooltipProvider>
                 <Tooltip>
                   <TooltipTrigger asChild>
-                    <Button variant='outline' size='icon' className='rounded-full bg-transparent border-background/30 hover:opacity-80'>
-                      <Image src='/facebook.svg' alt='Facebook' width={16} height={16} />
+                    <Button
+                      variant='outline'
+                      size='icon'
+                      className='h-10 w-10 rounded-full bg-transparent border-background/30 hover:border-background hover:bg-background/10 hover:opacity-100 transition-all'
+                    >
+                      <Image src='/facebook.svg' alt='Facebook' width={18} height={18} />
                       <span className='sr-only'>Facebook</span>
                     </Button>
                   </TooltipTrigger>
@@ -89,8 +96,12 @@ export default function ClicFooter (): React.ReactElement {
               <TooltipProvider>
                 <Tooltip>
                   <TooltipTrigger asChild>
-                    <Button variant='outline' size='icon' className='rounded-full bg-transparent border-background/30 hover:opacity-80'>
-                      <Image src='/tiktok.svg' alt='TikTok' width={16} height={16} />
+                    <Button
+                      variant='outline'
+                      size='icon'
+                      className='h-10 w-10 rounded-full bg-transparent border-background/30 hover:border-background hover:bg-background/10 hover:opacity-100 transition-all'
+                    >
+                      <Image src='/tiktok.svg' alt='TikTok' width={18} height={18} />
                       <span className='sr-only'>TikTok</span>
                     </Button>
                   </TooltipTrigger>
@@ -103,8 +114,12 @@ export default function ClicFooter (): React.ReactElement {
               <TooltipProvider>
                 <Tooltip>
                   <TooltipTrigger asChild>
-                    <Button variant='outline' size='icon' className='rounded-full bg-transparent border-background/30 hover:opacity-80'>
-                      <Image src='/instagram.svg' alt='Instagram' width={16} height={16} />
+                    <Button
+                      variant='outline'
+                      size='icon'
+                      className='h-10 w-10 rounded-full bg-transparent border-background/30 hover:border-background hover:bg-background/10 hover:opacity-100 transition-all'
+                    >
+                      <Image src='/instagram.svg' alt='Instagram' width={18} height={18} />
                       <span className='sr-only'>Instagram</span>
                     </Button>
                   </TooltipTrigger>
@@ -118,15 +133,14 @@ export default function ClicFooter (): React.ReactElement {
         </div>
 
         {/* Bottom Footer */}
-        <div className='mt-12 flex flex-col items-center justify-between gap-4 border-t border-background/20 pt-8 text-center md:flex-row'>
-          <p className='text-sm'>
+        <div className='mt-8 sm:mt-10 md:mt-12 flex flex-col items-center justify-between gap-4 border-t border-background/20 pt-6 md:flex-row md:pt-8'>
+          <p className='text-xs sm:text-sm'>
             ® CLIC STUDIO PILATES.
           </p>
-          <div className='flex items-center gap-4 text-sm'>
-            <a href='#' className='transition-opacity hover:opacity-80'>
+          <div className='flex items-center'>
+            <a href='#' className='text-xs sm:text-sm transition-opacity hover:opacity-80 hover:underline'>
               DESIGNED BY CS CREATIVE STUDIO
             </a>
-
           </div>
         </div>
       </div>
