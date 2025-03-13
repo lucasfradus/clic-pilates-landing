@@ -70,13 +70,11 @@ export default function FranquiciasForm (): React.JSX.Element {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-5 max-w-3xl mx-auto'>
-        <h3 className='text-3xl font-semibold text-primary uppercase mb-10'>Franquicias</h3>
+      <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8 md:space-y-5 w-full px-10 lg:px-12 mx-auto'>
+        <h3 className='text-2xl md:text-3xl font-semibold text-primary uppercase mb-6 md:mb-10'>Franquicias</h3>
 
-        <div className='grid grid-cols-12 gap-4'>
-
-          <div className='col-span-6'>
-
+        <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
+          <div className='col-span-1'>
             <FormField
               control={form.control}
               name='name'
@@ -90,15 +88,13 @@ export default function FranquiciasForm (): React.JSX.Element {
                       {...field}
                     />
                   </FormControl>
-
                   <FormMessage />
                 </FormItem>
               )}
             />
           </div>
 
-          <div className='col-span-6'>
-
+          <div className='col-span-1'>
             <FormField
               control={form.control}
               name='email'
@@ -112,19 +108,15 @@ export default function FranquiciasForm (): React.JSX.Element {
                       {...field}
                     />
                   </FormControl>
-
                   <FormMessage />
                 </FormItem>
               )}
             />
           </div>
-
         </div>
 
-        <div className='grid grid-cols-12 gap-4'>
-
-          <div className='col-span-4'>
-
+        <div className='grid grid-cols-1 sm:grid-cols-3 gap-4'>
+          <div className='col-span-1'>
             <FormField
               control={form.control}
               name='age'
@@ -138,15 +130,13 @@ export default function FranquiciasForm (): React.JSX.Element {
                       {...field}
                     />
                   </FormControl>
-
                   <FormMessage />
                 </FormItem>
               )}
             />
           </div>
 
-          <div className='col-span-4'>
-
+          <div className='col-span-1'>
             <FormField
               control={form.control}
               name='phone'
@@ -160,16 +150,13 @@ export default function FranquiciasForm (): React.JSX.Element {
                       {...field}
                     />
                   </FormControl>
-
                   <FormMessage />
                 </FormItem>
               )}
             />
-
           </div>
 
-          <div className='col-span-4'>
-
+          <div className='col-span-1'>
             <FormField
               control={form.control}
               name='occupation'
@@ -183,16 +170,15 @@ export default function FranquiciasForm (): React.JSX.Element {
                       {...field}
                     />
                   </FormControl>
-
                   <FormMessage />
                 </FormItem>
               )}
             />
           </div>
-
         </div>
-        <div className='grid grid-cols-12 gap-4'>
-          <div className='col-span-6'>
+
+        <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
+          <div className='col-span-1'>
             <FormField
               control={form.control}
               name='location'
@@ -206,14 +192,13 @@ export default function FranquiciasForm (): React.JSX.Element {
                       {...field}
                     />
                   </FormControl>
-                  {/* <FormDescription>¿En dónde te gustaría abrir tu Clic Studio Pilates?</FormDescription> */}
                   <FormMessage />
                 </FormItem>
               )}
             />
           </div>
 
-          <div className='col-span-6'>
+          <div className='col-span-1'>
             <FormField
               control={form.control}
               name='como_nos_conociste'
@@ -235,12 +220,11 @@ export default function FranquiciasForm (): React.JSX.Element {
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      <SelectItem value='m@example.com'>Instagram</SelectItem>
-                      <SelectItem value='m@google.com'>Un amigo</SelectItem>
-                      <SelectItem value='m@support.com'>Google</SelectItem>
+                      <SelectItem value='instagram'>Instagram</SelectItem>
+                      <SelectItem value='amigo'>Un amigo</SelectItem>
+                      <SelectItem value='google'>Google</SelectItem>
                     </SelectContent>
                   </Select>
-
                   <FormMessage />
                 </FormItem>
               )}
@@ -269,9 +253,9 @@ export default function FranquiciasForm (): React.JSX.Element {
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  <SelectItem value='m@example.com'>45.000 a 65.000 USD</SelectItem>
-                  <SelectItem value='m@google.com'>65.000 a 85.000 USD</SelectItem>
-                  <SelectItem value='m@support.com'>Otro</SelectItem>
+                  <SelectItem value='45000-65000'>45.000 a 65.000 USD</SelectItem>
+                  <SelectItem value='65000-85000'>65.000 a 85.000 USD</SelectItem>
+                  <SelectItem value='otro'>Otro</SelectItem>
                 </SelectContent>
               </Select>
               <FormDescription>Nivel de inversión disponible</FormDescription>
@@ -293,12 +277,11 @@ export default function FranquiciasForm (): React.JSX.Element {
                   {...field}
                 />
               </FormControl>
-
               <FormMessage />
             </FormItem>
           )}
         />
-        <Button type='submit' className='w-full cursor-pointer py-6'>Enviar</Button>
+        <Button type='submit' className='w-full cursor-pointer py-4 md:py-6'>Enviar</Button>
       </form>
     </Form>
   )

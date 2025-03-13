@@ -9,8 +9,8 @@ const poppins = Poppins({
 })
 
 export const metadata: Metadata = {
-  title: 'Clic Pilates',
-  description: 'Bienvenida a tu Pilates Era'
+  title: 'Clic Studio Pilates',
+  description: 'Franquicias de Clic Studio Pilates'
 }
 
 export default function RootLayout ({
@@ -20,6 +20,9 @@ export default function RootLayout ({
 }>): React.ReactElement {
   return (
     <html lang='es'>
+      <head>
+        <meta name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1' />
+      </head>
       <body
         className={`${poppins.variable} antialiased font-poppins bg-background`}
       >

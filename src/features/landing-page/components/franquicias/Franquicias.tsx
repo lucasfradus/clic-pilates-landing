@@ -28,11 +28,11 @@ export default function Franquicias (): React.JSX.Element {
   return (
     <section
       ref={sectionRef}
-      className='min-h-screen w-full overflow-hidden flex flex-col md:flex-row  border-y border-accent'
-      id='quienes-somos'
+      className='min-h-screen w-full overflow-hidden flex flex-col md:flex-row border-y border-accent'
+      id='franquicias'
     >
       {/* Left image column with parallax effect */}
-      <div className='relative w-full md:w-1/2 h-[50vh] md:h-screen overflow-hidden'>
+      <div className='relative w-full md:basis-2/5 lg:basis-1/2 h-[40vh] md:h-screen overflow-hidden'>
         <motion.div className='absolute inset-0' style={{ y }}>
           <Image
             src='/15FRANQUICIAS.jpeg'
@@ -40,6 +40,7 @@ export default function Franquicias (): React.JSX.Element {
             priority
             alt='Clic Pilates Equipment'
             className='object-cover'
+            sizes='(max-width: 768px) 100vw, 50vw'
           />
           {/* Dark overlay for better text visibility */}
           <div className='absolute inset-0 bg-black/50' />
@@ -49,15 +50,15 @@ export default function Franquicias (): React.JSX.Element {
           whileInView='visible'
           viewport={{ once: true, amount: 0.3 }}
           variants={textVariants}
-          className='absolute bottom-[15%] left-10 text-white text-start font-normal text-2xl md:text-3xl lg:text-4xl xl:text-5xl'
+          className='absolute bottom-[15%] left-5 md:left-10 text-white text-start font-normal text-2xl md:text-3xl lg:text-4xl xl:text-5xl max-w-[90%]'
         >
           Abrí tu propio <br />
           CLIC Studio Pilates
         </motion.h4>
       </div>
 
-      {/* Right form column  */}
-      <div className='w-full md:w-1/2 flex flex-col justify-evenly'>
+      {/* Right form column */}
+      <div className='w-full md:basis-3/5 lg:basis-1/2 flex flex-col justify-center py-8 md:py-12'>
         <FranquiciasForm />
       </div>
     </section>
