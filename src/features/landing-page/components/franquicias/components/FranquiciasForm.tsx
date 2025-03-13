@@ -16,7 +16,7 @@ import {
 import {
   Form,
   FormControl,
-  FormDescription,
+  // FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -37,24 +37,43 @@ import {
 } from '@/components/ui/select'
 
 const formSchema = z.object({
-  name: z.string().min(1).min(1).max(35),
-  email: z.string(),
-  age: z.number().min(0).max(120),
-  phone: z.string(),
-  occupation: z.string().min(1).min(1).max(30).optional(),
-  location: z.string().min(5).max(30),
-  investment: z.string(),
+  name: z.string().min(1, 'Por favor ingresa tu nombre').max(35),
+  email: z.string().email('Por favor ingresa un email válido'),
+  age: z.string({
+    required_error: 'Ingresa tu edad' // Set error message for empty field
+  })
+    .min(1, 'Ingresa tu edad')
+    .transform((val) => val === '' ? undefined : parseInt(val, 10))
+    .pipe(
+      z.number()
+        .min(1, 'Ingresa tu edad')
+        .max(120, 'La edad debe ser menor a 120 años')
+    ),
+  phone: z.string().min(1, 'El teléfono es requerido'),
+  occupation: z.string().max(30).optional(),
+  location: z.string().min(5, 'Por favor especifica una ubicación').max(30),
+  investment: z.string().min(1, 'Selecciona un nivel de inversión'),
   como_nos_conociste: z.string().optional(),
   why: z.string().optional()
 })
 
 export default function FranquiciasForm (): React.JSX.Element {
-  const form = useForm < z.infer < typeof formSchema >>({
-    resolver: zodResolver(formSchema)
-
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: '',
+      email: '',
+      age: undefined,
+      phone: '',
+      occupation: '',
+      location: '',
+      investment: '',
+      como_nos_conociste: '',
+      why: ''
+    }
   })
 
-  function onSubmit (values: z.infer < typeof formSchema >): void {
+  function onSubmit (values: z.infer<typeof formSchema>): void {
     try {
       console.log(values)
       toast(
@@ -70,7 +89,7 @@ export default function FranquiciasForm (): React.JSX.Element {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8 md:space-y-5 w-full px-10 lg:px-12 mx-auto'>
+      <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8 md:space-y-5 w-full px-12 lg:px-14 mx-auto'>
         <h3 className='text-2xl md:text-3xl font-semibold text-primary uppercase mb-6 md:mb-10'>Franquicias</h3>
 
         <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
@@ -128,6 +147,8 @@ export default function FranquiciasForm (): React.JSX.Element {
                       placeholder='35'
                       type='number'
                       {...field}
+                      onChange={(e) => field.onChange(e.target.value)}
+                      value={field.value || ''}
                     />
                   </FormControl>
                   <FormMessage />
@@ -207,12 +228,12 @@ export default function FranquiciasForm (): React.JSX.Element {
                   <FormLabel>¿Cómo nos conociste?</FormLabel>
                   <Select
                     onValueChange={(value) => {
-                      const handleConocioChange = (): void => {
+                      const handleComoNosConociste = (): void => {
                         field.onChange(value)
                       }
-                      handleConocioChange()
+                      handleComoNosConociste()
                     }}
-                    defaultValue={field.value}
+                    value={field.value}
                   >
                     <FormControl>
                       <SelectTrigger className='w-full'>
@@ -245,11 +266,11 @@ export default function FranquiciasForm (): React.JSX.Element {
                   }
                   handleInvestmentChange()
                 }}
-                defaultValue={field.value}
+                value={field.value}
               >
                 <FormControl>
                   <SelectTrigger className='w-full'>
-                    <SelectValue placeholder='45.000 a 65.000 USD' />
+                    <SelectValue placeholder='Cuánto estás dispuesto a invertir' />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
@@ -258,7 +279,7 @@ export default function FranquiciasForm (): React.JSX.Element {
                   <SelectItem value='otro'>Otro</SelectItem>
                 </SelectContent>
               </Select>
-              <FormDescription>Nivel de inversión disponible</FormDescription>
+              {/* <FormDescription>Nivel de inversión disponible</FormDescription> */}
               <FormMessage />
             </FormItem>
           )}
