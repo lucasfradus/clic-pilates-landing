@@ -148,7 +148,7 @@ export default function FranquiciasForm (): React.JSX.Element {
                       type='number'
                       {...field}
                       onChange={(e) => field.onChange(e.target.value)}
-                      value={field.value || ''}
+                      value={field.value !== undefined && field.value !== null ? field.value : ''}
                     />
                   </FormControl>
                   <FormMessage />
