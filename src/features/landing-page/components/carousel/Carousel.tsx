@@ -12,10 +12,10 @@ export default function Carousel (): JSX.Element {
       slideGap: '0px',
       loop: true,
       enableAutoplay: true,
-      autoplayInterval: 1200,
+      autoplayInterval: 2500,
       autoplayDirection: 'to left',
       stopAutoplayOnInteraction: true,
-      transitionDuration: 1000,
+      transitionDuration: 1200,
       transitionTimingFunction: 'ease',
       draggable: true,
       enablePagination: false
