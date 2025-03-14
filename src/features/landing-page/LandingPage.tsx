@@ -13,6 +13,7 @@ import DownloadApp from '@/features/landing-page/components/DownloadApp'
 import PorqueElegirnos from '@/features/landing-page/components/PorqueElegirnos'
 import Franquicias from '@/features/landing-page/components/franquicias/Franquicias'
 import Footer from '@/features/landing-page/components/Footer'
+import Locations from './components/locations/Locations'
 
 export default function LandingPage (): React.JSX.Element {
   // Lenis smooth scroll
@@ -40,6 +41,8 @@ export default function LandingPage (): React.JSX.Element {
         <DownloadApp />
         <PorqueElegirnos />
         <Franquicias />
+        <Locations />
+
       </main>
       <Footer />
     </>

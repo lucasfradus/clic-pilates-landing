@@ -10,7 +10,7 @@ export default function ClicFooter (): React.ReactElement {
       <div className='flex flex-col md:flex-row justify-between items-center flex-wrap gap-16 md:gap-8'>
 
         {/* Explore Section */}
-        <div className='flex flex-col justify-center items-start'>
+        <div className='flex flex-col justify-center items-center md:items-start'>
           <h3 className='mb-4 text-lg font-bold'>EXPLORE</h3>
           <div className='grid grid-cols-2 gap-x-3 gap-y-2 text-sm'>
             <Link href='#' className='inline-block transition-opacity hover:opacity-80 hover:underline'>
@@ -48,7 +48,7 @@ export default function ClicFooter (): React.ReactElement {
         </div>
 
         {/* Contact Us Section */}
-        <div className='flex flex-col justify-center items-start'>
+        <div className='flex flex-col justify-center items-center md:items-start'>
           <h3 className='mb-4 text-lg font-bold'>CONTACT</h3>
           <div className='grid grid-cols-2 gap-x-3 gap-y-2 text-sm'>
             <Link href='#' className='inline-block transition-opacity hover:opacity-80 hover:underline'>
