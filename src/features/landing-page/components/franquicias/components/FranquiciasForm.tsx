@@ -18,7 +18,6 @@ import {
 import {
   Form,
   FormControl,
-  // FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -121,7 +120,7 @@ export default function FranquiciasForm (): React.JSX.Element {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-6 w-full px-12 lg:px-14 mx-auto'>
+      <form onSubmit={(e) => { void form.handleSubmit(onSubmit)(e) }} className='space-y-6 w-full px-12 lg:px-14 mx-auto'>
         <h3 className='text-2xl md:text-3xl font-semibold text-primary uppercase mb-6'>Franquicias</h3>
 
         <div className='grid grid-cols-1 sm:grid-cols-2 gap-6'>
@@ -296,7 +295,6 @@ export default function FranquiciasForm (): React.JSX.Element {
                   <SelectItem value='otro'>Otro</SelectItem>
                 </SelectContent>
               </Select>
-              {/* <FormDescription>Nivel de inversión disponible</FormDescription> */}
               <FormMessage />
             </FormItem>
           )}

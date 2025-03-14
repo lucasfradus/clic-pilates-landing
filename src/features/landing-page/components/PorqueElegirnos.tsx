@@ -44,17 +44,17 @@ const BenefitItem = ({ number, title, description, index }: { number: string, ti
       viewport={{ once: true, margin: '-50px' }}
       variants={benefitVariants}
       custom={index}
-      className='flex flex-col items-center gap-2 w-full max-w-xs text-center px-4 mb-12 md:mb-8'
+      className='flex flex-col items-center gap-2 w-full max-w-2xs text-center mb-12 md:mb-8'
     >
       <div className='flex flex-col items-center'>
-        <h4 className='font-semibold text-xl md:text-2xl text-center leading-4'>
+        <h4 className='font-semibold text-xl md:text-xl 2xl:text-2xl text-center leading-4'>
           {number}
         </h4>
-        <h4 className='font-semibold text-xl md:text-2xl text-center'>
+        <h4 className='font-semibold text-xl md:text-xl 2xl:text-2xl text-center'>
           {title}
         </h4>
       </div>
-      <p className='text-base leading-4' dangerouslySetInnerHTML={{ __html: description }} />
+      <p className='2xl:text-base leading-4' dangerouslySetInnerHTML={{ __html: description }} />
     </motion.div>
   )
 }
@@ -64,57 +64,57 @@ export default function PorqueElegirnos (): React.JSX.Element {
     {
       number: '01 FÁCIL',
       title: 'IMPLEMENTACIÓN',
-      description: "<span class='font-semibold'>No necesitas experiencia</span>, te damos todas las herramientas para operar con éxito."
+      description: "<span class='font-semibold'>No necesitas experiencia</span>, te <br /> damos todas las herramientas <br /> para operar con éxito."
     },
     {
       number: '02 MANUAL',
       title: 'OPERATIVO',
-      description: "Manual operativo completo con procesos clave para una <span class='font-semibold'>gestión eficiente y estandarizada</span>."
+      description: "Manual operativo completo con <br /> procesos clave para una <span class='font-semibold'>gestión <br />eficiente y estandarizada</span>."
     },
     {
       number: '03 EXCLUSIVIDAD',
       title: 'TERRITORIAL',
-      description: "Garantiza una <span class='font-semibold'>zona exclusiva</span> donde no se abrirán otros estudios de la franquicia."
+      description: "Garantiza una <span class='font-semibold'>zona exclusiva</span><br /> donde no se abrirán otros<br />  estudios de la franquicia."
     },
     {
       number: '04 MODELO',
       title: 'COMPROBADO',
-      description: "Basado en <span class='font-semibold'>sedes exitosas</span>, minimiza riesgos y maximiza oportunidades."
+      description: "Basado en <span class='font-semibold'>sedes exitosas</span>,<br /> minimiza riesgos y maximiza<br />  oportunidades."
     },
     {
       number: '05 CLIC',
       title: 'ACADEMY',
-      description: "<span class='font-semibold'>Capacitación continua</span> en Pilates Clásico para contar siempre con personal calificado."
+      description: "<span class='font-semibold'>Capacitación continua</span> en Pilates<br />  Clásico para contar siempre con<br />  personal calificado."
     },
     {
       number: '06 DISEÑO',
       title: 'INNOVADOR',
-      description: "Espacios modernos y armoniosos para una <span class='font-semibold'>experiencia de entrenamiento placentera</span>."
+      description: "Espacios modernos y armoniosos<br />  para una <span class='font-semibold'>experiencia de<br />  entrenamiento placentera</span>."
     },
     {
       number: '07 MARKETING',
       title: 'ESTRATÉGICO',
-      description: "<span class='font-semibold'>Campañas y estrategias</span> para atraer, fidelizar y fortalecer tu presencia en el mercado."
+      description: "<span class='font-semibold'>Campañas y estrategias</span> para<br />  atraer, fidelizar y fortalecer tu<br />  presencia en el mercado."
     }
   ]
 
   return (
     <section
-      className='min-h-screen h-auto flex flex-col items-center py-16 md:py-24 text-accent w-full px-10'
+      className='min-h-screen h-auto flex flex-col items-center justify-center gap-16 text-accent w-full px-10 py-16 md:py-24'
     >
       <motion.div
         initial='hidden'
         whileInView='visible'
         viewport={{ once: true, margin: '-50px' }}
         variants={textVariants}
-        className='text-center space-y-2 mb-16'
+        className='text-center space-y-2'
       >
         <h3 className='font-semibold text-2xl sm:text-3xl lg:text-4xl'>¿Por qué elegir CLIC Pilates?</h3>
         <p className='text-lg sm:text-xl lg:text-2xl'>Beneficios para los franquiciados.</p>
       </motion.div>
 
-      <div className='w-full flex flex-col items-center gap-8'>
-        <div className='flex flex-col md:flex-row justify-center gap-4 md:gap-8 w-full items-center md:items-start flex-wrap'>
+      <div className='w-full flex flex-col items-center gap-4'>
+        <div className='flex flex-col md:flex-row justify-center gap-4 md:gap-1 w-full items-center md:items-start flex-wrap'>
           {/* First row - 3 items */}
           <BenefitItem
             key={0}
@@ -140,7 +140,7 @@ export default function PorqueElegirnos (): React.JSX.Element {
         </div>
 
         {/* Second row - 4 items */}
-        <div className='flex flex-col md:flex-row justify-center gap-4 md:gap-8 w-full items-center md:items-start flex-wrap'>
+        <div className='flex flex-col md:flex-row justify-center  gap-4 md:gap-1 w-full items-center md:items-start flex-wrap'>
           <BenefitItem
             key={3}
             number={benefits[3].number}
