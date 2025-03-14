@@ -1,5 +1,6 @@
 import React from 'react'
 import { ProgressiveBlurHoverCard } from './components/ProgressiveBlurHoverCard'
+import Image from 'next/image'
 
 // Define location data
 const locations = [
@@ -45,7 +46,18 @@ export default function Locations (): React.ReactElement {
               mapUrl={location.mapUrl}
               phoneNumber={location.phoneNumber}
             />
-            {/* TO DO: WhatsApp anchor con el numero */}
+            <a
+              className='flex items-center gap-2 group relative'
+              href={`https://wa.me/${location.phoneNumber.replace(/[\s-]+/g, '')}`}
+              target='_blank'
+              rel='noreferrer'
+            >
+              <Image src='/whatsapp.svg' width={20} height={20} alt='WhatsApp Logo' />
+              <span className='text-xl font-semibold relative'>
+                {location.phoneNumber}
+                <span className='absolute bottom-0 left-0 w-0 h-0.5 bg-accent transition-all duration-300 group-hover:w-full' />
+              </span>
+            </a>
           </div>
         ))}
       </div>

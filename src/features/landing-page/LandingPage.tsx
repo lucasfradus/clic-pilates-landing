@@ -14,6 +14,7 @@ import PorqueElegirnos from '@/features/landing-page/components/PorqueElegirnos'
 import Franquicias from '@/features/landing-page/components/franquicias/Franquicias'
 import Footer from '@/features/landing-page/components/Footer'
 import Locations from './components/locations/Locations'
+import ClicAcademy from './components/ClicAcademy'
 
 export default function LandingPage (): React.JSX.Element {
   // Lenis smooth scroll
@@ -42,6 +43,7 @@ export default function LandingPage (): React.JSX.Element {
         <PorqueElegirnos />
         <Franquicias />
         <Locations />
+        <ClicAcademy />
 
       </main>
       <Footer />

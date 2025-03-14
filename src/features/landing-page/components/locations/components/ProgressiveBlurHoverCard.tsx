@@ -6,7 +6,7 @@ import { motion } from 'motion/react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
-import { Phone, Map } from 'lucide-react'
+import { Map } from 'lucide-react'
 
 interface LocationProps {
   imageSrc: string
@@ -71,7 +71,7 @@ export function ProgressiveBlurHoverCard ({
           <span className='text-sm text-background'>{address}</span>
           {phoneNumber != null && phoneNumber !== '' && (
             <span className='flex items-center text-sm text-background'>
-              <Phone className='h-4 w-4 mr-1' />
+              {/* <Phone className='h-4 w-4 mr-1' /> */}
               {phoneNumber}
             </span>
           )}
