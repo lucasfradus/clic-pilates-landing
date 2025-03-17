@@ -60,7 +60,7 @@ export default function InstagramFeed (): React.JSX.Element {
         </div>
 
         {/* Behold.so Instagram Feed */}
-        <div data-behold-id='D8VPNpm7e4WBRBQepEnJ' />
+        {/* <div data-behold-id='D8VPNpm7e4WBRBQepEnJ' /> */}
 
         <div className='text-center mt-10'>
           <motion.a
