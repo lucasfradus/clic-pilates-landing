@@ -29,13 +29,12 @@ export default function Franquicias (): React.JSX.Element {
     <section
       ref={sectionRef}
       className='min-h-screen h-auto w-full overflow-hidden flex flex-col md:flex-row border-y border-accent'
-      id='franquicias'
     >
       {/* Left image column with parallax effect */}
       <div className='relative w-full md:basis-2/5 lg:basis-1/2 h-[40vh] md:min-h-screen md:h-auto overflow-hidden'>
         <motion.div className='absolute inset-0' style={{ y }}>
           <Image
-            src='/15FRANQUICIAS.jpeg'
+            src='/images/15FRANQUICIAS.jpeg'
             fill
             priority
             alt='Clic Pilates Equipment'

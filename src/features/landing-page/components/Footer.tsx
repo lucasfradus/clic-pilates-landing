@@ -37,7 +37,7 @@ export default function ClicFooter (): React.ReactElement {
         {/* logo */}
         <div className='relative flex flex-col gap-0 justify-center items-center'>
           <Image
-            src='/logo_footer.svg'
+            src='/icons/logo_footer.svg'
             alt='CLIC studio pilates'
             width={200}
             height={50}
@@ -81,7 +81,7 @@ export default function ClicFooter (): React.ReactElement {
             className=''
           >
             <Image
-              src='/facebook.svg'
+              src='/icons/facebook.svg'
               alt='Facebook'
               width={18}
               height={18}
@@ -97,7 +97,7 @@ export default function ClicFooter (): React.ReactElement {
             className=''
           >
             <Image
-              src='/tiktok.svg'
+              src='/icons/tiktok.svg'
               alt='TikTok'
               width={18}
               height={18}
@@ -113,7 +113,7 @@ export default function ClicFooter (): React.ReactElement {
             className=''
           >
             <Image
-              src='/instagram.svg'
+              src='/icons/instagram.svg'
               alt='Instagram'
               width={18}
               height={18}

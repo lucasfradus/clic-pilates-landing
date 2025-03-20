@@ -91,7 +91,7 @@ export default function QuienesSomos (): React.JSX.Element {
       <div className='relative w-full md:w-1/2 h-[50vh] md:h-screen overflow-hidden'>
         <motion.div className='absolute inset-0' style={{ y }}>
           <Image
-            src='/4QUIENES SOMOS.jpeg'
+            src='/images/4QUIENES SOMOS.jpeg'
             fill
             priority
             alt='Clic Pilates Equipment'

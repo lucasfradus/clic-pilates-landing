@@ -25,7 +25,7 @@ export default function DownloadApp (): React.JSX.Element {
           <div className='flex flex-col sm:flex-row gap-4 sm:gap-2'>
             <button>
               <Image
-                src='/app-store.svg'
+                src='/icons/app-store.svg'
                 alt='App Store Badge'
                 width={200}
                 height={75}
@@ -34,7 +34,7 @@ export default function DownloadApp (): React.JSX.Element {
             </button>
             <button>
               <Image
-                src='/google-play.svg'
+                src='/icons/google-play.svg'
                 alt='Google Play Badge'
                 width={200}
                 height={75}

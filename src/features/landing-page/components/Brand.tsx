@@ -12,12 +12,12 @@ export default function Brand (): React.JSX.Element {
   })
   const y = useTransform(scrollYProgress, [0, 1], ['-10%', '10%'])
   return (
-    <section ref={sectionRef} className='min-h-[90vh] w-full flex flex-col md:flex-row md:border-t-2 border-accent overflow-hidden'>
+    <section ref={sectionRef} id='brand' className='min-h-[90vh] w-full flex flex-col md:flex-row md:border-t-2 border-accent overflow-hidden'>
       {/* Left column with pilates equipment image */}
       <div className='relative w-full md:w-1/3 h-[30vh] md:h-auto overflow-hidden'>
         <motion.div className='absolute inset-0' style={{ y }}>
           <Image
-            src='/2CLIC.jpeg'
+            src='/images/2CLIC.jpeg'
             fill
             priority
             alt='Clic Pilates Equipment'
@@ -48,7 +48,7 @@ export default function Brand (): React.JSX.Element {
         <div className='relative w-full h-[40vh] md:h-auto md:basis-3/5 overflow-hidden'>
           <motion.div className='absolute inset-0' style={{ y }}>
             <Image
-              src='/3CLIC.jpeg'
+              src='/images/3CLIC.jpeg'
               fill
               priority
               alt='Clic Pilates Studio'
@@ -56,7 +56,7 @@ export default function Brand (): React.JSX.Element {
             />
           </motion.div>
           <Image
-            src='/texto_brand2.png'
+            src='/images/texto_brand2.png'
             width={300}
             height={50}
             priority

@@ -31,7 +31,7 @@ export default function MobileNav ({ scrolled }: { scrolled: boolean }): React.R
       )}
       >
         <Link href='/#home' className='z-50' onClick={() => setOpen(false)}>
-          <Image src='/logo_clic.svg' width={100} height={100} alt='Clic Pilates Logo' className='animate-fade ease-in-out animate-normal animate-duration-[3000ms] animate-fill-both animate-once' />
+          <Image src='/icons/logo_clic.svg' width={100} height={100} alt='Clic Pilates Logo' className='animate-fade ease-in-out animate-normal animate-duration-[3000ms] animate-fill-both animate-once' />
         </Link>
 
         {/* Botón para abrir o cerrar menú */}
@@ -82,7 +82,7 @@ export default function MobileNav ({ scrolled }: { scrolled: boolean }): React.R
               className='pointer-events-auto cursor-pointer transition duration-500 hover:brightness-200 focus-visible:outline-0'
             >
               <Link
-                href='/#quienesSomosMobile'
+                href='/#quienes-somos'
                 className='flex items-center gap-2'
               >
                 <span>Quiénes Somos</span>
@@ -93,7 +93,7 @@ export default function MobileNav ({ scrolled }: { scrolled: boolean }): React.R
               onClick={() => setOpen(false)}
               className='pointer-events-auto cursor-pointer transition duration-500 hover:brightness-200 focus-visible:outline-0'
             >
-              <Link href='/#servicios' className='flex items-center gap-2'>
+              <Link href='/#niveles' className='flex items-center gap-2'>
                 <span>Niveles</span>
                 <span className='mb-1'>{'>'}</span>
               </Link>
@@ -102,8 +102,17 @@ export default function MobileNav ({ scrolled }: { scrolled: boolean }): React.R
               onClick={() => setOpen(false)}
               className='pointer-events-auto cursor-pointer transition duration-500 hover:brightness-200 focus-visible:outline-0'
             >
-              <Link href='/#paquetes' className='flex items-center gap-2'>
-                <span>Pilates</span>
+              <Link href='/#franquicias' className='flex items-center gap-2'>
+                <span>Franquicias</span>
+                <span className='mb-1'>{'>'}</span>
+              </Link>
+            </li>
+            <li
+              onClick={() => setOpen(false)}
+              className='pointer-events-auto cursor-pointer transition duration-500 hover:brightness-200 focus-visible:outline-0'
+            >
+              <Link href='/#academy' className='flex items-center gap-2'>
+                <span>Academy</span>
                 <span className='mb-1'>{'>'}</span>
               </Link>
             </li>
@@ -112,7 +121,7 @@ export default function MobileNav ({ scrolled }: { scrolled: boolean }): React.R
               className='pointer-events-auto cursor-pointer transition duration-500 hover:brightness-200 focus-visible:outline-0'
             >
               <Link href='/#contacto' className='flex items-center gap-2'>
-                <span>Franquicias</span>
+                <span>Contacto</span>
                 <span className='mb-1'>{'>'}</span>
               </Link>
             </li>

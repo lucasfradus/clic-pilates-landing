@@ -101,6 +101,7 @@ export default function PorqueElegirnos (): React.JSX.Element {
   return (
     <section
       className='min-h-screen h-auto flex flex-col items-center justify-center gap-16 text-accent w-full px-10 py-16 md:py-24'
+      id='franquicias'
     >
       <motion.div
         initial='hidden'

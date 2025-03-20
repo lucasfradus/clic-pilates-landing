@@ -71,7 +71,7 @@ export default function Niveles (): React.JSX.Element {
         <div className='relative h-full w-full'>
           <Image
             alt='CLIC Pilates Niveles'
-            src='/5NIVELES.jpeg'
+            src='/images/5NIVELES.jpeg'
             fill
             priority
             quality={100}

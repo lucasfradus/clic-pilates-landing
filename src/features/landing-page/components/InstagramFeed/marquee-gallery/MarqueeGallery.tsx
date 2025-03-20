@@ -5,35 +5,51 @@ import { JSX } from 'react'
 const instagramPosts = [
   {
     id: '1',
-    imageUrl: '/carousel/6GALERIA.jpeg'
+    imageUrl: '/images/insta-feed/1.jpeg'
   },
   {
     id: '2',
-    imageUrl: '/carousel/7GALERIA.jpeg'
+    imageUrl: '/images/insta-feed/2.jpeg'
   },
   {
     id: '3',
-    imageUrl: '/carousel/8GALERIA.jpeg'
+    imageUrl: '/images/insta-feed/3.jpeg'
   },
   {
     id: '4',
-    imageUrl: '/carousel/9GALERIA.jpeg'
+    imageUrl: '/images/insta-feed/4.jpeg'
   },
   {
     id: '5',
-    imageUrl: '/carousel/10GALERIA.jpeg'
+    imageUrl: '/images/insta-feed/5.jpeg'
   },
   {
     id: '6',
-    imageUrl: '/carousel/11GALERIA.jpeg'
+    imageUrl: '/images/insta-feed/6.jpeg'
   },
   {
     id: '7',
-    imageUrl: '/carousel/12GALERIA.jpeg'
+    imageUrl: '/images/insta-feed/7.jpeg'
   },
   {
     id: '8',
-    imageUrl: '/carousel/13GALERIA.jpeg'
+    imageUrl: '/images/insta-feed/8.jpeg'
+  },
+  {
+    id: '9',
+    imageUrl: '/images/insta-feed/9.jpeg'
+  },
+  {
+    id: '10',
+    imageUrl: '/images/insta-feed/10.jpeg'
+  },
+  {
+    id: '11',
+    imageUrl: '/images/insta-feed/11.jpeg'
+  },
+  {
+    id: '12',
+    imageUrl: '/images/insta-feed/12.jpeg'
   }
 ]
 
@@ -47,12 +63,9 @@ const PostCard = ({
   imageUrl: string
 }): JSX.Element => {
   return (
-    <a
-      href='https://www.instagram.com/clic.pilates/'
-      target='_blank'
-      rel='noopener noreferrer'
+    <div
       className={cn(
-        'relative h-64 w-64 cursor-pointer overflow-hidden rounded-xl mx-2 group',
+        'relative h-64 w-64 overflow-hidden rounded-xl mx-2 group',
         'transition-transform duration-300 hover:scale-[1.02]'
       )}
     >
@@ -85,7 +98,7 @@ const PostCard = ({
           boxShadow: 'inset 0 0 0 2px rgba(255,255,255,0.7)'
         }}
       />
-    </a>
+    </div>
   )
 }
 

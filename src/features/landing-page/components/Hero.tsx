@@ -31,7 +31,7 @@ export default function Hero (): React.JSX.Element {
           <Image
             alt='CLIC Pilates Studio'
             title='Pilates Studio'
-            src='/1HOME.webp'
+            src='/images/1HOME.webp'
             fill
             priority
             quality={100}
@@ -59,7 +59,7 @@ export default function Hero (): React.JSX.Element {
 
           {/* Tu Nueva Era text - responsive width based on screen size */}
           <Image
-            src='/tu_nueva_era.png'
+            src='/images/tu_nueva_era.png'
             alt='Tu Nueva Era'
             width={300}
             height={50}
@@ -71,7 +71,7 @@ export default function Hero (): React.JSX.Element {
 
           {/* Down arrow - responsive width based on screen size */}
           <Image
-            src='/hero_arrow.png'
+            src='/images/hero_arrow.png'
             alt='Scroll down'
             width={60}
             height={60}

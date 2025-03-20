@@ -33,7 +33,7 @@ export default function Carousel (): JSX.Element {
   })
 
   // Gallery images array for the carousel
-  const galleryImages = Array.from({ length: 9 }, (_, i) => `/carousel/${i + 6}GALERIA.jpeg`)
+  const galleryImages = Array.from({ length: 9 }, (_, i) => `/images/carousel/${i + 6}GALERIA.jpeg`)
 
   return (
     <div>

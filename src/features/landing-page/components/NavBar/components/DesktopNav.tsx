@@ -16,16 +16,16 @@ export default function DesktopNav ({ scrolled }: { scrolled: boolean }): React.
           <Link href='/#brand'>Brand</Link>
         </li>
         <li className='underline-offset-8 transition-all duration-300 ease-in-out hover:scale-105 hover:text-white hover:underline hover:brightness-200'>
-          <Link href='/#quienesSomos'>Quiénes Somos</Link>
+          <Link href='/#quienes-somos'>Quiénes Somos</Link>
         </li>
         <li className='underline-offset-8 transition-all duration-300 ease-in-out hover:scale-105 hover:text-white hover:underline hover:brightness-200'>
-          <Link href='/#servicios'>Niveles</Link>
+          <Link href='/#niveles'>Niveles</Link>
         </li>
       </ul>
 
       <Link href='/#home'>
         <Image
-          src='/logo_clic.svg'
+          src='/icons/logo_clic.svg'
           width={120}
           height={120}
           alt='Clic Pilates Logo'
@@ -34,15 +34,17 @@ export default function DesktopNav ({ scrolled }: { scrolled: boolean }): React.
       </Link>
 
       <ul className='animate-fade-down animate-normal animate-duration-[3000ms] animate-fill-both animate-once mt-2 flex gap-12 transition'>
+
         <li className='underline-offset-8 transition-all duration-300 ease-in-out hover:scale-105 hover:text-white hover:underline hover:brightness-200'>
-          <Link href='/#paquetes'>Pilates</Link>
-        </li>
-        <li className='underline-offset-8 transition-all duration-300 ease-in-out hover:scale-105 hover:text-white hover:underline hover:brightness-200'>
-          <Link href='/#contacto'>Franquicias</Link>
+          <Link href='/#franquicias'>Franquicias</Link>
         </li>
 
         <li className='underline-offset-8 transition-all duration-300 ease-in-out hover:scale-105 hover:text-white hover:underline hover:brightness-200'>
-          <Link href='/sign-in'>Contacto</Link>
+          <Link href='/#academy'>Academy</Link>
+        </li>
+
+        <li className='underline-offset-8 transition-all duration-300 ease-in-out hover:scale-105 hover:text-white hover:underline hover:brightness-200'>
+          <Link href='/#contacto'>Contacto</Link>
         </li>
       </ul>
     </nav>

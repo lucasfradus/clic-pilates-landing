@@ -29,7 +29,7 @@ const locations = [
 
 export default function Locations (): React.ReactElement {
   return (
-    <div className='min-h-screen flex justify-center items-center py-12 text-accent px-10 w-full'>
+    <section id='contacto' className='min-h-screen flex justify-center items-center py-12 text-accent px-10 w-full'>
 
       <div className='flex items-center justify-evenly flex-wrap gap-18'>
         {locations.map((location, index) => (
@@ -52,7 +52,7 @@ export default function Locations (): React.ReactElement {
               target='_blank'
               rel='noreferrer'
             >
-              <Image src='/whatsapp.svg' width={20} height={20} alt='WhatsApp Logo' />
+              <Image src='/icons/whatsapp.svg' width={20} height={20} alt='WhatsApp Logo' />
               <span className='text-xl font-semibold relative'>
                 {location.phoneNumber}
                 <span className='absolute bottom-0 left-0 w-0 h-0.5 bg-accent transition-all duration-300 group-hover:w-full' />
@@ -61,6 +61,6 @@ export default function Locations (): React.ReactElement {
           </div>
         ))}
       </div>
-    </div>
+    </section>
   )
 }
