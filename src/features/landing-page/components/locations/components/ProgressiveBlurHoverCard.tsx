@@ -67,10 +67,10 @@ export function ProgressiveBlurHoverCard ({
         transition={{ duration: 0.2, ease: 'easeOut' }}
       >
         <div className='flex flex-col items-start gap-1 px-5 py-4'>
-          <p className='text-base font-medium text-background'>{locationName}</p>
-          <span className='text-sm text-background'>{address}</span>
+          <p className='text-base font-medium text-white'>{locationName}</p>
+          <span className='text-sm text-white'>{address}</span>
           {phoneNumber != null && phoneNumber !== '' && (
-            <span className='flex items-center text-sm text-background'>
+            <span className='flex items-center text-sm text-white'>
               {/* <Phone className='h-4 w-4 mr-1' /> */}
               {phoneNumber}
             </span>
