@@ -5,21 +5,21 @@ import Image from 'next/image'
 // Define location data
 const locations = [
   {
-    imageSrc: '/clic_officepark.png', // You'll need to ensure these images are in your public folder
+    imageSrc: '/images/clic_officepark.png', // You'll need to ensure these images are in your public folder
     locationName: 'PILAR',
     address: 'Office Park',
     mapUrl: 'https://maps.app.goo.gl/qqpVPALUWsdH14Zx5',
     phoneNumber: '+54 9 11 2689-4398'
   },
   {
-    imageSrc: '/clic_pilara.png',
+    imageSrc: '/images/clic_pilara.png',
     locationName: 'PILARÁ',
     address: 'Estación Pilará',
     mapUrl: 'https://maps.app.goo.gl/tiyUmw2py2m7Fegs6',
     phoneNumber: '+54 9 11 2650-9533'
   },
   {
-    imageSrc: '/clic_escobar.png',
+    imageSrc: '/images/clic_escobar.png',
     locationName: 'ESCOBAR',
     address: 'WorkClub',
     mapUrl: 'https://maps.app.goo.gl/zfEAiiW8xAr2nRve6',
