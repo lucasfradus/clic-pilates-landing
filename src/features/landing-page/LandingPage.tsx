@@ -44,7 +44,6 @@ export default function LandingPage (): React.JSX.Element {
         <PorqueElegirnos />
         <Franquicias />
         <Locations />
-
         <ClicAcademy />
         <InstagramFeed />
 
