@@ -19,9 +19,9 @@ export const metadata: Metadata = {
   },
   icons: {
     apple: [
-      { url: '/opengraph-image.png' },
+      { url: '/images/opengraph-image.png' },
       {
-        url: '/opengraph-image.png',
+        url: '/images/opengraph-image.png',
         sizes: '180x180',
         type: 'image/png'
       }
