@@ -26,6 +26,7 @@ export default function DesktopNav ({ scrolled }: { scrolled: boolean }): React.
       <Link href='/#home'>
         <Image
           src='/icons/logo_clic.svg'
+          priority
           width={120}
           height={120}
           alt='Clic Pilates Logo'

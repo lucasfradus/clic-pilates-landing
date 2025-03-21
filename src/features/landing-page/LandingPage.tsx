@@ -20,7 +20,16 @@ import InstagramFeed from './components/InstagramFeed/InstagramFeed'
 export default function LandingPage (): React.JSX.Element {
   // Lenis smooth scroll
   useEffect(() => {
-    const lenis = new Lenis()
+    const lenis = new Lenis(
+      {
+        anchors: {
+          offset: -80,
+          onComplete: () => {
+            console.log('scrolled to anchor')
+          }
+        }
+      }
+    )
     function raf (time: any): void {
       lenis.raf(time)
       requestAnimationFrame(raf)
@@ -43,8 +52,8 @@ export default function LandingPage (): React.JSX.Element {
         <DownloadApp />
         <PorqueElegirnos />
         <Franquicias />
-        <Locations />
         <ClicAcademy />
+        <Locations />
         <InstagramFeed />
 
       </main>

@@ -58,6 +58,7 @@
     from { transform: translateY(0); }
     to { transform: translateY(calc(-100% - var(--gap, 1rem))); }
   }
+
 }
 
 :root {
@@ -166,13 +167,13 @@
 
 /* Fix marquee animations */
 @keyframes marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(calc(-100% - var(--gap, 1rem))); }
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 
 @keyframes marquee-reverse {
-  from { transform: translateX(calc(-100% - var(--gap, 1rem))); }
-  to { transform: translateX(0); }
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
 }
 
 @keyframes marquee-vertical {
@@ -186,7 +187,7 @@
 }
 
 .animate-marquee {
-  animation: marquee var(--duration, 15s) linear infinite;
+  animation: marquee 25s linear infinite;
 }
 
 .animate-marquee-reverse {
@@ -223,6 +224,16 @@
   overflow-x: hidden;
 }
 
+/* Add these new marquee helper classes */
+.marquee-wrapper {
+  overflow: hidden;
+  width: 100%;
+}
+
+.marquee-track {
+  display: flex;
+  width: fit-content;
+}
 
 /* fix layout shifts */
 
@@ -342,4 +353,10 @@
 /* For IE and Edge */
 * {
   -ms-overflow-style: none;
+}
+
+/* Add this custom animation class */
+.animate-pulse-after {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  animation-delay: 1s; /* Start pulsing after fade-up finishes */
 }
