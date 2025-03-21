@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     other: [
       {
         rel: 'opengraph-image',
-        url: '/opengraph-image.png'
+        url: '/images/opengraph-image.png'
       }
     ]
   },
