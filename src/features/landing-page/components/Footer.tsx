@@ -10,7 +10,7 @@ export default function ClicFooter (): React.ReactElement {
       <div className='flex flex-col md:flex-row justify-between items-center flex-wrap gap-16 md:gap-8'>
 
         {/* Explore Section */}
-        <div className='flex flex-col justify-center items-center md:items-start'>
+        <div className='flex flex-col justify-center items-center md:items-start order-2 md:order-1'>
           <h3 className='mb-4 text-lg font-bold'>EXPLORE</h3>
           <div className='grid grid-cols-2 gap-x-3 gap-y-2 text-sm'>
             <Link href='#' className='inline-block transition-opacity hover:opacity-80 hover:underline'>
@@ -35,7 +35,7 @@ export default function ClicFooter (): React.ReactElement {
         </div>
 
         {/* logo */}
-        <div className='relative flex flex-col gap-0 justify-center items-center'>
+        <div className='relative flex flex-col gap-0 justify-center items-center order-1 md:order-2'>
           <Image
             src='/icons/logo_footer.svg'
             alt='CLIC studio pilates'
@@ -48,7 +48,7 @@ export default function ClicFooter (): React.ReactElement {
         </div>
 
         {/* Contact Us Section */}
-        <div className='flex flex-col justify-center items-center md:items-start'>
+        <div className='flex flex-col justify-center items-center md:items-start order-3'>
           <h3 className='mb-4 text-lg font-bold'>CONTACT</h3>
           <div className='grid grid-cols-2 gap-x-3 gap-y-2 text-sm'>
             <Link href='#' className='inline-block transition-opacity hover:opacity-80 hover:underline'>
@@ -73,7 +73,7 @@ export default function ClicFooter (): React.ReactElement {
         </div>
 
         {/* social */}
-        <div className='flex w-full justify-center md:justify-start flex-wrap gap-4 py-6 md:py-8'>
+        <div className='flex w-full justify-center md:justify-start flex-wrap gap-4 py-6 md:py-8 order-4'>
           <a
             href='https://www.facebook.com'
             target='_blank'
