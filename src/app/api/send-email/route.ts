@@ -22,7 +22,7 @@ export async function POST (request: Request): Promise<NextResponse> {
     const { name, email, age, phone, occupation, location, investment, como_nos_conociste: comoNosConociste, why } = formData
 
     const data = await resend.emails.send({
-      from: 'Clic Pilates <onboarding@resend.dev>',
+      from: 'Clic Pilates <franquicias@clicpilates.com>', // Must use your verified domain
       to: ['franquicias@clicpilates.com'],
       subject: 'Nueva solicitud de franquicia',
       html: `
@@ -38,7 +38,7 @@ export async function POST (request: Request): Promise<NextResponse> {
         <p><strong>¿Por qué quiere abrir un Clic Studio Pilates?:</strong> ${why !== undefined ? String(why) : 'No especificado'}</p>
       `
     })
-
+    console.log('Resend response:', JSON.stringify(data, null, 2))
     return NextResponse.json({ success: true, data })
   } catch (error) {
     console.error('Error sending email:', error)
