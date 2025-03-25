@@ -77,30 +77,39 @@ export default function FranquiciasForm (): React.JSX.Element {
     }
   })
 
-  function onSubmit (values: z.infer<typeof formSchema>): void {
+  async function onSubmit (values: z.infer<typeof formSchema>): Promise<void> {
     try {
       setFormStatus('loading')
-      console.log(values)
 
-      // Simulate API call with delay
-      setTimeout(() => {
-        // Show custom toast with CheckIcon
-        toast(
-          <div className='flex items-start'>
-            <div className='mr-3 rounded-full bg-accent p-2'>
-              <CheckIcon className='h-4 w-4 text-background' />
-            </div>
-            <div>
-              <p className='font-medium'>Recibimos tu consulta</p>
-              <p className='text-sm text-muted-foreground'>Te contactaremos a la brevedad</p>
-            </div>
+      // Send form data to API endpoint
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(values)
+      })
+
+      if (!response.ok) {
+        throw new Error('Failed to submit form')
+      }
+
+      // Show custom toast with CheckIcon
+      toast(
+        <div className='flex items-start'>
+          <div className='mr-3 rounded-full bg-accent p-2'>
+            <CheckIcon className='h-4 w-4 text-background' />
           </div>
-        )
+          <div>
+            <p className='font-medium'>Recibimos tu consulta</p>
+            <p className='text-sm text-muted-foreground'>Te contactaremos a la brevedad</p>
+          </div>
+        </div>
+      )
 
-        // Reset form and update status
-        form.reset()
-        setFormStatus('submitted')
-      }, 1500)
+      // Reset form and update status
+      form.reset()
+      setFormStatus('submitted')
     } catch (error) {
       console.error('Form submission error', error)
       toast(
