@@ -23,8 +23,8 @@ export async function POST (request: Request): Promise<NextResponse> {
     const { name, email, age, phone, occupation, location, investment, como_nos_conociste: comoNosConociste, why } = formData
 
     const data = await resend.emails.send({
-      from: 'Clic Pilates <onboarding@resend.dev>', // You can change this to your verified domain
-      to: ['clicpilates0@gmail.com'],
+      from: 'Clic Pilates <onboarding@resend.dev>',
+      to: ['info@clicpilates.com'],
       subject: 'Nueva solicitud de franquicia',
       html: `
         <h2>Nueva solicitud de franquicia</h2>
