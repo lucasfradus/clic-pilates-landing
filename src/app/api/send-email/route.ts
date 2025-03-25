@@ -3,7 +3,6 @@ import { NextResponse } from 'next/server'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 
-// Define a type for the form data
 interface FormData {
   name: string
   email: string
