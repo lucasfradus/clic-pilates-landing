@@ -71,6 +71,24 @@ export default function ClicFooter (): React.ReactElement {
             <Link href='#' className='inline-block transition-opacity hover:opacity-80 hover:underline'>
               +54 9 11 2650-9533
             </Link>
+               <Link href='#' className='inline-block transition-opacity hover:opacity-80 hover:underline'>
+              Palermo Soho
+            </Link>
+            <Link href='#' className='inline-block transition-opacity hover:opacity-80 hover:underline'>
+              +54 9 11 5457-3847
+            </Link>
+               <Link href='#' className='inline-block transition-opacity hover:opacity-80 hover:underline'>
+              Palermo Hollywood
+            </Link>
+            <Link href='#' className='inline-block transition-opacity hover:opacity-80 hover:underline'>
+              +54 9 11 3284-9318
+            </Link>
+               <Link href='#' className='inline-block transition-opacity hover:opacity-80 hover:underline'>
+              Belgrano C
+            </Link>
+            <Link href='#' className='inline-block transition-opacity hover:opacity-80 hover:underline'>
+              +54 9 11 6657-8230
+            </Link>
           </div>
         </div>
 
