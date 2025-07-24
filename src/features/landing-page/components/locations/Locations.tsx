@@ -19,6 +19,13 @@ const locations = [
     phoneNumber: '+54 9 11 2650-9533'
   },
   {
+    imageSrc: '/images/clic_nordelta.jpg',
+    locationName: 'Nordelta',
+    address: 'Av. del Puerto 955',
+    mapUrl: 'https://maps.app.goo.gl/KMzyLXX7gCPC7Bqw8',
+    phoneNumber: '+54 9 11 2519-0076'
+  },
+  {
     imageSrc: '/images/clic_escobar.png',
     locationName: 'ESCOBAR',
     address: 'WorkClub',

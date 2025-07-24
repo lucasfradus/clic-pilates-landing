@@ -87,7 +87,7 @@ export default function ClicFooter (): React.ReactElement {
               Belgrano C
             </Link>
             <Link href='#' className='inline-block transition-opacity hover:opacity-80 hover:underline'>
-              +54 9 11 6657-8230
+              +54 9 11 6657-8230+54 9 11 6657-8230
             </Link>
           </div>
         </div>
