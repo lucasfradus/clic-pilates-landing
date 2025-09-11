@@ -17,7 +17,7 @@ const ClicAcademy: React.FC<ClicAcademyProps> = ({
   description = 'Capacítate en el método auténtico de pilates y forma parte de nuestro staff de instructores.',
   pdfPath = '/files/clic-academy.pdf',
   previewImagePath = '/images/pdf-preview.png',
-  fileDetails = 'Formato PDF - 2.5MB - Actualizado Marzo 2025'
+  fileDetails = 'Formato PDF - 2.5MB - Actualizado Septiembre 2025'
 }) => {
   return (
     <section id='academy' className='w-full bg-accent text-cream py-20'>

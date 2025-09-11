@@ -50,9 +50,17 @@ const locations = [
     imageSrc: '/images/clic_belgrano.jpg',
     locationName: 'Belgrano C',
     address: 'Av. del Libertador 5990',
-    mapUrl: 'https://maps.app.goo.gl/7HZH6oE9Yq4v81oS6',
+    mapUrl: 'https://maps.app.goo.gl/CWJRj2SMZRkLkDp19',
     phoneNumber: '+54 9 11 6657-8230'
+  },
+  {
+    imageSrc: '/images/clic_olivos.jpg',
+    locationName: 'Olivos',
+    address: 'Av. del Libertador 2451',
+    mapUrl: 'https://maps.app.goo.gl/sGHvGie1aXEkPHUe9',
+    phoneNumber: '+54 9 11 5881-1377'
   }
+
 
 
 
