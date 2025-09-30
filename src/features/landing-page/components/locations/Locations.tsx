@@ -59,7 +59,15 @@ const locations = [
     address: 'Av. del Libertador 2451',
     mapUrl: 'https://maps.app.goo.gl/sGHvGie1aXEkPHUe9',
     phoneNumber: '+54 9 11 5881-1377'
+  },
+  {
+    imageSrc: '/images/nunez.jpg',
+    locationName: 'Nuñez',
+    address: 'Av. del Libertador 7274',
+    mapUrl: 'https://maps.app.goo.gl/ZzPA3RAcWdVb6Qbr9',
+    phoneNumber: '+54 9 11 3228-3985'
   }
+
 
 
 
