@@ -6,13 +6,13 @@ import FranquiciasForm from './components/FranquiciasForm'
 
 // Animation variants for text elements - modified for horizontal slide-in
 const textVariants = {
-  hidden: { opacity: 0, x: -100 }, // Start from left
+  hidden: { opacity: 0, x: -100 },
   visible: {
     opacity: 1,
     x: 0,
     transition: {
       duration: 0.8,
-      ease: 'easeOut'
+      ease: 'easeOut' as const
     }
   }
 }
@@ -36,7 +36,6 @@ export default function Franquicias (): React.JSX.Element {
           <Image
             src='/images/15FRANQUICIAS.jpeg'
             fill
-            priority
             alt='Clic Pilates Equipment'
             className='object-cover'
             sizes='(max-width: 768px) 100vw, 50vw'

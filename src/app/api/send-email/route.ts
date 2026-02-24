@@ -1,7 +1,11 @@
 import { Resend } from 'resend'
 import { NextResponse } from 'next/server'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
+function getResend (): Resend {
+  const key = process.env.RESEND_API_KEY
+  if (!key) throw new Error('Missing RESEND_API_KEY')
+  return new Resend(key)
+}
 
 interface FormData {
   name: string
@@ -21,6 +25,7 @@ export async function POST (request: Request): Promise<NextResponse> {
 
     const { name, email, age, phone, occupation, location, investment, como_nos_conociste: comoNosConociste, why } = formData
 
+    const resend = getResend()
     const data = await resend.emails.send({
       from: 'Clic Pilates <franquicias@clicpilates.com>', // Must use your verified domain
       to: ['franquicias@clicpilates.com'],

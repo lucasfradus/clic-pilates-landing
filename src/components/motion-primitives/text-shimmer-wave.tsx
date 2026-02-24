@@ -76,7 +76,7 @@ export function TextShimmerWave({
               repeat: Infinity,
               repeatDelay: (children.length * 0.05) / spread,
               delay,
-              ease: 'easeInOut',
+              ease: [0.42, 0, 0.58, 1] as const,
               ...transition,
             }}
           >

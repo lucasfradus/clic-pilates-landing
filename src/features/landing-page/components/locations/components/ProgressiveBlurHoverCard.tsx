@@ -43,7 +43,7 @@ export function ProgressiveBlurHoverCard ({
           hidden: { opacity: 0 },
           visible: { opacity: 1 }
         }}
-        transition={{ duration: 0.3, ease: 'easeOut' }}
+        transition={{ duration: 0.3, ease: [0, 0, 0.58, 1] as const }}
       />
 
       {/* Subtle blur effect */}
@@ -55,7 +55,7 @@ export function ProgressiveBlurHoverCard ({
           hidden: { opacity: 0 },
           visible: { opacity: 0.5 }
         }}
-        transition={{ duration: 0.3, ease: 'easeOut' }}
+        transition={{ duration: 0.3, ease: [0, 0, 0.58, 1] as const }}
       />
       <motion.div
         className='absolute bottom-0 left-0 w-full'
@@ -64,7 +64,7 @@ export function ProgressiveBlurHoverCard ({
           hidden: { opacity: 0 },
           visible: { opacity: 1 }
         }}
-        transition={{ duration: 0.2, ease: 'easeOut' }}
+        transition={{ duration: 0.2, ease: [0, 0, 0.58, 1] as const }}
       >
         <div className='flex flex-col items-start gap-1 px-5 py-4'>
           <p className='text-base font-medium text-white'>{locationName}</p>

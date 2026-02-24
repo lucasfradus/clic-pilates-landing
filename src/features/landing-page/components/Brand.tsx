@@ -19,7 +19,6 @@ export default function Brand (): React.JSX.Element {
           <Image
             src='/images/2CLIC.jpeg'
             fill
-            priority
             alt='Clic Pilates Equipment'
             className='object-cover'
           />
@@ -50,7 +49,6 @@ export default function Brand (): React.JSX.Element {
             <Image
               src='/images/3CLIC.jpeg'
               fill
-              priority
               alt='Clic Pilates Studio'
               className='object-cover object-center md:object-top'
             />
@@ -59,7 +57,6 @@ export default function Brand (): React.JSX.Element {
             src='/images/texto_brand2.png'
             width={300}
             height={50}
-            priority
             alt='Clic Pilates Studio'
             className='absolute bottom-6 right-6 transform'
           />
