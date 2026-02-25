@@ -34,7 +34,7 @@ export default function Hero (): React.JSX.Element {
             src='/images/1HOME.webp'
             fill
             priority
-            quality={100}
+            quality={82}
             sizes='100vw'
             className='object-cover object-top'
             onLoad={() => setIsLoaded(true)}
@@ -63,7 +63,7 @@ export default function Hero (): React.JSX.Element {
             alt='Tu Nueva Era'
             width={300}
             height={50}
-            quality={100}
+            quality={82}
             className={`w-[200px] sm:w-[220px] md:w-[250px] lg:w-[280px] xl:w-[300px] ${
               isLoaded ? 'animate-fade-up animate-duration-1000 animate-delay-500 animate-once animate-ease-in-out' : 'opacity-0'
             }`}
@@ -75,7 +75,7 @@ export default function Hero (): React.JSX.Element {
             alt='Scroll down'
             width={60}
             height={60}
-            quality={100}
+            quality={82}
             className={`w-[40px] sm:w-[45px] md:w-[50px] lg:w-[55px] xl:w-[60px] ${
               isLoaded ? 'animate-fade-up animate-duration-1000 animate-delay-1000 animate-once animate-ease-in-out' : 'opacity-0'
             }`}

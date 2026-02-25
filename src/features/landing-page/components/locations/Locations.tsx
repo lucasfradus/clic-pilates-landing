@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
-import { ProgressiveBlurHoverCard } from './components/ProgressiveBlurHoverCard'
 import Image from 'next/image'
+import { ProgressiveBlurHoverCard } from './components/ProgressiveBlurHoverCard'
 import { getActiveLocations } from '@/lib/locations'
 
 const locations = getActiveLocations()

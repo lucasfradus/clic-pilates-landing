@@ -1,5 +1,6 @@
 import { cn } from '@/lib/utils'
 import { Marquee } from '@/components/magicui/marquee'
+import Image from 'next/image'
 import { JSX } from 'react'
 
 const instagramPosts = [
@@ -69,10 +70,12 @@ const PostCard = ({
         'transition-transform duration-300 hover:scale-[1.02]'
       )}
     >
-      <img
+      <Image
         src={imageUrl}
         alt='Instagram post by @clic.pilates'
-        className='w-full h-full object-cover'
+        fill
+        sizes='256px'
+        className='object-cover'
       />
 
       {/* Overlay on hover */}
