@@ -36,7 +36,7 @@ export const locations: Location[] = [
   {
     location: 'office',
     imageSrc: '/images/clic_officepark.png',
-    locationName: 'Pilar',
+    locationName: 'Pilar - Office',
     address: 'Av. 12 de Octubre 2961, Pilar',
     mapUrl: 'https://maps.app.goo.gl/qqpVPALUWsdH14Zx5',
     phoneNumber: '+54 9 11 2689-4398',

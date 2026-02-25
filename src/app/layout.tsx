@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import { Poppins } from 'next/font/google'
 import { Toaster } from '@/components/ui/sonner'
+import { EnsurePageScroll } from '@/components/EnsurePageScroll'
 import './globals.css'
 
 const poppins = Poppins({
@@ -78,9 +79,10 @@ export default function RootLayout ({
         <meta name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1' />
       </head>
       <body
-        className={`${poppins.variable} antialiased font-poppins bg-background`}
+        className={`${poppins.variable} antialiased font-poppins bg-background min-h-screen`}
       >
         {children}
+        <EnsurePageScroll />
         <Toaster position='top-center' />
       </body>
     </html>

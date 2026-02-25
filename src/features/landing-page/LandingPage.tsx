@@ -21,19 +21,23 @@ const InstagramFeed = dynamic(() => import('@/features/landing-page/components/I
 export default function LandingPage (): React.JSX.Element {
   useEffect(() => {
     let rafId: number | undefined
+    let lenisInstance: import('lenis') | undefined
     const initLenis = async (): Promise<void> => {
       const { default: Lenis } = await import('lenis')
-      const lenis = new Lenis({
+      lenisInstance = new Lenis({
         anchors: { offset: -80 }
       })
       function raf (time: number): void {
-        lenis.raf(time)
+        lenisInstance?.raf(time)
         rafId = requestAnimationFrame(raf)
       }
       rafId = requestAnimationFrame(raf)
     }
     initLenis()
-    return () => { if (rafId !== undefined) cancelAnimationFrame(rafId) }
+    return () => {
+      if (rafId !== undefined) cancelAnimationFrame(rafId)
+      lenisInstance?.destroy()
+    }
   }, [])
 
   return (

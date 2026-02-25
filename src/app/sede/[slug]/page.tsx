@@ -1,3 +1,4 @@
+import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { getLocationBySlug, locations } from '@/lib/locations'
@@ -10,6 +11,25 @@ interface PageProps {
 
 export function generateStaticParams (): Array<{ slug: string }> {
   return locations.map((loc) => ({ slug: loc.location }))
+}
+
+export async function generateMetadata ({ params }: PageProps): Promise<Metadata> {
+  const { slug } = await params
+  const location = getLocationBySlug(slug)
+  if (!location) {
+    return {}
+  }
+  const title = `Clic Pilates ${location.locationName} - Grilla horaria`
+  return {
+    title,
+    openGraph: {
+      title
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title
+    }
+  }
 }
 
 export default async function SedePage ({ params }: PageProps): Promise<React.ReactElement> {
