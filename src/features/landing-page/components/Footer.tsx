@@ -3,8 +3,12 @@
 import * as React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { getActiveLocations } from '@/lib/locations'
+
+const linkClass = 'inline-block transition-opacity hover:opacity-80 hover:underline'
 
 export default function ClicFooter (): React.ReactElement {
+  const locations = getActiveLocations()
   return (
     <footer className='relative border-t bg-accent text-background transition-colors duration-300 py-10 px-10 md:px-20'>
       <div className='flex flex-col md:flex-row justify-between items-center flex-wrap gap-16 md:gap-8'>
@@ -53,42 +57,21 @@ export default function ClicFooter (): React.ReactElement {
         <div className='flex flex-col justify-center items-center md:items-start order-3'>
           <h3 className='mb-4 text-lg font-bold'>CONTACT</h3>
           <div className='grid grid-cols-2 gap-x-3 gap-y-2 text-sm'>
-            <Link href='#' className='inline-block transition-opacity hover:opacity-80 hover:underline'>
-              Office Park
-            </Link>
-            <Link href='#' className='inline-block transition-opacity hover:opacity-80 hover:underline'>
-              +54 9 11 2689-4398
-            </Link>
-            <Link href='#' className='inline-block transition-opacity hover:opacity-80 hover:underline'>
-              Escobar
-            </Link>
-            <Link href='#' className='inline-block transition-opacity hover:opacity-80 hover:underline'>
-              +54 9 11 3336-6571
-            </Link>
-            <Link href='#' className='inline-block transition-opacity hover:opacity-80 hover:underline'>
-              Pilará
-            </Link>
-            <Link href='#' className='inline-block transition-opacity hover:opacity-80 hover:underline'>
-              +54 9 11 2650-9533
-            </Link>
-               <Link href='#' className='inline-block transition-opacity hover:opacity-80 hover:underline'>
-              Palermo Soho
-            </Link>
-            <Link href='#' className='inline-block transition-opacity hover:opacity-80 hover:underline'>
-              +54 9 11 5457-3847
-            </Link>
-               <Link href='#' className='inline-block transition-opacity hover:opacity-80 hover:underline'>
-              Palermo Hollywood
-            </Link>
-            <Link href='#' className='inline-block transition-opacity hover:opacity-80 hover:underline'>
-              +54 9 11 3284-9318
-            </Link>
-               <Link href='#' className='inline-block transition-opacity hover:opacity-80 hover:underline'>
-              Belgrano C
-            </Link>
-            <Link href='#' className='inline-block transition-opacity hover:opacity-80 hover:underline'>
-              +54 9 11 6657-8230+54 9 11 6657-8230
-            </Link>
+            {locations.map((loc) => (
+              <React.Fragment key={loc.location}>
+                <Link href={`/sede/${loc.location}`} className={linkClass}>
+                  {loc.locationName}
+                </Link>
+                <a
+                  href={`https://wa.me/${loc.phoneNumber.replace(/[\s-]+/g, '')}`}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className={linkClass}
+                >
+                  {loc.phoneNumber}
+                </a>
+              </React.Fragment>
+            ))}
           </div>
         </div>
 

@@ -1,94 +1,24 @@
 import React from 'react'
+import Link from 'next/link'
 import { ProgressiveBlurHoverCard } from './components/ProgressiveBlurHoverCard'
 import Image from 'next/image'
+import { getActiveLocations } from '@/lib/locations'
 
-// Define location data
-const locations = [
-  {
-    imageSrc: '/images/clic_officepark.png', // You'll need to ensure these images are in your public folder
-    locationName: 'PILAR',
-    address: 'Office Park',
-    mapUrl: 'https://maps.app.goo.gl/qqpVPALUWsdH14Zx5',
-    phoneNumber: '+54 9 11 2689-4398'
-  },
-  {
-    imageSrc: '/images/clic_pilara.png',
-    locationName: 'PILARÁ',
-    address: 'Estación Pilará',
-    mapUrl: 'https://maps.app.goo.gl/tiyUmw2py2m7Fegs6',
-    phoneNumber: '+54 9 11 2650-9533'
-  },
-  {
-    imageSrc: '/images/clic_nordelta.jpg',
-    locationName: 'Nordelta',
-    address: 'Av. del Puerto 955',
-    mapUrl: 'https://maps.app.goo.gl/KMzyLXX7gCPC7Bqw8',
-    phoneNumber: '+54 9 11 2519-0076'
-  },
-  {
-    imageSrc: '/images/clic_escobar.png',
-    locationName: 'ESCOBAR',
-    address: 'WorkClub',
-    mapUrl: 'https://maps.app.goo.gl/zfEAiiW8xAr2nRve6',
-    phoneNumber: '+54 9 11 3336-6571'
-  },
-  {
-    imageSrc: '/images/clic_soho.jpg',
-    locationName: 'Palermo Soho',
-    address: 'Fray Justo Sta. María de Oro 2150, CABA',
-    mapUrl: 'https://maps.app.goo.gl/TtK218sy38U6P52Y6',
-    phoneNumber: '+54 9 11 5457-3847'
-  },
-  {
-    imageSrc: '/images/clic_hollywood.jpg',
-    locationName: 'Palermo Hollywood',
-    address: 'Av. Dorrego 1789',
-    mapUrl: 'https://maps.app.goo.gl/xzvAYTnRhuE386Gs6',
-    phoneNumber: '+54 9 11 3284-9318'
-  },
-  {
-    imageSrc: '/images/clic_belgrano.jpg',
-    locationName: 'Belgrano C',
-    address: 'Av. del Libertador 5990',
-    mapUrl: 'https://maps.app.goo.gl/CWJRj2SMZRkLkDp19',
-    phoneNumber: '+54 9 11 6657-8230'
-  },
-  {
-    imageSrc: '/images/clic_olivos.jpg',
-    locationName: 'Olivos',
-    address: 'Av. del Libertador 2451',
-    mapUrl: 'https://maps.app.goo.gl/sGHvGie1aXEkPHUe9',
-    phoneNumber: '+54 9 11 5881-1377'
-  },
-  {
-    imageSrc: '/images/nunez.jpg',
-    locationName: 'Nuñez',
-    address: 'Av. del Libertador 7274',
-    mapUrl: 'https://maps.app.goo.gl/ZzPA3RAcWdVb6Qbr9',
-    phoneNumber: '+54 9 11 3228-3985'
-  }
-
-
-
-
-
-  
-
-]
+const locations = getActiveLocations()
 
 export default function Locations (): React.ReactElement {
   return (
     <section id='contacto' className='min-h-screen flex justify-center items-center py-12 text-accent px-10 w-full'>
 
       <div className='flex items-center justify-evenly flex-wrap gap-18'>
-        {locations.map((location, index) => (
-          <div key={index} className='flex flex-col items-center gap-4 text-center'>
+        {locations.map((location) => (
+          <div key={location.location} className='flex flex-col items-center gap-4 text-center'>
             <div>
               <h5 className='text-3xl font-semibold'>{location.locationName}</h5>
               <h6 className='text-2xl font-normal'>{location.address}</h6>
             </div>
             <ProgressiveBlurHoverCard
-              key={index}
+              key={location.location}
               imageSrc={location.imageSrc}
               locationName={location.locationName}
               address={location.address}
@@ -107,6 +37,17 @@ export default function Locations (): React.ReactElement {
                 <span className='absolute bottom-0 left-0 w-0 h-0.5 bg-accent transition-all duration-300 group-hover:w-full' />
               </span>
             </a>
+            
+
+            <Link
+              href={`/sede/${location.location}`}
+              className='flex items-center gap-2 group relative'
+            >
+              <span className='text-xl font-semibold relative'>
+                Ver horarios disponibles
+                <span className='absolute bottom-0 left-0 w-0 h-0.5 bg-accent transition-all duration-300 group-hover:w-full' />
+              </span>
+            </Link>
           </div>
         ))}
       </div>
