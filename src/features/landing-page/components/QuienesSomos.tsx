@@ -1,10 +1,10 @@
 'use client'
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { motion, useScroll, useTransform, type Variants } from 'framer-motion'
 import React, { useRef } from 'react'
 import Image from 'next/image'
 
 // Animation variants for text elements
-const textVariants = {
+const textVariants: Variants = {
   hidden: { opacity: 0, y: 20 },
   visible: (i: number) => ({
     opacity: 1,
@@ -12,7 +12,7 @@ const textVariants = {
     transition: {
       delay: 0.2 * i,
       duration: 0.6,
-      ease: 'easeOut'
+      ease: 'easeOut' as const
     }
   })
 }
@@ -93,7 +93,6 @@ export default function QuienesSomos (): React.JSX.Element {
           <Image
             src='/images/4QUIENES SOMOS.jpeg'
             fill
-            priority
             alt='Clic Pilates Equipment'
             className='object-cover'
           />

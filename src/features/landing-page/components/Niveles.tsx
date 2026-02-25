@@ -9,7 +9,7 @@ const cardVariants = {
     scale: 1.02,
     boxShadow: '0 10px 30px rgba(0, 0, 0, 0.1)',
     transition: {
-      type: 'spring',
+      type: 'spring' as const,
       stiffness: 300,
       damping: 20
     }
@@ -18,7 +18,7 @@ const cardVariants = {
     scale: 1,
     boxShadow: '0 0 0 rgba(0, 0, 0, 0)',
     transition: {
-      type: 'spring',
+      type: 'spring' as const,
       stiffness: 500,
       damping: 30
     }
@@ -33,7 +33,7 @@ const cardVariants = {
     transition: {
       delay: 0.2 * i,
       duration: 0.6,
-      ease: 'easeOut'
+      ease: 'easeOut' as const
     }
   })
 }
@@ -47,7 +47,7 @@ const textVariants = {
     transition: {
       delay: 0.2 * i,
       duration: 0.6,
-      ease: 'easeOut'
+      ease: 'easeOut' as const
     }
   })
 }
@@ -73,8 +73,6 @@ export default function Niveles (): React.JSX.Element {
             alt='CLIC Pilates Niveles'
             src='/images/5NIVELES.jpeg'
             fill
-            priority
-            quality={100}
             sizes='100vw'
             className='object-cover'
           />

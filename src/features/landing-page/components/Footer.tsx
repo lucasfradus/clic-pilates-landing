@@ -43,7 +43,6 @@ export default function ClicFooter (): React.ReactElement {
             width={200}
             height={50}
             className='mb-2'
-            priority
           />
           </Link>
 
