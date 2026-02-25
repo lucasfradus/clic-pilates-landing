@@ -21,7 +21,7 @@ const InstagramFeed = dynamic(() => import('@/features/landing-page/components/I
 export default function LandingPage (): React.JSX.Element {
   useEffect(() => {
     let rafId: number | undefined
-    let lenisInstance: import('lenis') | undefined
+    let lenisInstance: InstanceType<Awaited<typeof import('lenis')>['default']> | undefined
     const initLenis = async (): Promise<void> => {
       const { default: Lenis } = await import('lenis')
       lenisInstance = new Lenis({
