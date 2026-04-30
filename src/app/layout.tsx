@@ -21,17 +21,17 @@ export const metadata: Metadata = {
   },
   icons: {
     apple: [
-      { url: '/images/opengraph-image.png' },
+      { url: '/images/opengraph-image.webp' },
       {
-        url: '/images/opengraph-image.png',
+        url: '/images/opengraph-image.webp',
         sizes: '180x180',
-        type: 'image/png'
+        type: 'image/webp'
       }
     ],
     other: [
       {
         rel: 'opengraph-image',
-        url: '/images/opengraph-image.png'
+        url: '/images/opengraph-image.webp'
       }
     ]
   },

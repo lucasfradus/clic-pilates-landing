@@ -35,7 +35,7 @@ export function getActiveLocationBySlug (slug: string): Location | undefined {
 export const locations: Location[] = [
   {
     location: 'office',
-    imageSrc: '/images/clic_officepark.png',
+    imageSrc: '/images/clic_officepark.webp',
     locationName: 'Pilar - Office',
     address: 'Av. 12 de Octubre 2961, Pilar',
     mapUrl: 'https://maps.app.goo.gl/qqpVPALUWsdH14Zx5',
@@ -45,7 +45,7 @@ export const locations: Location[] = [
   },
   {
     location: 'pilara',
-    imageSrc: '/images/clic_pilara.png',
+    imageSrc: '/images/clic_pilara.webp',
     locationName: 'PILARÁ',
     address: 'Paseo Estación Pilará',
     mapUrl: 'https://maps.app.goo.gl/tiyUmw2py2m7Fegs6',
@@ -54,16 +54,16 @@ export const locations: Location[] = [
   },
   {
     location: 'nordelta',
-    imageSrc: '/images/clic_nordelta.jpg',
+    imageSrc: '/images/clic_nordelta.webp',
     locationName: 'Nordelta',
-    address: 'Av. del Puerto 955, Nordelta',
+    address: 'Av. del Puerto 925, Nordelta',
     mapUrl: 'https://maps.app.goo.gl/KMzyLXX7gCPC7Bqw8',
     phoneNumber: '+54 9 11 2519-0076',
     active: true
   },
   {
     location: 'escobar',
-    imageSrc: '/images/clic_escobar.png',
+    imageSrc: '/images/clic_escobar.webp',
     locationName: 'ESCOBAR',
     address: 'Int. O. Larghi 1390, Escobar',
     mapUrl: 'https://maps.app.goo.gl/zfEAiiW8xAr2nRve6',
@@ -72,7 +72,7 @@ export const locations: Location[] = [
   },
   {
     location: 'soho',
-    imageSrc: '/images/clic_soho.jpg',
+    imageSrc: '/images/clic_soho.webp',
     locationName: 'Palermo Soho',
     address: 'Fray Justo Sta. María de Oro 2150, CABA',
     mapUrl: 'https://maps.app.goo.gl/TtK218sy38U6P52Y6',
@@ -81,7 +81,7 @@ export const locations: Location[] = [
   },
   {
     location: 'hollywood',
-    imageSrc: '/images/clic_hollywood.jpg',
+    imageSrc: '/images/clic_hollywood.webp',
     locationName: 'Palermo Hollywood',
     address: 'Av. Dorrego 1789, CABA',
     mapUrl: 'https://maps.app.goo.gl/xzvAYTnRhuE386Gs6',
@@ -90,7 +90,7 @@ export const locations: Location[] = [
   },
   {
     location: 'belgrano',
-    imageSrc: '/images/clic_belgrano.jpg',
+    imageSrc: '/images/clic_belgrano.webp',
     locationName: 'Belgrano C',
     address: 'Av. del Libertador 5990, CABA',
     mapUrl: 'https://maps.app.goo.gl/CWJRj2SMZRkLkDp19',
@@ -99,7 +99,7 @@ export const locations: Location[] = [
   },
   {
     location: 'olivos',
-    imageSrc: '/images/clic_olivos.jpg',
+    imageSrc: '/images/clic_olivos.webp',
     locationName: 'Olivos',
     address: 'Av. del Libertador 2451, Olivos',
     mapUrl: 'https://maps.app.goo.gl/sGHvGie1aXEkPHUe9',
@@ -108,7 +108,7 @@ export const locations: Location[] = [
   },
   {
     location: 'nunez',
-    imageSrc: '/images/nunez.jpg',
+    imageSrc: '/images/nunez.webp',
     locationName: 'Nuñez',
     address: 'Av. del Libertador 7274, CABA',
     mapUrl: 'https://maps.app.goo.gl/ZzPA3RAcWdVb6Qbr9',
@@ -118,7 +118,7 @@ export const locations: Location[] = [
   ,
   {
     location: 'prueba',
-    imageSrc: '/images/nunez.jpg',
+    imageSrc: '/images/nunez.webp',
     locationName: 'Nuñez',
     address: 'Av. del Libertador 7274',
     mapUrl: 'https://maps.app.goo.gl/ZzPA3RAcWdVb6Qbr9',

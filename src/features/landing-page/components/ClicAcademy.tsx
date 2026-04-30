@@ -16,7 +16,7 @@ const ClicAcademy: React.FC<ClicAcademyProps> = ({
   title = 'CLIC ACADEMY',
   description = 'Capacítate en el método auténtico de pilates y forma parte de nuestro staff de instructores.',
   pdfPath = '/files/clic-academy.pdf',
-  previewImagePath = '/images/pdf-preview.png',
+  previewImagePath = '/images/pdf-preview.webp',
   fileDetails = 'Formato PDF - 2.5MB - Actualizado Septiembre 2025'
 }) => {
   return (
@@ -43,6 +43,8 @@ const ClicAcademy: React.FC<ClicAcademyProps> = ({
               alt='PDF Preview'
               fill
               className='rounded-lg'
+              sizes='(max-width: 768px) 100vw, 448px'
+              loading='lazy'
             />
 
             {/* Hover Overlay */}

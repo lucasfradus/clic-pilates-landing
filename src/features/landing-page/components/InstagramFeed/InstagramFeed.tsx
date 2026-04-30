@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { MarqueeGallery } from './marquee-gallery/MarqueeGallery'
+import { MasonryGallery } from './marquee-gallery/MasonryGallery'
 
 export default function InstagramFeed (): React.JSX.Element {
   return (
@@ -47,7 +47,7 @@ export default function InstagramFeed (): React.JSX.Element {
           />
         </div>
 
-        <MarqueeGallery />
+        <MasonryGallery />
 
         <div className='text-center mt-10' />
       </div>

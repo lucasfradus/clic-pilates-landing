@@ -27,16 +27,24 @@ export function ProgressiveBlurHoverCard ({
 
   return (
     <div
-      className='relative my-4 aspect-square h-[300px] overflow-hidden rounded-[4px]'
+      className='relative my-4 aspect-square h-[300px] overflow-hidden rounded-2xl shadow-warm-lg border border-white/20 backdrop-blur-md bg-white/10 transition-shadow duration-500 hover:shadow-warm'
       onMouseEnter={() => setIsHover(true)}
       onMouseLeave={() => setIsHover(false)}
     >
-      <Image src={imageSrc} fill alt={`${locationName} - ${address}`} className='object-cover' />
-      {/* Gradient background with diffused effect using custom colors */}
+      <Image
+        src={imageSrc}
+        fill
+        alt={`${locationName} - ${address}`}
+        className='object-cover rounded-2xl'
+        sizes='300px'
+        loading='lazy'
+      />
+
+      {/* Warm gradient overlay */}
       <motion.div
         className='pointer-events-none absolute bottom-0 left-0 h-[75%] w-full'
         style={{
-          background: 'linear-gradient(to top, rgba(161, 146, 133, 0.85) 0%, rgba(161, 146, 133, 0.6) 50%, rgba(237, 236, 231, 0) 100%)'
+          background: 'linear-gradient(to top, rgba(161, 146, 133, 0.9) 0%, rgba(161, 146, 133, 0.5) 50%, rgba(237, 236, 231, 0) 100%)'
         }}
         animate={isHover ? 'visible' : 'hidden'}
         variants={{
@@ -57,6 +65,7 @@ export function ProgressiveBlurHoverCard ({
         }}
         transition={{ duration: 0.3, ease: [0, 0, 0.58, 1] as const }}
       />
+
       <motion.div
         className='absolute bottom-0 left-0 w-full'
         animate={isHover ? 'visible' : 'hidden'}
@@ -71,7 +80,6 @@ export function ProgressiveBlurHoverCard ({
           <span className='text-sm text-white'>{address}</span>
           {phoneNumber != null && phoneNumber !== '' && (
             <span className='flex items-center text-sm text-white'>
-              {/* <Phone className='h-4 w-4 mr-1' /> */}
               {phoneNumber}
             </span>
           )}

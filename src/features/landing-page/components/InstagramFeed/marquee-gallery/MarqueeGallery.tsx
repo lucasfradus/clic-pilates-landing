@@ -6,51 +6,51 @@ import { JSX } from 'react'
 const instagramPosts = [
   {
     id: '1',
-    imageUrl: '/images/insta-feed/1.jpeg'
+    imageUrl: '/images/insta-feed/1.webp'
   },
   {
     id: '2',
-    imageUrl: '/images/insta-feed/2.jpeg'
+    imageUrl: '/images/insta-feed/2.webp'
   },
   {
     id: '3',
-    imageUrl: '/images/insta-feed/3.jpeg'
+    imageUrl: '/images/insta-feed/3.webp'
   },
   {
     id: '4',
-    imageUrl: '/images/insta-feed/4.jpeg'
+    imageUrl: '/images/insta-feed/4.webp'
   },
   {
     id: '5',
-    imageUrl: '/images/insta-feed/5.jpeg'
+    imageUrl: '/images/insta-feed/5.webp'
   },
   {
     id: '6',
-    imageUrl: '/images/insta-feed/6.jpeg'
+    imageUrl: '/images/insta-feed/6.webp'
   },
   {
     id: '7',
-    imageUrl: '/images/insta-feed/7.jpeg'
+    imageUrl: '/images/insta-feed/7.webp'
   },
   {
     id: '8',
-    imageUrl: '/images/insta-feed/8.jpeg'
+    imageUrl: '/images/insta-feed/8.webp'
   },
   {
     id: '9',
-    imageUrl: '/images/insta-feed/9.jpeg'
+    imageUrl: '/images/insta-feed/9.webp'
   },
   {
     id: '10',
-    imageUrl: '/images/insta-feed/10.jpeg'
+    imageUrl: '/images/insta-feed/10.webp'
   },
   {
     id: '11',
-    imageUrl: '/images/insta-feed/11.jpeg'
+    imageUrl: '/images/insta-feed/11.webp'
   },
   {
     id: '12',
-    imageUrl: '/images/insta-feed/12.jpeg'
+    imageUrl: '/images/insta-feed/12.webp'
   }
 ]
 
@@ -76,6 +76,7 @@ const PostCard = ({
         fill
         sizes='256px'
         className='object-cover'
+        loading='lazy'
       />
 
       {/* Overlay on hover */}

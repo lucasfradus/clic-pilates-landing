@@ -1,44 +1,44 @@
 export default function HaceElClic (): React.JSX.Element {
-  return (
-    <section id='hace-el-clic' className='flex items-center justify-center h-[40vh] w-full overflow-hidden'>
-      <div className='marquee-wrapper relative w-full'>
-        <div className='marquee-track flex whitespace-nowrap'>
-          {/* First set of items */}
-          <div className='flex animate-marquee'>
-            <h2 className='text-9xl font-semibold text-accent px-4 whitespace-nowrap'>
-              HACÉ EL CLIC
-            </h2>
-            <h2 className='text-9xl font-semibold text-accent px-4 whitespace-nowrap'>
-              HACÉ EL CLIC
-            </h2>
-            <h2 className='text-9xl font-semibold text-accent px-4 whitespace-nowrap'>
-              HACÉ EL CLIC
-            </h2>
-            <h2 className='text-9xl font-semibold text-accent px-4 whitespace-nowrap'>
-              HACÉ EL CLIC
-            </h2>
-            <h2 className='text-9xl font-semibold text-accent px-4 whitespace-nowrap'>
-              HACÉ EL CLIC
-            </h2>
-          </div>
+  const words = Array.from({ length: 6 }, () => 'HACÉ EL CLIC')
 
-          {/* Second set of identical items for seamless loop */}
+  return (
+    <section id='hace-el-clic' className='flex flex-col justify-center h-[35vh] w-full overflow-hidden gap-2 py-4'>
+      {/* First row - moving right */}
+      <div className='marquee-wrapper relative w-full opacity-100'>
+        <div className='marquee-track flex whitespace-nowrap'>
           <div className='flex animate-marquee'>
-            <h2 className='text-9xl font-semibold text-accent px-4 whitespace-nowrap'>
-              HACÉ EL CLIC
-            </h2>
-            <h2 className='text-9xl font-semibold text-accent px-4 whitespace-nowrap'>
-              HACÉ EL CLIC
-            </h2>
-            <h2 className='text-9xl font-semibold text-accent px-4 whitespace-nowrap'>
-              HACÉ EL CLIC
-            </h2>
-            <h2 className='text-9xl font-semibold text-accent px-4 whitespace-nowrap'>
-              HACÉ EL CLIC
-            </h2>
-            <h2 className='text-9xl font-semibold text-accent px-4 whitespace-nowrap'>
-              HACÉ EL CLIC
-            </h2>
+            {words.map((text, i) => (
+              <h2 key={`a-${i}`} className='text-7xl sm:text-8xl md:text-9xl font-semibold text-accent px-4 whitespace-nowrap'>
+                {text}
+              </h2>
+            ))}
+          </div>
+          <div className='flex animate-marquee' aria-hidden>
+            {words.map((text, i) => (
+              <h2 key={`a2-${i}`} className='text-7xl sm:text-8xl md:text-9xl font-semibold text-accent px-4 whitespace-nowrap'>
+                {text}
+              </h2>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Second row - moving left (reverse) */}
+      <div className='marquee-wrapper relative w-full opacity-40'>
+        <div className='marquee-track flex whitespace-nowrap'>
+          <div className='flex animate-marquee-reverse'>
+            {words.map((text, i) => (
+              <h2 key={`b-${i}`} className='text-7xl sm:text-8xl md:text-9xl font-light text-accent px-4 whitespace-nowrap italic'>
+                {text}
+              </h2>
+            ))}
+          </div>
+          <div className='flex animate-marquee-reverse' aria-hidden>
+            {words.map((text, i) => (
+              <h2 key={`b2-${i}`} className='text-7xl sm:text-8xl md:text-9xl font-light text-accent px-4 whitespace-nowrap italic'>
+                {text}
+              </h2>
+            ))}
           </div>
         </div>
       </div>

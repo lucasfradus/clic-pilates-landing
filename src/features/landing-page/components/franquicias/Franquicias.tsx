@@ -34,11 +34,12 @@ export default function Franquicias (): React.JSX.Element {
       <div className='relative w-full md:basis-2/5 lg:basis-1/2 h-[40vh] md:min-h-screen md:h-auto overflow-hidden'>
         <motion.div className='absolute inset-0' style={{ y }}>
           <Image
-            src='/images/15FRANQUICIAS.jpeg'
+            src='/images/15FRANQUICIAS.webp'
             fill
             alt='Clic Pilates Equipment'
             className='object-cover'
             sizes='(max-width: 768px) 100vw, 50vw'
+            loading='lazy'
           />
           {/* Dark overlay for better text visibility */}
           <div className='absolute inset-0 bg-black/50' />

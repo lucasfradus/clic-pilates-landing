@@ -28,11 +28,11 @@ export default function QuienesSomos (): React.JSX.Element {
   return (
     <section
       ref={sectionRef}
-      className='min-h-screen w-full overflow-hidden flex flex-col md:flex-row items-center border-t border-accent'
+      className='min-h-screen w-full overflow-hidden flex flex-col md:flex-row items-center border-t border-accent relative'
       id='quienes-somos'
     >
       {/* Left content column */}
-      <div className='w-full md:w-1/2 p-8 md:p-12 lg:p-20 flex flex-col gap-6 justify-center'>
+      <div className='w-full md:w-1/2 p-8 md:p-12 lg:p-20 flex flex-col gap-6 justify-center relative z-10'>
         <motion.h2
           className='text-md md:text-lg text-accent font-semibold'
           initial='hidden'
@@ -80,21 +80,38 @@ export default function QuienesSomos (): React.JSX.Element {
             custom={3}
           >
             Nuestros estudios ofrecen un espacio seguro y
-            armonioso. <span className='font-semibold'>Te invitamos a hacer el "CLIC"</span>:
+            armonioso. <span className='font-semibold'>Te invitamos a hacer el &quot;CLIC&quot;</span>:
             priorizarte, moverte con conciencia y adoptar
             hábitos que mejoren tu vida.
           </motion.p>
         </div>
       </div>
 
+      {/* Organic wave separator (desktop only) */}
+      <div className='hidden md:block absolute left-1/2 top-0 h-full w-20 -translate-x-1/2 z-20 pointer-events-none'>
+        <svg
+          viewBox='0 0 100 400'
+          preserveAspectRatio='none'
+          className='h-full w-full'
+          style={{ fill: 'var(--cream)' }}
+        >
+          <path d='M0,0 C60,80 40,150 70,200 C100,250 30,320 60,400 L100,400 L100,0 Z' />
+        </svg>
+      </div>
+
       {/* Right image column with parallax effect */}
       <div className='relative w-full md:w-1/2 h-[50vh] md:h-screen overflow-hidden'>
-        <motion.div className='absolute inset-0' style={{ y }}>
+        <motion.div
+          className='absolute inset-0 md:rounded-tl-[60px] md:rounded-bl-[40px] overflow-hidden'
+          style={{ y }}
+        >
           <Image
-            src='/images/4QUIENES SOMOS.jpeg'
+            src='/images/4QUIENES SOMOS.webp'
             fill
             alt='Clic Pilates Equipment'
             className='object-cover'
+            sizes='(max-width: 768px) 100vw, 50vw'
+            loading='lazy'
           />
         </motion.div>
       </div>

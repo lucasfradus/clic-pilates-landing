@@ -71,10 +71,11 @@ export default function Niveles (): React.JSX.Element {
         <div className='relative h-full w-full'>
           <Image
             alt='CLIC Pilates Niveles'
-            src='/images/5NIVELES.jpeg'
+            src='/images/5NIVELES.webp'
             fill
             sizes='100vw'
             className='object-cover'
+            loading='lazy'
           />
           {/* Dark overlay for better text visibility */}
           <div className='absolute inset-0 bg-black/50' />
@@ -112,7 +113,7 @@ export default function Niveles (): React.JSX.Element {
           <div className='flex w-full flex-col items-stretch justify-center gap-6 md:flex-row md:gap-10 lg:gap-16'>
             {/* Inicial Pilates Card - lighter background with motion animation */}
             <motion.div
-              className='w-full bg-background p-10 md:p-8 md:py-16 md:w-1/2'
+              className='w-full bg-background p-10 md:p-8 md:py-16 md:w-1/2 rounded-2xl shadow-warm'
               initial='hidden'
               whileInView='visible'
               viewport={{ once: true, margin: '-50px' }}
@@ -142,7 +143,7 @@ export default function Niveles (): React.JSX.Element {
 
             {/* Level Up Pilates Card - lighter background with motion animation */}
             <motion.div
-              className='w-full bg-background p-10 md:p-8 md:py-16 md:w-1/2'
+              className='w-full bg-background p-10 md:p-8 md:py-16 md:w-1/2 rounded-2xl shadow-warm'
               initial='hidden'
               whileInView='visible'
               viewport={{ once: true, margin: '-50px' }}

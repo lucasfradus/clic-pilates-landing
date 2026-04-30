@@ -360,3 +360,53 @@
   animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   animation-delay: 1s; /* Start pulsing after fade-up finishes */
 }
+
+/* ── KEN BURNS HERO ANIMATION ── */
+@keyframes ken-burns {
+  0% { transform: scale(1) translateY(0); }
+  100% { transform: scale(1.08) translateY(-2%); }
+}
+
+.animate-ken-burns {
+  animation: ken-burns 20s ease-in-out infinite alternate;
+}
+
+/* ── SMOOTH BOUNCE FOR SCROLL ARROW ── */
+@keyframes bounce-soft {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(10px); }
+}
+
+.animate-bounce-soft {
+  animation: bounce-soft 2s ease-in-out infinite;
+}
+
+/* ── WARM SHADOWS ── */
+.shadow-warm {
+  box-shadow: 0 4px 24px rgba(188, 172, 158, 0.15);
+}
+
+.shadow-warm-lg {
+  box-shadow: 0 8px 40px rgba(188, 172, 158, 0.2);
+}
+
+/* ── GRAIN TEXTURE OVERLAY ── */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.025;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* ── PREFERS REDUCED MOTION ── */
+@media (prefers-reduced-motion: reduce) {
+  .animate-ken-burns,
+  .animate-bounce-soft,
+  .animate-marquee,
+  .animate-marquee-reverse {
+    animation: none !important;
+  }
+}
