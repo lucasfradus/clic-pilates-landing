@@ -12,6 +12,8 @@
 
 **Working directory for all paths below:** `clic-pilates-landing/`
 
+> **Update 2026-05-18:** El endpoint real ya está vivo en `https://app.clicpilates.com/api/v1/centers/{slug}/schedule` (probado: `pilara` y `escobar` devuelven 200 con la forma exacta del spec; todos los otros slugs devuelven 404). Por eso este plan **no incluye mock local** — el fetcher pega siempre a la API real, con la URL base hardcoded como default y override opcional por env var. La sede que sirve de happy-path para verificación visual es **`pilara`** (no Nordelta como decía el spec original).
+
 ---
 
 ## Notas sobre verificación
@@ -31,7 +33,6 @@ Todos los comandos se corren desde `clic-pilates-landing/`.
 **A crear:**
 - `src/app/grilla/[sede]/page.tsx`
 - `src/lib/grilla.ts`
-- `src/lib/grilla-mock.ts`
 - `src/components/grilla/GrillaHoraria.tsx` (`'use client'`)
 - `src/components/grilla/GrillaHeader.tsx`
 - `src/components/grilla/GrillaLegend.tsx`
@@ -124,12 +125,10 @@ git commit -m "feat(grilla): add Crema theme tokens and Poppins weights"
 **Files:**
 - Create: `src/lib/grilla.ts`
 
-- [ ] **Step 1: Crear el archivo con tipos del spec y fetcher**
+- [ ] **Step 1: Crear el archivo con tipos del spec y fetcher contra la API real**
 
 ```ts
 // src/lib/grilla.ts
-import { grillaMock } from './grilla-mock'
-
 export type Status = 'd' | 'b' | 'n' | 'p'
 export type Level = 'Inicial' | 'Level Up' | 'Próx'
 export type Day = 'Lunes' | 'Martes' | 'Miércoles' | 'Jueves' | 'Viernes' | 'Sábado'
@@ -162,100 +161,31 @@ export interface ScheduleResponse {
 
 export const DAYS: readonly Day[] = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado']
 
-export const STATUS_LABEL: Record<Status, string> = {
-  d: 'Disponible',
-  b: 'Baja disponibilidad',
-  n: 'No disponible',
-  p: 'Próximamente'
+const DEFAULT_API_BASE = 'https://app.clicpilates.com/api/v1'
+
+/**
+ * Ordena claves de horario "H.MM" numéricamente ascendente.
+ * Ej.: ['10.00','8.00','9.30'] → ['8.00','9.30','10.00']
+ */
+export function sortTimes (times: string[]): string[] {
+  return [...times].sort((a, b) => parseFloat(a) - parseFloat(b))
 }
 
 /**
  * Obtiene la grilla horaria de un centro.
- * - Si NEXT_PUBLIC_GRILLA_API está seteada, hace fetch al endpoint real y
- *   mapea 404/409 a null (centro existe pero no fue migrado).
- * - Si no, delega al mock local.
  *
- * Devuelve null cuando el centro existe pero no hay grilla disponible.
+ * - Base URL: `NEXT_PUBLIC_GRILLA_API` si está seteada; si no, la URL de producción.
+ * - 404/409 → null (centro existe pero no fue migrado todavía).
+ * - Cualquier otro error de red o 5xx propaga.
+ *
+ * Devuelve null cuando el centro no tiene grilla disponible.
  */
 export async function getGrilla (slug: string): Promise<ScheduleResponse | null> {
-  const api = process.env.NEXT_PUBLIC_GRILLA_API
-  if (api === undefined || api === '') {
-    return grillaMock(slug)
-  }
-
-  const res = await fetch(`${api}/centers/${slug}/schedule`, { cache: 'no-store' })
+  const base = process.env.NEXT_PUBLIC_GRILLA_API ?? DEFAULT_API_BASE
+  const res = await fetch(`${base}/centers/${slug}/schedule`, { cache: 'no-store' })
   if (res.status === 404 || res.status === 409) return null
   if (!res.ok) throw new Error(`Grilla API ${res.status} for ${slug}`)
   return await res.json() as ScheduleResponse
-}
-```
-
-- [ ] **Step 2: Verificar lint**
-
-Run:
-```bash
-npm run lint
-```
-Expected: pasa (puede fallar transitoriamente porque `grilla-mock` aún no existe — si pasa eso, continuar a Task 3 sin commitear todavía).
-
-Si lint/build fallan SOLO por el import faltante de `grilla-mock`, está esperado: lo creamos en Task 3 y commiteamos entonces. Si fallan por cualquier otra razón, arreglarlo antes de avanzar.
-
-- [ ] **Step 3: No commitear todavía** (la verificación verde llega cuando Task 3 cree el mock).
-
----
-
-### Task 3: Mock data (`src/lib/grilla-mock.ts`)
-
-**Files:**
-- Create: `src/lib/grilla-mock.ts`
-
-- [ ] **Step 1: Crear el mock con la data de Nordelta del prototipo HTML**
-
-```ts
-// src/lib/grilla-mock.ts
-import { locations } from './locations'
-import type { Center, Schedule, ScheduleResponse } from './grilla'
-
-const NORDELTA_SCHEDULE: Schedule = {
-  '7.45':  { Lunes: { l: 'Level Up', s: 'd' }, Martes: { l: 'Inicial', s: 'd' }, 'Miércoles': { l: 'Inicial', s: 'd' }, Jueves: { l: 'Inicial', s: 'd' }, Viernes: { l: 'Level Up', s: 'd' }, 'Sábado': { l: 'Próx', s: 'p' } },
-  '8.45':  { Lunes: { l: 'Level Up', s: 'b' }, Martes: { l: 'Inicial', s: 'b' }, 'Miércoles': { l: 'Level Up', s: 'b' }, Jueves: { l: 'Inicial', s: 'd' }, Viernes: { l: 'Level Up', s: 'b' }, 'Sábado': { l: 'Level Up', s: 'd' } },
-  '9.45':  { Lunes: { l: 'Inicial', s: 'b' }, Martes: { l: 'Level Up', s: 'b' }, 'Miércoles': { l: 'Inicial', s: 'd' }, Jueves: { l: 'Level Up', s: 'b' }, Viernes: { l: 'Inicial', s: 'b' }, 'Sábado': { l: 'Inicial', s: 'd' } },
-  '10.45': { Lunes: { l: 'Inicial', s: 'd' }, Martes: { l: 'Inicial', s: 'd' }, 'Miércoles': { l: 'Inicial', s: 'd' }, Jueves: { l: 'Inicial', s: 'b' }, Viernes: { l: 'Inicial', s: 'b' }, 'Sábado': { l: 'Level Up', s: 'd' } },
-  '11.45': { Lunes: { l: 'Inicial', s: 'd' }, Martes: { l: 'Inicial', s: 'd' }, 'Miércoles': { l: 'Inicial', s: 'b' }, Jueves: { l: 'Inicial', s: 'd' }, Viernes: { l: 'Level Up', s: 'd' }, 'Sábado': { l: 'Inicial', s: 'b' } },
-  '12.45': { Lunes: { l: 'Level Up', s: 'd' }, Martes: { l: 'Próx', s: 'p' }, 'Miércoles': { l: 'Inicial', s: 'd' }, Jueves: { l: 'Próx', s: 'p' }, Viernes: { l: 'Inicial', s: 'b' }, 'Sábado': null },
-  '13.45': { Lunes: { l: 'Inicial', s: 'd' }, Martes: { l: 'Próx', s: 'p' }, 'Miércoles': { l: 'Level Up', s: 'd' }, Jueves: { l: 'Próx', s: 'p' }, Viernes: { l: 'Inicial', s: 'd' }, 'Sábado': null },
-  '14.45': { Lunes: { l: 'Próx', s: 'p' }, Martes: { l: 'Próx', s: 'p' }, 'Miércoles': { l: 'Inicial', s: 'd' }, Jueves: { l: 'Próx', s: 'p' }, Viernes: { l: 'Próx', s: 'p' }, 'Sábado': null },
-  '15.45': { Lunes: { l: 'Próx', s: 'p' }, Martes: { l: 'Inicial', s: 'p' }, 'Miércoles': { l: 'Inicial', s: 'p' }, Jueves: { l: 'Inicial', s: 'p' }, Viernes: { l: 'Próx', s: 'p' }, 'Sábado': null },
-  '16.45': { Lunes: { l: 'Level Up', s: 'd' }, Martes: { l: 'Inicial', s: 'd' }, 'Miércoles': { l: 'Level Up', s: 'p' }, Jueves: { l: 'Inicial', s: 'p' }, Viernes: { l: 'Próx', s: 'p' }, 'Sábado': null }
-}
-
-const MOCK_UPDATED_AT = '2026-05-18T17:00:00Z'
-
-function centerFromSlug (slug: string): Center | null {
-  const idx = locations.findIndex((loc) => loc.location === slug)
-  if (idx === -1) return null
-  const loc = locations[idx]
-  return {
-    id: idx + 1,
-    name: loc.locationName,
-    address: loc.address,
-    slug: loc.location
-  }
-}
-
-/**
- * Mock local de la grilla. Hoy solo Nordelta tiene datos completos;
- * el resto de las sedes devuelve null (estado "todavía no disponible").
- */
-export async function grillaMock (slug: string): Promise<ScheduleResponse | null> {
-  const center = centerFromSlug(slug)
-  if (center === null) return null
-  if (slug !== 'nordelta') return null
-  return {
-    center,
-    schedule: NORDELTA_SCHEDULE,
-    updatedAt: MOCK_UPDATED_AT
-  }
 }
 ```
 
@@ -270,13 +200,13 @@ Expected: ambos pasan.
 - [ ] **Step 3: Commit**
 
 ```bash
-git add src/lib/grilla.ts src/lib/grilla-mock.ts
-git commit -m "feat(grilla): add types, fetcher and mock data layer"
+git add src/lib/grilla.ts
+git commit -m "feat(grilla): add types and API fetcher"
 ```
 
 ---
 
-### Task 4: Ruta `/grilla/[sede]` con esqueleto (404 + placeholder)
+### Task 3: Ruta `/grilla/[sede]` con esqueleto (404 + placeholder)
 
 **Files:**
 - Create: `src/app/grilla/[sede]/page.tsx`
@@ -328,8 +258,8 @@ Después, en otra terminal:
 npm run dev
 ```
 Abrir en el navegador:
-- `http://localhost:3000/grilla/nordelta` → muestra JSON con `hasData: true`.
-- `http://localhost:3000/grilla/escobar` → muestra JSON con `hasData: false`.
+- `http://localhost:3000/grilla/pilara` → muestra JSON con `hasData: true` (sede migrada).
+- `http://localhost:3000/grilla/nordelta` → muestra JSON con `hasData: false` (sede activa pero no migrada en la API).
 - `http://localhost:3000/grilla/inexistente` → 404 de Next.
 
 Cortar `npm run dev` cuando termines.
@@ -343,7 +273,7 @@ git commit -m "feat(grilla): add /grilla/[sede] route skeleton"
 
 ---
 
-### Task 5: `SlotContent` (celda compartida mobile/desktop)
+### Task 4: `SlotContent` (celda compartida mobile/desktop)
 
 **Files:**
 - Create: `src/components/grilla/SlotContent.tsx`
@@ -473,7 +403,7 @@ git commit -m "feat(grilla): add SlotContent presentational component"
 
 ---
 
-### Task 6: `GrillaLegend`
+### Task 5: `GrillaLegend`
 
 **Files:**
 - Create: `src/components/grilla/GrillaLegend.tsx`
@@ -532,7 +462,7 @@ git commit -m "feat(grilla): add GrillaLegend component"
 
 ---
 
-### Task 7: `GrillaHeader`
+### Task 6: `GrillaHeader`
 
 **Files:**
 - Create: `src/components/grilla/GrillaHeader.tsx`
@@ -641,8 +571,8 @@ npm run build
 npm run dev
 ```
 Visitar:
-- `http://localhost:3000/grilla/nordelta` → header con gradiente, logo blanco, "Nordelta" + dirección, label "HORARIOS Y DISPONIBILIDAD". Debajo, el JSON crudo (provisorio).
-- `http://localhost:3000/grilla/escobar` → mismo header con "ESCOBAR" + dirección, debajo el mensaje "Próximamente publicamos los horarios de esta sede.".
+- `http://localhost:3000/grilla/pilara` → header con gradiente, logo blanco, "PILARÁ" + dirección, label "HORARIOS Y DISPONIBILIDAD". Debajo, el JSON crudo (provisorio).
+- `http://localhost:3000/grilla/nordelta` → mismo header con "Nordelta" + dirección, debajo el mensaje "Próximamente publicamos los horarios de esta sede.".
 
 Cortar `npm run dev`.
 
@@ -655,7 +585,7 @@ git commit -m "feat(grilla): add GrillaHeader and wire it into the route"
 
 ---
 
-### Task 8: `ScheduleTable` (vista desktop)
+### Task 7: `ScheduleTable` (vista desktop)
 
 **Files:**
 - Create: `src/components/grilla/ScheduleTable.tsx`
@@ -664,7 +594,7 @@ git commit -m "feat(grilla): add GrillaHeader and wire it into the route"
 
 ```tsx
 // src/components/grilla/ScheduleTable.tsx
-import { DAYS, type Schedule } from '@/lib/grilla'
+import { DAYS, sortTimes, type Schedule } from '@/lib/grilla'
 import { SlotContent } from './SlotContent'
 
 interface Props {
@@ -672,13 +602,13 @@ interface Props {
 }
 
 function endTime (start: string): string {
-  // "7.45" → "8", "10.45" → "11", etc. La clase dura ~1h.
+  // "8.00" → "9", "10.30" → "11", etc. La clase dura ~1h.
   const hour = parseInt(start.split('.')[0], 10)
   return `${hour + 1}`
 }
 
 export function ScheduleTable ({ schedule }: Props): React.ReactElement {
-  const times = Object.keys(schedule)
+  const times = sortTimes(Object.keys(schedule))
 
   return (
     <div className='overflow-x-auto px-6 pb-10'>
@@ -790,7 +720,7 @@ git commit -m "feat(grilla): add ScheduleTable (desktop view)"
 
 ---
 
-### Task 9: `SlotCard` (card individual mobile)
+### Task 8: `SlotCard` (card individual mobile)
 
 **Files:**
 - Create: `src/components/grilla/SlotCard.tsx`
@@ -847,7 +777,7 @@ git commit -m "feat(grilla): add SlotCard (mobile)"
 
 ---
 
-### Task 10: `SlotList` (lista mobile para el día activo)
+### Task 9: `SlotList` (lista mobile para el día activo)
 
 **Files:**
 - Create: `src/components/grilla/SlotList.tsx`
@@ -856,7 +786,7 @@ git commit -m "feat(grilla): add SlotCard (mobile)"
 
 ```tsx
 // src/components/grilla/SlotList.tsx
-import type { Day, Schedule } from '@/lib/grilla'
+import { sortTimes, type Day, type Schedule } from '@/lib/grilla'
 import { SlotCard } from './SlotCard'
 
 interface Props {
@@ -874,7 +804,7 @@ const DAY_FULL_LABEL: Record<Day, string> = {
 }
 
 export function SlotList ({ schedule, activeDay }: Props): React.ReactElement {
-  const times = Object.keys(schedule)
+  const times = sortTimes(Object.keys(schedule))
   return (
     <>
       <h2
@@ -909,7 +839,7 @@ git commit -m "feat(grilla): add SlotList (mobile)"
 
 ---
 
-### Task 11: `DayTabs` (tabs scrolleables mobile)
+### Task 10: `DayTabs` (tabs scrolleables mobile)
 
 **Files:**
 - Create: `src/components/grilla/DayTabs.tsx`
@@ -983,7 +913,7 @@ git commit -m "feat(grilla): add DayTabs (mobile)"
 
 ---
 
-### Task 12: `GrillaHoraria` (orquestador) + wire en el page
+### Task 11: `GrillaHoraria` (orquestador) + wire en el page
 
 **Files:**
 - Create: `src/components/grilla/GrillaHoraria.tsx`
@@ -1087,9 +1017,10 @@ npm run build
 npm run dev
 ```
 Visitar:
-- `http://localhost:3000/grilla/nordelta` (desktop width ≥ 768px) → header + leyenda + tabla completa con 10 filas (7.45 → 16.45), 6 columnas de días, columnas Horario a izquierda y derecha. Status pills/dots con los colores correctos.
+- `http://localhost:3000/grilla/pilara` (desktop width ≥ 768px) → header + leyenda + tabla completa con 11 filas (`8.00` → `20.00`, ordenadas), 6 columnas de días, columnas Horario a izquierda y derecha. Status pills/dots con los colores correctos.
 - Mismo URL, viewport mobile (< 768px) → header + tabs Lun/Mar/Mié/Jue/Vie/Sáb (Lun activo por defecto) + leyenda + lista de horarios del día activo. Tap en otro día cambia la lista.
-- `http://localhost:3000/grilla/escobar` → header + mensaje "Próximamente publicamos los horarios de esta sede.".
+- `http://localhost:3000/grilla/escobar` → mismo formato que `pilara` (también está migrada).
+- `http://localhost:3000/grilla/nordelta` → header + mensaje "Próximamente publicamos los horarios de esta sede." (sede activa, no migrada todavía).
 - `http://localhost:3000/grilla/no-existe` → 404.
 
 Cortar `npm run dev`.
@@ -1103,24 +1034,24 @@ git commit -m "feat(grilla): wire GrillaHoraria orchestrator into the route"
 
 ---
 
-### Task 13: QA final + checklist contra spec
+### Task 12: QA final + checklist contra spec
 
 **Files:** ninguno (verificación)
 
 - [ ] **Step 1: Recorrer el checklist visual**
 
-Levantar `npm run dev` y verificar contra el HTML del handoff (`design_handoff_grilla_horaria/Grilla Horaria.html`) abierto al lado, en `http://localhost:3000/grilla/nordelta`:
+Levantar `npm run dev` y verificar contra el HTML del handoff (`design_handoff_grilla_horaria/Grilla Horaria.html`) abierto al lado, en `http://localhost:3000/grilla/pilara`:
 
 Desktop:
-- [ ] Header: gradiente, logo blanco crop 88×38, nombre "Nordelta" 34px, dirección 13px, label "HORARIOS Y DISPONIBILIDAD" 11px uppercase
+- [ ] Header: gradiente, logo blanco crop 88×38, nombre "PILARÁ" 34px, dirección 13px, label "HORARIOS Y DISPONIBILIDAD" 11px uppercase
 - [ ] Círculos decorativos visibles en header
 - [ ] Leyenda con los 4 items y dots con los 4 colores correctos
 - [ ] Tabla header oscuro `#2c2f34`, texto `#dfd4ca` uppercase tracking ancho
 - [ ] Filas alternadas blanco / `#faf7f4`
 - [ ] Columnas Horario (izq + der) con fondo `#f6f2ed`, fuente bold 13px
+- [ ] Filas ordenadas numéricamente (`8.00`, `9.00`, ..., `20.00`) — no en orden alfabético ni de inserción
 - [ ] Celdas con level badge (Inicial fondo crema / Level Up fondo oscuro) + status dot+label
-- [ ] Slots "Próximamente" se ven como pill solo
-- [ ] Slots null se ven como em-dash gris
+- [ ] Slots null se ven como em-dash gris (los horarios `12.00`, `15.00`, `20.00` tienen varios `null`)
 - [ ] Borde 1px `#ede8e2` entre celdas, radius 8px en esquinas superiores
 
 Mobile (viewport < 768px):
@@ -1132,7 +1063,8 @@ Mobile (viewport < 768px):
 - [ ] Tap en "Sáb" muestra correctamente los slots null como em-dash
 
 Otras sedes:
-- [ ] `/grilla/escobar` → header + placeholder
+- [ ] `/grilla/escobar` → header + tabla/lista con los horarios de Escobar
+- [ ] `/grilla/nordelta` → header + placeholder "Próximamente publicamos los horarios..."
 - [ ] `/grilla/inexistente` → 404 nativo de Next
 
 - [ ] **Step 2: Lint y build final**
@@ -1157,24 +1089,26 @@ Expected: working tree clean.
 ## Self-Review (post-plan)
 
 **Spec coverage:**
-- ✅ Ruta `/grilla/[sede]` → Task 4 + Task 12
+- ✅ Ruta `/grilla/[sede]` → Task 3 + Task 11
 - ✅ Tipos del spec → Task 2
-- ✅ Fetcher con env var → Task 2
-- ✅ Mock con Nordelta + resto null → Task 3
+- ✅ Fetcher contra API real con override por env var → Task 2
+- ✅ Sorting numérico de horarios (claves `"H.MM"`) → Task 2 (`sortTimes`) + Tasks 7, 9
 - ✅ Tokens Crema en globals.css → Task 1
 - ✅ Pesos Poppins → Task 1
-- ✅ GrillaHoraria orquestador `'use client'` → Task 12
-- ✅ GrillaHeader (reusable en null state) → Task 7
-- ✅ GrillaLegend → Task 6
-- ✅ DayTabs `'use client'` → Task 11
-- ✅ SlotList + SlotCard → Tasks 10, 9
-- ✅ ScheduleTable desktop → Task 8
-- ✅ SlotContent compartido → Task 5
-- ✅ Responsive con `hidden md:*` (sin listener resize) → Task 12
-- ✅ Estado "sede no migrada" placeholder → Task 7 + Task 12
-- ✅ 404 sede no existe → Task 4
-- ✅ Manejo error fetch → Task 4 (try/catch → null)
+- ✅ GrillaHoraria orquestador `'use client'` → Task 11
+- ✅ GrillaHeader (reusable en null state) → Task 6
+- ✅ GrillaLegend → Task 5
+- ✅ DayTabs `'use client'` → Task 10
+- ✅ SlotList + SlotCard → Tasks 9, 8
+- ✅ ScheduleTable desktop → Task 7
+- ✅ SlotContent compartido → Task 4
+- ✅ Responsive con `hidden md:*` (sin listener resize) → Task 11
+- ✅ Estado "sede no migrada" placeholder → Task 6 + Task 11
+- ✅ 404 sede no existe (validación local via `getActiveLocationBySlug`) → Task 3
+- ✅ Manejo error fetch → Task 3 (try/catch → null)
+
+**Diferencia con el spec:** El spec original asumía un mock local porque la API no existía. En el momento de escribir este plan, la API ya estaba viva en `https://app.clicpilates.com/api/v1` con la forma exacta del spec. Por eso este plan **no crea el mock** (un archivo y una task menos). El comportamiento user-facing es idéntico al diseñado.
 
 **Placeholder scan:** Sin TBD/TODO. Cada step tiene código completo o comando exacto.
 
-**Type consistency:** `Day`, `Schedule`, `SlotData`, `ScheduleResponse`, `Center` definidos en Task 2 y usados consistentemente en todas las tasks siguientes. `DAYS` exportado en Task 2 y consumido en Task 8 y Task 11. `STATUS_LABEL` queda duplicado en `lib/grilla.ts` (Task 2) y `SlotContent.tsx` (Task 5) — voluntario, son tablas chicas que viven cerca de su uso visual; si molesta se puede deduplicar en una mejora posterior (no bloquea este plan).
+**Type consistency:** `Day`, `Schedule`, `SlotData`, `ScheduleResponse`, `Center` definidos en Task 2 y usados consistentemente en todas las tasks siguientes. `DAYS` y `sortTimes` exportados en Task 2 y consumidos en Tasks 7, 9, 10. Status/level color labels viven en `SlotContent.tsx` (Task 4) y `GrillaLegend.tsx` (Task 5) — duplicación voluntaria de las dos tablas chicas para mantener cada componente autocontenido; si molesta se puede deduplicar en una mejora posterior (no bloquea este plan).
