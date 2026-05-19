@@ -4,8 +4,14 @@ export type Level = 'Inicial' | 'Level Up' | 'Próx'
 export type Day = 'Lunes' | 'Martes' | 'Miércoles' | 'Jueves' | 'Viernes' | 'Sábado'
 
 export interface SlotData {
-  l: Level
+  /**
+   * Nombre de la actividad tal cual viene del backend (ej. "Inicial", "Level Up", "Embarazadas", "Entrenamientos").
+   * Es la fuente de verdad para mostrar la clase. Optional solo por el período de coexistencia con `l`.
+   */
+  activity?: string
   s: Status
+  /** @deprecated Reemplazado por `activity`. Se va a retirar en el corte final del backend. */
+  l?: Level
 }
 
 export type DaySchedule = Partial<Record<Day, SlotData | null>>
