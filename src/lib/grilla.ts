@@ -8,9 +8,7 @@ export interface SlotData {
   s: Status
 }
 
-export type DaySchedule = {
-  [day in Day]?: SlotData | null
-}
+export type DaySchedule = Partial<Record<Day, SlotData | null>>
 
 export type Schedule = {
   [time: string]: DaySchedule

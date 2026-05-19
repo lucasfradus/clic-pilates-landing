@@ -10,10 +10,10 @@ interface Props {
 const DAY_FULL_LABEL: Record<Day, string> = {
   Lunes: 'Lunes',
   Martes: 'Martes',
-  'Miércoles': 'Miércoles',
+  Miércoles: 'Miércoles',
   Jueves: 'Jueves',
   Viernes: 'Viernes',
-  'Sábado': 'Sábado'
+  Sábado: 'Sábado'
 }
 
 export function SlotList ({ schedule, activeDay }: Props): React.ReactElement {

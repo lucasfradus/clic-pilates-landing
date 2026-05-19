@@ -25,7 +25,6 @@ export function GrillaHeader ({ center }: Props): React.ReactElement {
 
       {/* Logo en crop 88×38 */}
       <div className='relative mb-3 h-[38px] w-[88px] overflow-hidden'>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src='/icons/logo_clic.svg'
           alt='CLIC Studio Pilates'

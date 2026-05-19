@@ -12,10 +12,10 @@ interface Props {
 const SHORT_LABEL: Record<Day, string> = {
   Lunes: 'Lun',
   Martes: 'Mar',
-  'Miércoles': 'Mié',
+  Miércoles: 'Mié',
   Jueves: 'Jue',
   Viernes: 'Vie',
-  'Sábado': 'Sáb'
+  Sábado: 'Sáb'
 }
 
 export function DayTabs ({ activeDay, onSelect }: Props): React.ReactElement {
