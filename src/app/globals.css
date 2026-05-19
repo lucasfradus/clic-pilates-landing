@@ -102,6 +102,39 @@
   --sidebar-accent-foreground: var(--dark-text);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+  /* ── Grilla Horaria (tema Crema) ── */
+  --grilla-page-bg: #fdfbfa;
+  --grilla-card-bg: #ffffff;
+  --grilla-border: #ede8e2;
+  --grilla-text: #2c2f34;
+  --grilla-muted: #a0928a;
+  --grilla-time-bg: #f6f2ed;
+  --grilla-tab-active-bg: #bcac9e;
+  --grilla-tab-active-text: #ffffff;
+  --grilla-tab-inactive-bg: #edece7;
+  --grilla-tab-inactive-text: #5a4f45;
+  --grilla-table-header-bg: #2c2f34;
+  --grilla-table-header-text: #dfd4ca;
+  --grilla-row-alt-bg: #faf7f4;
+  --grilla-legend-bg: #f6f2ed;
+  /* Status */
+  --grilla-status-d-dot: #2e8a52;
+  --grilla-status-d-text: #1a6b3e;
+  --grilla-status-d-bg: #e4f2ea;
+  --grilla-status-b-dot: #c97c22;
+  --grilla-status-b-text: #875200;
+  --grilla-status-b-bg: #fdf2de;
+  --grilla-status-n-dot: #c43030;
+  --grilla-status-n-text: #8a1c1c;
+  --grilla-status-n-bg: #fde6e6;
+  --grilla-status-p-dot: #7888a8;
+  --grilla-status-p-text: #445070;
+  --grilla-status-p-bg: #edf0f6;
+  /* Levels */
+  --grilla-level-inicial-bg: #f0ece7;
+  --grilla-level-inicial-text: #5a4f45;
+  --grilla-level-levelup-bg: #2c2f34;
+  --grilla-level-levelup-text: #dfd4ca;
 }
 
 .dark {
