@@ -23,7 +23,7 @@ export function SlotCard ({ time, slot }: Props): React.ReactElement {
         {time}
         <span className='ml-1 text-[11px] font-normal'>hs</span>
       </span>
-      <span className='ml-auto'>
+      <span className='flex flex-1 justify-center'>
         <SlotContent slot={slot} size='mobile' />
       </span>
     </li>

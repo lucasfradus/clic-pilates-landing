@@ -55,7 +55,7 @@ export function SlotContent ({ slot, size }: Props): React.ReactElement {
   return (
     <div
       className={[
-        'flex flex-col items-start',
+        'flex flex-col items-center',
         isMobile ? 'gap-1.5' : 'gap-1'
       ].join(' ')}
     >

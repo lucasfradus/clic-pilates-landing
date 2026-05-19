@@ -80,7 +80,7 @@ export function ScheduleTable ({ schedule }: Props): React.ReactElement {
                 {DAYS.map((day) => (
                   <td
                     key={day}
-                    className='px-3.5 py-[9px] align-middle'
+                    className='px-3.5 py-[9px] text-center align-middle'
                     style={{
                       borderBottom: '1px solid var(--grilla-border)',
                       borderLeft: '1px solid var(--grilla-border)'
