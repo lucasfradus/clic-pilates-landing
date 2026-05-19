@@ -1,5 +1,5 @@
-// src/components/grilla/SlotCard.tsx
 import type { SlotData } from '@/lib/grilla'
+import { formatTimeRange } from '@/lib/grilla'
 import { SlotContent } from './SlotContent'
 
 interface Props {
@@ -17,11 +17,10 @@ export function SlotCard ({ time, slot }: Props): React.ReactElement {
       }}
     >
       <span
-        className='text-[15px] font-bold tracking-[-0.02em]'
+        className='text-[14px] font-bold tracking-[-0.02em] whitespace-nowrap'
         style={{ color: 'var(--grilla-text)' }}
       >
-        {time}
-        <span className='ml-1 text-[11px] font-normal'>hs</span>
+        {formatTimeRange(time)}
       </span>
       <span className='flex flex-1 justify-center'>
         <SlotContent slot={slot} size='mobile' />

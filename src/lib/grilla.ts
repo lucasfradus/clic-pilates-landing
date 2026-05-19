@@ -45,6 +45,16 @@ export function sortTimes (times: string[]): string[] {
   return [...times].sort((a, b) => parseFloat(a) - parseFloat(b))
 }
 
+/**
+ * Formatea un horario de clase como rango inicio-fin de 1 hora.
+ * Ej.: "8.00" → "8.00 - 9.00 hs", "8.30" → "8.30 - 9.30 hs".
+ */
+export function formatTimeRange (start: string): string {
+  const [h, m = '00'] = start.split('.')
+  const startHour = parseInt(h, 10)
+  return `${start} - ${startHour + 1}.${m} hs`
+}
+
 /** Actividades que no se muestran al público (uso interno). */
 const HIDDEN_ACTIVITIES = new Set<string>(['Entrenamientos'])
 
