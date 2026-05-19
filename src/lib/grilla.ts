@@ -10,7 +10,7 @@ export interface SlotData {
 
 export type DaySchedule = Partial<Record<Day, SlotData | null>>
 
-export type Schedule = {
+export interface Schedule {
   [time: string]: DaySchedule
 }
 
