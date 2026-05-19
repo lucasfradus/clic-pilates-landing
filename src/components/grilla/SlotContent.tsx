@@ -1,30 +1,33 @@
-// src/components/grilla/SlotContent.tsx
-import type { SlotData } from '@/lib/grilla'
+import type { SlotData, Status } from '@/lib/grilla'
 
 interface Props {
   slot: SlotData | null | undefined
   size: 'mobile' | 'desktop'
 }
 
-const STATUS_COLORS = {
+type ActiveStatus = Exclude<Status, 'p'>
+
+const STATUS_COLORS: Record<ActiveStatus, { dot: string, text: string }> = {
   d: { dot: 'var(--grilla-status-d-dot)', text: 'var(--grilla-status-d-text)' },
   b: { dot: 'var(--grilla-status-b-dot)', text: 'var(--grilla-status-b-text)' },
-  n: { dot: 'var(--grilla-status-n-dot)', text: 'var(--grilla-status-n-text)' },
-  p: { dot: 'var(--grilla-status-p-dot)', text: 'var(--grilla-status-p-text)' }
-} as const
+  n: { dot: 'var(--grilla-status-n-dot)', text: 'var(--grilla-status-n-text)' }
+}
 
-const STATUS_LABEL = {
+const STATUS_LABEL: Record<ActiveStatus, string> = {
   d: 'Disponible',
   b: 'Baja disponibilidad',
-  n: 'No disponible',
-  p: 'Próximamente'
-} as const
+  n: 'No disponible'
+}
+
+function isActiveStatus (s: Status): s is ActiveStatus {
+  return s !== 'p'
+}
 
 export function SlotContent ({ slot, size }: Props): React.ReactElement {
   const isMobile = size === 'mobile'
 
-  // Sin clase
-  if (slot === null || slot === undefined) {
+  // Sin clase (null, undefined, o status 'p' que no se muestra)
+  if (slot === null || slot === undefined || !isActiveStatus(slot.s)) {
     return (
       <span
         className={isMobile ? 'text-[14px]' : 'text-[12px]'}
@@ -35,33 +38,6 @@ export function SlotContent ({ slot, size }: Props): React.ReactElement {
     )
   }
 
-  // Próximamente: solo el pill
-  if (slot.s === 'p') {
-    return (
-      <span
-        className={[
-          'inline-flex items-center gap-1.5 rounded-[20px] font-medium',
-          isMobile ? 'px-3 py-1 text-[12px]' : 'px-2 py-[3px] text-[10px]'
-        ].join(' ')}
-        style={{
-          background: 'var(--grilla-status-p-bg)',
-          color: 'var(--grilla-status-p-text)'
-        }}
-      >
-        <span
-          className='inline-block rounded-full'
-          style={{
-            width: isMobile ? 7 : 5,
-            height: isMobile ? 7 : 5,
-            background: 'var(--grilla-status-p-dot)'
-          }}
-        />
-        Próximamente
-      </span>
-    )
-  }
-
-  // Disponible / Baja / No disponible: level badge + status row
   const levelBg = slot.l === 'Level Up' ? 'var(--grilla-level-levelup-bg)' : 'var(--grilla-level-inicial-bg)'
   const levelText = slot.l === 'Level Up' ? 'var(--grilla-level-levelup-text)' : 'var(--grilla-level-inicial-text)'
   const statusColor = STATUS_COLORS[slot.s]
@@ -70,13 +46,13 @@ export function SlotContent ({ slot, size }: Props): React.ReactElement {
     <div
       className={[
         'flex flex-col items-start',
-        isMobile ? 'gap-[5px]' : 'gap-[3px]'
+        isMobile ? 'gap-1.5' : 'gap-1'
       ].join(' ')}
     >
       <span
         className={[
           'inline-block rounded-[20px] font-semibold uppercase tracking-[0.04em]',
-          isMobile ? 'px-[11px] py-[3px] text-[10px]' : 'px-2 py-[2px] text-[10px]'
+          isMobile ? 'px-3 py-[5px] text-[12px]' : 'px-2.5 py-[4px] text-[12px]'
         ].join(' ')}
         style={{ background: levelBg, color: levelText }}
       >
@@ -85,7 +61,7 @@ export function SlotContent ({ slot, size }: Props): React.ReactElement {
       <span
         className={[
           'inline-flex items-center gap-1.5 font-medium',
-          isMobile ? 'text-[12px]' : 'text-[10px]'
+          isMobile ? 'text-[12px]' : 'text-[11px]'
         ].join(' ')}
         style={{ color: statusColor.text }}
       >

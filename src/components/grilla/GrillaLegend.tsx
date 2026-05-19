@@ -2,8 +2,7 @@
 const ITEMS = [
   { dot: 'var(--grilla-status-d-dot)', label: 'Disponible' },
   { dot: 'var(--grilla-status-b-dot)', label: 'Baja disponibilidad' },
-  { dot: 'var(--grilla-status-n-dot)', label: 'No disponible' },
-  { dot: 'var(--grilla-status-p-dot)', label: 'Próximamente' }
+  { dot: 'var(--grilla-status-n-dot)', label: 'No disponible' }
 ] as const
 
 export function GrillaLegend (): React.ReactElement {

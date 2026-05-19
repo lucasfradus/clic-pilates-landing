@@ -10,7 +10,7 @@ interface Props {
 export function SlotCard ({ time, slot }: Props): React.ReactElement {
   return (
     <li
-      className='flex items-center gap-3 rounded-[12px] px-4 py-[13px]'
+      className='flex min-h-[72px] items-center gap-3 rounded-[12px] px-4 py-[13px]'
       style={{
         background: 'var(--grilla-card-bg)',
         border: '1px solid var(--grilla-border)'
