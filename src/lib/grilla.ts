@@ -36,6 +36,88 @@ export interface ScheduleResponse {
 export const DAYS: readonly Day[] = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado']
 export const WEEKDAYS: readonly Day[] = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes']
 
+export interface GridRow {
+  /** Hora que se muestra en la columna HORARIO. Tomada del horario de lun-vie cuando la fila tiene clases de semana, o del propio sábado si es una fila exclusiva del fin de semana. */
+  rowTime: string
+  /** Slots de lunes a viernes en esta fila. */
+  weekday: DaySchedule
+  /** Slot de sábado asignado a esta fila (por proximidad horaria), o null si no hay. */
+  saturday: SlotData | null
+  /** Hora real del slot de sábado; puede diferir de `rowTime`. Sólo presente cuando `saturday` no es null. */
+  saturdayTime?: string
+}
+
+/**
+ * Arma las filas de la grilla desktop combinando lun-vie con sábado.
+ *
+ * - Cada fila representa un horario de clase de lun-vie. Los slots de sábado se
+ *   asignan a la fila lun-vie con la hora más cercana (≤ `toleranceHours`).
+ * - Si dos slots de sábado compiten por la misma fila, gana el más cercano; el
+ *   otro queda como fila extra al final.
+ * - Slots de sábado sin fila lun-vie cercana también van a filas extra al final.
+ */
+export function buildGridRows (schedule: Schedule, toleranceHours = 1): GridRow[] {
+  const weekdayTimes = sortTimes(
+    Object.keys(schedule).filter((t) => WEEKDAYS.some((d) => schedule[t][d] != null))
+  )
+
+  const saturdaySlots: Array<{ time: string, slot: SlotData }> = []
+  for (const t of Object.keys(schedule)) {
+    const s = schedule[t]['Sábado']
+    if (s != null) saturdaySlots.push({ time: t, slot: s })
+  }
+
+  const assignments = new Map<string, { time: string, slot: SlotData, distance: number }>()
+  const unassigned: Array<{ time: string, slot: SlotData }> = []
+
+  for (const sat of saturdaySlots) {
+    const satNum = parseFloat(sat.time)
+    let bestRow: string | null = null
+    let bestDist = Infinity
+    for (const wt of weekdayTimes) {
+      const d = Math.abs(parseFloat(wt) - satNum)
+      if (d < bestDist) { bestDist = d; bestRow = wt }
+    }
+    if (bestRow != null && bestDist <= toleranceHours) {
+      const existing = assignments.get(bestRow)
+      if (existing == null || bestDist < existing.distance) {
+        if (existing != null) unassigned.push({ time: existing.time, slot: existing.slot })
+        assignments.set(bestRow, { time: sat.time, slot: sat.slot, distance: bestDist })
+      } else {
+        unassigned.push(sat)
+      }
+    } else {
+      unassigned.push(sat)
+    }
+  }
+
+  const rows: GridRow[] = weekdayTimes.map((wt) => {
+    const weekday: DaySchedule = {}
+    for (const day of WEEKDAYS) weekday[day] = schedule[wt][day] ?? null
+    const assigned = assignments.get(wt)
+    return {
+      rowTime: wt,
+      weekday,
+      saturday: assigned?.slot ?? null,
+      saturdayTime: assigned?.time
+    }
+  })
+
+  unassigned.sort((a, b) => parseFloat(a.time) - parseFloat(b.time))
+  for (const u of unassigned) {
+    const weekday: DaySchedule = {}
+    for (const day of WEEKDAYS) weekday[day] = null
+    rows.push({
+      rowTime: u.time,
+      weekday,
+      saturday: u.slot,
+      saturdayTime: u.time
+    })
+  }
+
+  return rows
+}
+
 const DEFAULT_API_BASE = 'https://app.clicpilates.com/api/v1'
 
 /**

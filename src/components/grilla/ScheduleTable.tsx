@@ -1,4 +1,4 @@
-import { DAYS, formatTimeRange, sortTimes, type Schedule } from '@/lib/grilla'
+import { buildGridRows, DAYS, formatTimeRange, WEEKDAYS, type Schedule } from '@/lib/grilla'
 import { SlotContent } from './SlotContent'
 
 interface Props {
@@ -6,7 +6,7 @@ interface Props {
 }
 
 export function ScheduleTable ({ schedule }: Props): React.ReactElement {
-  const times = sortTimes(Object.keys(schedule))
+  const rows = buildGridRows(schedule)
   const lastDayIdx = DAYS.length - 1
 
   return (
@@ -46,11 +46,11 @@ export function ScheduleTable ({ schedule }: Props): React.ReactElement {
           </tr>
         </thead>
         <tbody>
-          {times.map((time, rowIdx) => {
+          {rows.map((row, rowIdx) => {
             const rowBg = rowIdx % 2 === 0 ? 'var(--grilla-card-bg)' : 'var(--grilla-row-alt-bg)'
-            const daySchedule = schedule[time]
+            const saturdayTimeDiffers = row.saturday != null && row.saturdayTime != null && row.saturdayTime !== row.rowTime
             return (
-              <tr key={time} style={{ background: rowBg }}>
+              <tr key={`${row.rowTime}-${rowIdx}`} style={{ background: rowBg }}>
                 <td
                   className='px-3.5 py-[9px] text-center text-[13px] font-semibold whitespace-nowrap'
                   style={{
@@ -58,9 +58,9 @@ export function ScheduleTable ({ schedule }: Props): React.ReactElement {
                     borderBottom: '1px solid var(--grilla-border)'
                   }}
                 >
-                  {formatTimeRange(time)}
+                  {formatTimeRange(row.rowTime)}
                 </td>
-                {DAYS.map((day) => (
+                {WEEKDAYS.map((day) => (
                   <td
                     key={day}
                     className='px-3.5 py-[9px] text-center align-middle'
@@ -69,9 +69,28 @@ export function ScheduleTable ({ schedule }: Props): React.ReactElement {
                       borderLeft: '1px solid var(--grilla-border)'
                     }}
                   >
-                    <SlotContent slot={daySchedule[day]} size='desktop' />
+                    <SlotContent slot={row.weekday[day]} size='desktop' />
                   </td>
                 ))}
+                <td
+                  className='px-3.5 py-[9px] text-center align-middle'
+                  style={{
+                    borderBottom: '1px solid var(--grilla-border)',
+                    borderLeft: '1px solid var(--grilla-border)'
+                  }}
+                >
+                  <div className='flex flex-col items-center gap-1'>
+                    <SlotContent slot={row.saturday} size='desktop' />
+                    {saturdayTimeDiffers && (
+                      <span
+                        className='text-[11px] font-medium whitespace-nowrap'
+                        style={{ color: 'var(--grilla-muted)' }}
+                      >
+                        {formatTimeRange(row.saturdayTime ?? row.rowTime)}
+                      </span>
+                    )}
+                  </div>
+                </td>
               </tr>
             )
           })}
