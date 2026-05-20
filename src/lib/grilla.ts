@@ -34,6 +34,7 @@ export interface ScheduleResponse {
 }
 
 export const DAYS: readonly Day[] = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado']
+export const WEEKDAYS: readonly Day[] = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes']
 
 const DEFAULT_API_BASE = 'https://app.clicpilates.com/api/v1'
 
