@@ -103,17 +103,18 @@ export function buildGridRows (schedule: Schedule, toleranceHours = 1): GridRow[
     }
   })
 
-  unassigned.sort((a, b) => parseFloat(a.time) - parseFloat(b.time))
   for (const u of unassigned) {
-    const weekday: DaySchedule = {}
-    for (const day of WEEKDAYS) weekday[day] = null
+    const emptyWeekday: DaySchedule = {}
+    for (const day of WEEKDAYS) emptyWeekday[day] = null
     rows.push({
       rowTime: u.time,
-      weekday,
+      weekday: emptyWeekday,
       saturday: u.slot,
       saturdayTime: u.time
     })
   }
+
+  rows.sort((a, b) => parseFloat(a.rowTime) - parseFloat(b.rowTime))
 
   return rows
 }
