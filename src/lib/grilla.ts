@@ -36,85 +36,63 @@ export interface ScheduleResponse {
 export const DAYS: readonly Day[] = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado']
 export const WEEKDAYS: readonly Day[] = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes']
 
+export interface SaturdaySlot {
+  /** Horario real del slot de sábado (puede diferir del `rowTime` de la fila donde se ubica). */
+  time: string
+  slot: SlotData
+}
+
 export interface GridRow {
-  /** Hora que se muestra en la columna HORARIO. Tomada del horario de lun-vie cuando la fila tiene clases de semana, o del propio sábado si es una fila exclusiva del fin de semana. */
+  /** Hora que ancla la fila — siempre un horario de clase de lun-vie. */
   rowTime: string
   /** Slots de lunes a viernes en esta fila. */
   weekday: DaySchedule
-  /** Slot de sábado asignado a esta fila (por proximidad horaria), o null si no hay. */
-  saturday: SlotData | null
-  /** Hora real del slot de sábado; puede diferir de `rowTime`. Sólo presente cuando `saturday` no es null. */
-  saturdayTime?: string
+  /** Slots de sábado asignados a esta fila por cercanía. Pueden ser 0, 1 o más; se apilan en la celda. */
+  saturdaySlots: SaturdaySlot[]
 }
 
 /**
  * Arma las filas de la grilla desktop combinando lun-vie con sábado.
  *
- * - Cada fila representa un horario de clase de lun-vie. Los slots de sábado se
- *   asignan a la fila lun-vie con la hora más cercana (≤ `toleranceHours`).
- * - Si dos slots de sábado compiten por la misma fila, gana el más cercano; el
- *   otro queda como fila extra al final.
- * - Slots de sábado sin fila lun-vie cercana también van a filas extra al final.
+ * Cada fila representa un horario de clase de lun-vie. Cada slot de sábado se
+ * asigna a la fila lun-vie con la hora más cercana, sin tolerancia. Si dos o
+ * más sábados caen en la misma fila, se apilan en la celda. No se generan
+ * filas extras: la cantidad de filas siempre es igual a la cantidad de
+ * horarios de lun-vie con clases.
  */
-export function buildGridRows (schedule: Schedule, toleranceHours = 1): GridRow[] {
+export function buildGridRows (schedule: Schedule): GridRow[] {
   const weekdayTimes = sortTimes(
     Object.keys(schedule).filter((t) => WEEKDAYS.some((d) => schedule[t][d] != null))
   )
 
-  const saturdaySlots: Array<{ time: string, slot: SlotData }> = []
+  const rows: GridRow[] = weekdayTimes.map((wt) => {
+    const weekday: DaySchedule = {}
+    for (const day of WEEKDAYS) weekday[day] = schedule[wt][day] ?? null
+    return { rowTime: wt, weekday, saturdaySlots: [] }
+  })
+
+  if (rows.length === 0) return rows
+
+  const saturdaySlots: SaturdaySlot[] = []
   for (const t of Object.keys(schedule)) {
     const s = schedule[t]['Sábado']
     if (s != null) saturdaySlots.push({ time: t, slot: s })
   }
 
-  const assignments = new Map<string, { time: string, slot: SlotData, distance: number }>()
-  const unassigned: Array<{ time: string, slot: SlotData }> = []
-
   for (const sat of saturdaySlots) {
     const satNum = parseFloat(sat.time)
-    let bestRow: string | null = null
+    let bestIdx = 0
     let bestDist = Infinity
-    for (const wt of weekdayTimes) {
-      const d = Math.abs(parseFloat(wt) - satNum)
-      if (d < bestDist) { bestDist = d; bestRow = wt }
+    for (let i = 0; i < rows.length; i++) {
+      const d = Math.abs(parseFloat(rows[i].rowTime) - satNum)
+      if (d < bestDist) { bestDist = d; bestIdx = i }
     }
-    if (bestRow != null && bestDist <= toleranceHours) {
-      const existing = assignments.get(bestRow)
-      if (existing == null || bestDist < existing.distance) {
-        if (existing != null) unassigned.push({ time: existing.time, slot: existing.slot })
-        assignments.set(bestRow, { time: sat.time, slot: sat.slot, distance: bestDist })
-      } else {
-        unassigned.push(sat)
-      }
-    } else {
-      unassigned.push(sat)
-    }
+    rows[bestIdx].saturdaySlots.push(sat)
   }
 
-  const rows: GridRow[] = weekdayTimes.map((wt) => {
-    const weekday: DaySchedule = {}
-    for (const day of WEEKDAYS) weekday[day] = schedule[wt][day] ?? null
-    const assigned = assignments.get(wt)
-    return {
-      rowTime: wt,
-      weekday,
-      saturday: assigned?.slot ?? null,
-      saturdayTime: assigned?.time
-    }
-  })
-
-  for (const u of unassigned) {
-    const emptyWeekday: DaySchedule = {}
-    for (const day of WEEKDAYS) emptyWeekday[day] = null
-    rows.push({
-      rowTime: u.time,
-      weekday: emptyWeekday,
-      saturday: u.slot,
-      saturdayTime: u.time
-    })
+  for (const row of rows) {
+    row.saturdaySlots.sort((a, b) => parseFloat(a.time) - parseFloat(b.time))
   }
-
-  rows.sort((a, b) => parseFloat(a.rowTime) - parseFloat(b.rowTime))
 
   return rows
 }
