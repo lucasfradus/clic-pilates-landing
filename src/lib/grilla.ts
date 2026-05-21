@@ -36,65 +36,52 @@ export interface ScheduleResponse {
 export const DAYS: readonly Day[] = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado']
 export const WEEKDAYS: readonly Day[] = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes']
 
-export interface SaturdaySlot {
-  /** Horario real del slot de sábado (puede diferir del `rowTime` de la fila donde se ubica). */
+export interface PositionedSlot {
+  day: Day
+  /** Hora de inicio en formato "H.MM" (como viene del backend). */
   time: string
+  /** Minutos desde 0:00 del día (parseado de `time`). */
+  startMinutes: number
+  /** Minutos del fin de clase (asume duración fija). */
+  endMinutes: number
   slot: SlotData
 }
 
-export interface GridRow {
-  /** Hora que ancla la fila — siempre un horario de clase de lun-vie. */
-  rowTime: string
-  /** Slots de lunes a viernes en esta fila. */
-  weekday: DaySchedule
-  /** Slots de sábado asignados a esta fila por cercanía. Pueden ser 0, 1 o más; se apilan en la celda. */
-  saturdaySlots: SaturdaySlot[]
+/** Convierte un horario "H.MM" (8.45 = 8h 45m) a minutos desde 0:00. */
+export function parseTimeMinutes (time: string): number {
+  const [h, m = '0'] = time.split('.')
+  return parseInt(h, 10) * 60 + parseInt(m, 10)
 }
 
+const SLOT_DURATION_MIN = 60
+
 /**
- * Arma las filas de la grilla desktop combinando lun-vie con sábado.
- *
- * Cada fila representa un horario de clase de lun-vie. Cada slot de sábado se
- * asigna a la fila lun-vie con la hora más cercana, sin tolerancia. Si dos o
- * más sábados caen en la misma fila, se apilan en la celda. No se generan
- * filas extras: la cantidad de filas siempre es igual a la cantidad de
- * horarios de lun-vie con clases.
+ * Devuelve la lista de slots con su posición temporal calculada, y el rango
+ * horario total (en minutos, redondeado a horas enteras) que cubre la grilla.
  */
-export function buildGridRows (schedule: Schedule): GridRow[] {
-  const weekdayTimes = sortTimes(
-    Object.keys(schedule).filter((t) => WEEKDAYS.some((d) => schedule[t][d] != null))
-  )
-
-  const rows: GridRow[] = weekdayTimes.map((wt) => {
-    const weekday: DaySchedule = {}
-    for (const day of WEEKDAYS) weekday[day] = schedule[wt][day] ?? null
-    return { rowTime: wt, weekday, saturdaySlots: [] }
-  })
-
-  if (rows.length === 0) return rows
-
-  const saturdaySlots: SaturdaySlot[] = []
-  for (const t of Object.keys(schedule)) {
-    const s = schedule[t]['Sábado']
-    if (s != null) saturdaySlots.push({ time: t, slot: s })
-  }
-
-  for (const sat of saturdaySlots) {
-    const satNum = parseFloat(sat.time)
-    let bestIdx = 0
-    let bestDist = Infinity
-    for (let i = 0; i < rows.length; i++) {
-      const d = Math.abs(parseFloat(rows[i].rowTime) - satNum)
-      if (d < bestDist) { bestDist = d; bestIdx = i }
+export function buildPositionedSlots (schedule: Schedule): {
+  slots: PositionedSlot[]
+  startMinutes: number
+  endMinutes: number
+} {
+  const slots: PositionedSlot[] = []
+  for (const time of Object.keys(schedule)) {
+    const startMinutes = parseTimeMinutes(time)
+    const endMinutes = startMinutes + SLOT_DURATION_MIN
+    for (const day of DAYS) {
+      const s = schedule[time][day]
+      if (s != null) slots.push({ day, time, startMinutes, endMinutes, slot: s })
     }
-    rows[bestIdx].saturdaySlots.push(sat)
   }
 
-  for (const row of rows) {
-    row.saturdaySlots.sort((a, b) => parseFloat(a.time) - parseFloat(b.time))
-  }
+  if (slots.length === 0) return { slots, startMinutes: 0, endMinutes: 0 }
 
-  return rows
+  const minStart = Math.min(...slots.map((s) => s.startMinutes))
+  const maxEnd = Math.max(...slots.map((s) => s.endMinutes))
+  const startMinutes = Math.floor(minStart / 60) * 60
+  const endMinutes = Math.ceil(maxEnd / 60) * 60
+
+  return { slots, startMinutes, endMinutes }
 }
 
 const DEFAULT_API_BASE = 'https://app.clicpilates.com/api/v1'
