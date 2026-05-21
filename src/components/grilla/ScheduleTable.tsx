@@ -5,11 +5,11 @@ interface Props {
   schedule: Schedule
 }
 
-const ROW_PX = 18 // 15 min
-const HOUR_PX = ROW_PX * 4 // 72 px
-const HEADER_HEIGHT_PX = 36
-const TIME_AXIS_WIDTH_PX = 64
-const DAY_MIN_WIDTH_PX = 120
+const ROW_PX = 24 // 15 min
+const HOUR_PX = ROW_PX * 4 // 96 px
+const HEADER_HEIGHT_PX = 40
+const TIME_AXIS_WIDTH_PX = 72
+const DAY_MIN_WIDTH_PX = 140
 
 export function ScheduleTable ({ schedule }: Props): React.ReactElement {
   const { slots, startMinutes, endMinutes } = buildPositionedSlots(schedule)
@@ -128,20 +128,20 @@ function SlotBlock ({ slot, startMinutes }: SlotBlockProps): React.ReactElement 
       style={{
         gridColumn: dayIdx + 2,
         gridRow: `${rowStart} / span ${rowSpan}`,
-        padding: 4,
+        padding: 6,
         position: 'relative',
         zIndex: 1
       }}
     >
       <div
-        className='flex h-full flex-col items-center justify-center gap-1 rounded-md px-2 py-1.5'
+        className='flex h-full flex-col items-center justify-between gap-2 rounded-md px-3 py-3'
         style={{
           background: 'var(--grilla-row-alt-bg)',
           border: '1px solid var(--grilla-border)'
         }}
       >
         <span
-          className='text-[10px] font-semibold whitespace-nowrap'
+          className='text-[11px] font-semibold whitespace-nowrap'
           style={{ color: 'var(--grilla-muted)' }}
         >
           {formatTimeRange(slot.time)}
