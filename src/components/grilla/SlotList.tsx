@@ -17,7 +17,9 @@ const DAY_FULL_LABEL: Record<Day, string> = {
 }
 
 export function SlotList ({ schedule, activeDay }: Props): React.ReactElement {
-  const times = sortTimes(Object.keys(schedule))
+  const times = sortTimes(
+    Object.keys(schedule).filter((t) => schedule[t][activeDay] != null)
+  )
   return (
     <>
       <h2
