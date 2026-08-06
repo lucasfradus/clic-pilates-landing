@@ -15,6 +15,18 @@ function getCellData (
   return rowData?.[day] ?? null
 }
 
+/**
+ * Convierte `**texto**` en <strong>. El resto se renderiza como texto plano,
+ * así que no hay riesgo de inyección desde la planilla de Google.
+ */
+function renderBold (text: string): React.ReactNode {
+  return text.split(/(\*\*[^*]+\*\*)/g).map((part, i) =>
+    part.startsWith('**') && part.endsWith('**')
+      ? <strong key={i}>{part.slice(2, -2)}</strong>
+      : part
+  )
+}
+
 export function HorariosTable ({ data, className = '', variant = 'default' }: HorariosTableProps): React.ReactElement {
   const { schedule, sortedTimesMF, sortedTimesSat, maxRows, weekDays } = data
 
@@ -38,9 +50,9 @@ export function HorariosTable ({ data, className = '', variant = 'default' }: Ho
   function CellContent ({ cell }: { cell: { level: string; availability: string } }) {
     return (
       <div className='flex flex-col min-h-[2.5rem] md:min-h-0 justify-center'>
-        <span className='font-medium'>{cell.level}</span>
+        <span className='font-medium'>{renderBold(cell.level)}</span>
         {cell.availability && (
-          <span className='text-[10px] md:text-xs text-muted-foreground'>{cell.availability}</span>
+          <span className='text-[10px] md:text-xs text-muted-foreground'>{renderBold(cell.availability)}</span>
         )}
       </div>
     )
