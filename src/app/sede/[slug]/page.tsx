@@ -22,6 +22,7 @@ export async function generateMetadata ({ params }: PageProps): Promise<Metadata
   const title = `Clic Pilates ${location.locationName} - Grilla horaria`
   return {
     title,
+    alternates: { canonical: `/sede/${slug}` },
     openGraph: {
       title
     },

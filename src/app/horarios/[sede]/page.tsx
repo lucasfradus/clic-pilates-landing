@@ -1,3 +1,4 @@
+import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { getActiveLocationBySlug } from '@/lib/locations'
 import { getHorarios, parseHorarios } from '@/lib/stein'
@@ -5,6 +6,18 @@ import { HorariosTable } from '@/components/HorariosTable'
 
 interface PageProps {
   params: Promise<{ sede: string }>
+}
+
+export async function generateMetadata ({ params }: PageProps): Promise<Metadata> {
+  const { sede } = await params
+  const location = getActiveLocationBySlug(sede)
+  if (location == null) {
+    return {}
+  }
+  return {
+    title: `Horarios Clic Pilates ${location.locationName}`,
+    alternates: { canonical: `/horarios/${sede}` }
+  }
 }
 
 export default async function SedeHorariosPage ({ params }: PageProps): Promise<React.ReactElement> {
