@@ -1,3 +1,4 @@
+import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { getActiveLocationBySlug } from '@/lib/locations'
 import { getGrilla } from '@/lib/grilla'
@@ -6,6 +7,18 @@ import { GrillaHoraria } from '@/components/grilla/GrillaHoraria'
 
 interface PageProps {
   params: Promise<{ sede: string }>
+}
+
+export async function generateMetadata ({ params }: PageProps): Promise<Metadata> {
+  const { sede } = await params
+  const location = getActiveLocationBySlug(sede)
+  if (location === undefined) {
+    return {}
+  }
+  return {
+    title: `Grilla horaria Clic Pilates ${location.locationName}`,
+    alternates: { canonical: `/grilla/${sede}` }
+  }
 }
 
 export default async function GrillaSedePage ({ params }: PageProps): Promise<React.ReactElement> {
